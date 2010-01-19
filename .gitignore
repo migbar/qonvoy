@@ -9,3 +9,4 @@ coverage.data
 mkmf.log
 webrat-*.html
 config/application.yml
+rerun.txt
