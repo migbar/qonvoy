@@ -1,0 +1,11 @@
+.DS_Store
+log/*.log
+tmp/**/*
+tmp/*
+db/*.sqlite3
+coverage/*
+coverage.data
+*.tmproj
+mkmf.log
+webrat-*.html
+config/application.yml
