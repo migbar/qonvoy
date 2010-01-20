@@ -1,0 +1,12 @@
+!!!
+%html{html_attrs}
+  %head
+    = title_tag
+    %meta{"http-equiv"=>"Content-type", :content=>"text/html; charset=utf-8"}
+    = yield(:head)
+  %body
+    #container
+      #main-content
+        - if show_title?
+          %h2= h yield(:title)
+        = yield
