@@ -5,6 +5,6 @@ Feature: Oauth
 
   Scenario: Registering with Qonvoy using Twitter
     Given a Twitter user "twitter_guy" that is not registered with Qonvoy
-      And I am on the registration page
+      And I am on the home page
      When I press "Register using Twitter"
      Then I should see "Thank you for registering twitter_guy"
