@@ -6,6 +6,9 @@ require 'spec/autorun'
 require 'spec/rails'
 require 'remarkable_rails'
 
+require 'factory_girl'
+require File.dirname(__FILE__) + '/factories'
+
 # Uncomment the next line to use webrat's matchers
 #require 'webrat/integrations/rspec-rails'
 

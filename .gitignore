@@ -10,3 +10,4 @@ mkmf.log
 webrat-*.html
 config/application.yml
 rerun.txt
+capybara-*.html

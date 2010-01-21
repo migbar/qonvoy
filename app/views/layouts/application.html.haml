@@ -9,4 +9,5 @@
       #main-content
         - if show_title?
           %h2= h yield(:title)
+        = render "shared/flash", :flash => flash
         = yield

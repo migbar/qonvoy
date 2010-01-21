@@ -24,9 +24,9 @@ Given /^a Twitter user "([^\"]*)" that is not registered with Qonvoy$/ do |twitt
     end
 
     def authenticate_with_oauth
-      self.twitter_uid = "12355434"
-      self.name = user_twitter_name
-      self.oauth_token = "foo"
+      self.twitter_uid  = "12355434"
+      self.screen_name  = user_twitter_name
+      self.oauth_token  = "foo"
       self.oauth_secret = "bar"
     end
   end
