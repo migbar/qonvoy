@@ -49,6 +49,12 @@ describe UserSessionsController do
       flash[:notice].should == "You did not allow Qonvoy to use your Twitter account"
       response.should redirect_to(root_path)
     end
+    
+    it "notifies hoptoad and redirects to the home page when trying to post with an invalid form" do
+      controller.should_receive(:notify_hoptoad).with(:error_message => "Hack Attack!")
+      post_with_invalid_attributes
+      response.should redirect_to(root_path)
+    end
   end
   
   # describe "handling DELETE destroy" do

@@ -12,6 +12,6 @@ Rails::Initializer.run do |config|
   config.gem "oauth",                              :version => '0.3.6'
   config.gem "authlogic-oauth",                    :version => '1.0.8', :lib => "authlogic_oauth"
   config.gem "settingslogic",                      :version => '2.0.3'
-
+  config.gem 'hoptoad_notifier',                   :version => '2.1.2'
   config.time_zone = 'UTC'
 end
