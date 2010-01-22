@@ -6,6 +6,8 @@
     = yield(:head)
   %body
     #container
+      #header
+        = render "shared/header"
       #main-content
         - if show_title?
           %h2= h yield(:title)

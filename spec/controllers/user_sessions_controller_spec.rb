@@ -57,35 +57,35 @@ describe UserSessionsController do
     end
   end
   
-  # describe "handling DELETE destroy" do
-  #   def do_delete
-  #     delete :destroy
-  #   end
-  #   
-  #   it "redirects to the login page if not logged in" do
-  #     do_delete
-  #     response.should redirect_to(new_user_session_path)
-  #   end
-  #   
-  #   describe "when logged in" do
-  #     before(:each) do
-  #       login_user
-  #       user_session.stub(:destroy)
-  #     end
-  #     
-  #     it "destroys the current user session" do
-  #       user_session.should_receive(:destroy)
-  #       do_delete
-  #     end
-  #     
-  #     it "sets the flash message and redirects to the home page" do
-  #       do_delete
-  #       flash[:notice].should == "You have logged out"
-  #       response.should redirect_to(root_path)
-  #     end
-  #   end
-  #   
-  #   
-  # end
+  describe "handling DELETE destroy" do
+    def do_delete
+      delete :destroy
+    end
+    
+    it "redirects to the home page if not logged in (before filter)" do
+      do_delete
+      response.should redirect_to(root_path)
+    end
+    
+    describe "when logged in" do
+      before(:each) do
+        login_user
+        user_session.stub(:destroy)
+      end
+      
+      it "destroys the current user session" do
+        user_session.should_receive(:destroy)
+        do_delete
+      end
+      
+      it "sets the flash message and redirects to the home page" do
+        do_delete
+        flash[:notice].should == "You have logged out"
+        response.should redirect_to(root_path)
+      end
+    end
+    
+    
+  end
   
 end

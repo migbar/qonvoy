@@ -65,3 +65,9 @@ Given /^a Twitter user that denies access to Qonvoy$/ do
     end
  end
 end
+
+Given /^I am a logged in as the Twitter user "([^\"]*)"$/ do |name|
+   Given %Q{a Twitter user "#{name}" registered with Qonvoy}
+   Given %Q{I am on the home page}
+   Given %Q{I press "Let me log in using Twitter"}
+end
