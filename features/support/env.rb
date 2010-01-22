@@ -54,9 +54,9 @@ require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation
 
 
-After do |scenario|  
-  if scenario.failed?
-    save_and_open_page
-  end
-end
+# After do |scenario|  
+#   if scenario.failed?
+#     save_and_open_page
+#   end
+# end
 

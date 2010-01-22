@@ -13,9 +13,10 @@ class UsersController < ApplicationController
         if params[:denied]
           flash[:notice] = "You did not allow Qonvoy to use your Twitter account"
           redirect_to root_path
+        else
+          # Hoptoad.notify("Hack attack!")
         end
       end
     end
-    # render :create
   end
 end

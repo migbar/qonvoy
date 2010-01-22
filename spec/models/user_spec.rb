@@ -5,7 +5,9 @@ describe User do
                      :oauth_token, :oauth_secret,
                      :name, :screen_name, :avatar_url, :twitter_uid, :location,
                      :type => :string
-
+  
+  should_validate_presence_of :screen_name
+  
   it "#to_s returns the screen_name for the user" do
     user = User.new
     user.screen_name = "bob"

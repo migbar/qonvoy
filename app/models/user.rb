@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   acts_as_authentic
   before_save :populate_oauth_user
   
+  validates_presence_of :screen_name
+  
   def to_s
     screen_name
   end

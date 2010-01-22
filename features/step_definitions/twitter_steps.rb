@@ -31,3 +31,37 @@ Given /^a Twitter user "([^\"]*)" that is not registered with Qonvoy$/ do |twitt
     end
   end
 end
+
+Given /^a Twitter user "([^\"]*)" registered with Qonvoy$/ do |name|
+  Given %Q{a twitter user "#{name}" exists with oauth_token: "foo", oauth_secret: "secret", screen_name: "#{name}", name: "#{name}", avatar_url: "http://a3.twimg.com/profile_images/63673063/images-2_normal.jpeg"}
+  
+  UserSession.class_eval do
+    def redirect_to_oauth
+      oauth_controller.session[:oauth_callback_method] = "POST"
+      oauth_controller.session[:oauth_request_class] = self.class.name
+      oauth_controller.redirect_to "/user_session?oauth_token=foo&oauth_verifier=bar"
+    end
+
+    def authenticate_with_oauth
+      self.attempted_record = User.find_by_oauth_token("foo")
+    end
+  end
+end
+
+Given /^a Twitter user that denies access to Qonvoy$/ do
+  UserSession.class_eval do
+    def redirect_to_oauth
+      oauth_controller.session[:oauth_callback_method] = "POST"
+      oauth_controller.session[:oauth_request_class] = self.class.name
+      oauth_controller.redirect_to "/user_session?denied=foo"
+    end
+  end
+  
+  User.class_eval do
+    def redirect_to_oauth
+      oauth_controller.session[:oauth_callback_method] = "POST"
+      oauth_controller.session[:oauth_request_class] = self.class.name
+      oauth_controller.redirect_to "/account?denied=foo"
+    end
+ end
+end
