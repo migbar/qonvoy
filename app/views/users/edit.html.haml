@@ -1,0 +1,6 @@
+- title "Specify your interests"
+
+- semantic_form_for @user, :url => profile_path do |f|
+  - f.inputs do
+    = f.input :location
+  = f.inputs :name => 'Interest #%i', :for => :interests

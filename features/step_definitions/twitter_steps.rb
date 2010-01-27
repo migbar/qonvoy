@@ -20,7 +20,7 @@ Given /^a Twitter user "([^\"]*)" that is not registered with Qonvoy$/ do |twitt
     def redirect_to_oauth
       oauth_controller.session[:oauth_callback_method] = "POST"
       oauth_controller.session[:oauth_request_class] = self.class.name
-      oauth_controller.redirect_to "/account?oauth_token=foo&oauth_verifier=bar"
+      oauth_controller.redirect_to "/profile?oauth_token=foo&oauth_verifier=bar"
     end
 
     def authenticate_with_oauth
@@ -61,7 +61,7 @@ Given /^a Twitter user that denies access to Qonvoy$/ do
     def redirect_to_oauth
       oauth_controller.session[:oauth_callback_method] = "POST"
       oauth_controller.session[:oauth_request_class] = self.class.name
-      oauth_controller.redirect_to "/account?denied=foo"
+      oauth_controller.redirect_to "/profile?denied=foo"
     end
  end
 end
@@ -70,4 +70,10 @@ Given /^I am a logged in as the Twitter user "([^\"]*)"$/ do |name|
    Given %Q{a Twitter user "#{name}" registered with Qonvoy}
    Given %Q{I am on the home page}
    Given %Q{I press "Let me log in using Twitter"}
+end
+
+Given /^I register as "([^\"]*)" using Twitter$/ do |name|
+  Given %Q{a Twitter user "#{name}" that is not registered with Qonvoy}
+   When %Q{I am on the home page}
+   When %Q{I press "Register using Twitter"}
 end

@@ -28,10 +28,10 @@ describe UsersController do
       assigns[:user].should == @user
     end
     
-    it "redirects to the home page and sets the flash message on success" do
+    it "redirects to the profile page and sets the flash message on success" do
       post_with_valid_attributes
       flash[:notice].should == "Thank you for registering twitter_guy, your account has been created!"
-      response.should redirect_to(root_path)
+      response.should redirect_to(edit_profile_path)
     end
     
     it "sets the notice flash and redirects to the registration page if denied OAuth authentication" do
@@ -47,4 +47,19 @@ describe UsersController do
     end
   end
   
+  describe "handling GET edit" do
+    before(:each) do
+      login_user
+    end
+    
+    it "assigns the current user for the view" do
+      get :edit
+      assigns[:user].should == current_user
+    end
+    
+    it "renders the edit template" do
+      get :edit
+      response.should render_template(:edit)
+    end
+  end
 end
