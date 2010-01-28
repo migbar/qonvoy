@@ -1,5 +1,7 @@
 - if current_user
   = button_to "Log out", user_session_path, :method => :delete
+  | 
+  = link_to "profile", edit_profile_path
 - else
   - form_tag profile_path do
     = oauth_register_button :value => "Register using Twitter"

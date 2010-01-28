@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   acts_as_authentic
+  
+  acts_as_taggable_on :interests
+  
   validates_presence_of :screen_name
   
   def to_s
@@ -9,7 +12,7 @@ class User < ActiveRecord::Base
   def using_twitter?
     !oauth_token.blank?
   end
-  
+
   def populate_oauth_user
     if using_twitter?
       @response = UserSession.oauth_consumer.request(:get, '/account/verify_credentials.json',
@@ -25,7 +28,7 @@ class User < ActiveRecord::Base
       end
     end
   end
-  
+
   private
     def authenticate_with_oauth
       super # oauth_token is set

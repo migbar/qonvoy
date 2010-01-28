@@ -78,5 +78,5 @@ describe User do
   end
   
   it "#authenticate_with_oauth calls super and #populate_oauth_user when registering"
-
+  
 end

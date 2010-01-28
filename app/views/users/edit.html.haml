@@ -3,4 +3,9 @@
 - semantic_form_for @user, :url => profile_path do |f|
   - f.inputs do
     = f.input :location
-  = f.inputs :name => 'Interest #%i', :for => :interests
+  - f.inputs "Interests" do
+    - @user.interests.each_with_index do |interest, index|
+      - f.semantic_fields_for(:interest_list, interest) do |fi|
+        = fi.input :name, :input_html => { :name => "#{fi.object_name}[]", :id => "interest_#{index}" }
+  - f.buttons do
+    = f.commit_button "Save my interests"

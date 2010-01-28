@@ -50,16 +50,57 @@ describe UsersController do
   describe "handling GET edit" do
     before(:each) do
       login_user
+      @user = current_user
+    end
+    
+    def do_get
+      get :edit
     end
     
     it "assigns the current user for the view" do
-      get :edit
+      do_get
       assigns[:user].should == current_user
     end
     
+    it "builds up to 5 interests for the user" do
+      @user.stub(:interest_list).and_return(%w[foo bar])
+      @user.interests.should_receive(:build).exactly(3).times
+      do_get
+    end
+    
     it "renders the edit template" do
-      get :edit
+      do_get
       response.should render_template(:edit)
     end
   end
+  
+  describe "handling PUT update" do
+    before(:each) do
+      login_user
+      @user = current_user
+    end
+    
+    def put_with_valid_attributtes
+      @user.should_receive(:update_attributes).with("foo" => "bar").and_return(true)
+      put :update, :user => { :foo => "bar" }
+    end
+      
+    it "assigns the current user for the view" do
+      put_with_valid_attributtes
+      assigns[:user].should == current_user
+    end
+    
+    it "sets the success flash and redirects to home page" do
+      put_with_valid_attributtes
+      flash[:success].should == "Saved your interests."
+      response.should redirect_to(root_path)
+    end
+  end
 end
+
+
+
+
+
+
+

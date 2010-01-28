@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :require_user, :except => [:create]
   before_filter :require_no_user, :only => [:create]
   
   # POST /account
@@ -24,6 +25,16 @@ class UsersController < ApplicationController
   
   def edit
     @user = current_user
+    (5 - @user.interest_list.length).times do
+      @user.interests.build
+    end
   end
   
+  def update
+    @user = current_user
+    if @user.update_attributes(params[:user])
+      redirect_to root_path
+      flash[:success] = "Saved your interests."
+    end
+  end
 end
