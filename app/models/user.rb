@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                  :integer(4)      not null, primary key
+#  name                :string(255)
+#  twitter_uid         :string(255)
+#  avatar_url          :string(255)
+#  screen_name         :string(255)
+#  location            :string(255)
+#  persistence_token   :string(255)     not null, indexed
+#  single_access_token :string(255)     not null, indexed
+#  perishable_token    :string(255)     not null, indexed
+#  oauth_token         :string(255)     indexed
+#  oauth_secret        :string(255)
+#  created_at          :datetime
+#  updated_at          :datetime
+#
+
 class User < ActiveRecord::Base
   acts_as_authentic
   
@@ -27,6 +46,10 @@ class User < ActiveRecord::Base
         self.location    = user_info['location']
       end
     end
+  end
+  
+  def follow_me
+    RatingBird.follow(screen_name)
   end
 
   private

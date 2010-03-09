@@ -10,3 +10,10 @@ Factory.define(:twitter_user, :parent => :user) do |f|
   f.oauth_token {|twitter_user| "#{twitter_user.name}_token"}
   f.oauth_secret {|twitter_user| "#{twitter_user.name}_secret"}
 end
+
+Factory.define(:status) do |f|
+end
+
+Factory.define(:dm_status, :parent => :status) do |f|
+  f.kind "dm"
+end

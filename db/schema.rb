@@ -9,7 +9,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100127115908) do
+ActiveRecord::Schema.define(:version => 20100305113236) do
+
+  create_table "statuses", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "sender_screen_name"
+    t.integer  "sender_id",          :limit => 8
+    t.string   "body",               :limit => 1000
+    t.string   "kind",               :limit => 40
+    t.datetime "status_created_at"
+    t.integer  "message_id",         :limit => 8
+    t.text     "raw"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "statuses", ["message_id"], :name => "index_statuses_on_message_id"
+  add_index "statuses", ["user_id"], :name => "index_statuses_on_user_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

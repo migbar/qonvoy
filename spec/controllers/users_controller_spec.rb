@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UsersController do
   before(:each) do
-    @user = stub_model(User, :create_or_update => true, :screen_name => "twitter_guy")
+    @user = stub_model(User, :create_or_update => true, :screen_name => "twitter_guy", :follow_me => true)
   end
   
   describe "handling POST create" do
@@ -26,6 +26,11 @@ describe UsersController do
       User.should_receive(:new).and_return(@user)
       post_with_valid_attributes
       assigns[:user].should == @user
+    end
+    
+    it "gets the user followed by Ratingbird" do
+      @user.should_receive(:follow_me)
+      post_with_valid_attributes
     end
     
     it "redirects to the profile page and sets the flash message on success" do

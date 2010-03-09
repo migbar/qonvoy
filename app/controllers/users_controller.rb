@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     
     @user.save do |result|
       if result
+        @user.follow_me
         redirect_to edit_profile_path
         flash[:notice] = "Thank you for registering #{current_user}, your account has been created!"
       else

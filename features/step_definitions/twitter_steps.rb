@@ -30,6 +30,8 @@ Given /^a Twitter user "([^\"]*)" that is not registered with Qonvoy$/ do |twitt
       self.oauth_secret = "bar"
     end
   end
+  
+  stub_ratingbird_twitter_following
 end
 
 Given /^a Twitter user "([^\"]*)" registered with Qonvoy$/ do |name|
@@ -76,4 +78,28 @@ Given /^I register as "([^\"]*)" using Twitter$/ do |name|
   Given %Q{a Twitter user "#{name}" that is not registered with Qonvoy}
    When %Q{I am on the home page}
    When %Q{I press "Register using Twitter"}
+end
+
+Then /^"([^\"]*)" should have a tweet$/ do |name|
+  guy_queue = TwitterQueue.for_user(name)
+  guy_queue.size.should == 1
+  @twitter_guy = name
+end
+
+Then /^the tweet should contain "([^\"]*)"$/ do |text|
+  @the_tweet = TwitterQueue.for_user(@twitter_guy).shift
+  @the_tweet.should match(/#{text}/)
+end
+
+When /^I click the first link in the tweet$/ do
+  link = URI.extract(@the_tweet).first
+  visit link
+end
+
+Then /^Qonvoy should be following "([^\"]*)"$/ do |screen_name|
+  TwitterQueue.friendships["ratingbird"].should include(screen_name)
+end
+
+When /^I direct message Ratingbird with "([^\"]*)"$/ do |message|
+  TwitterQueue.add_dm(@twitter_guy, "ratingbird", message)
 end

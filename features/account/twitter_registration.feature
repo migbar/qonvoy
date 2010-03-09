@@ -3,11 +3,12 @@ Feature: Twitter Registration
   As a Twitter user
   I want to be able to register and log in using my Twitter account
 
-  Scenario: Registering with Qonvoy using Twitter
+  Scenario: Registering with Ratingbird using Twitter
     Given a Twitter user "twitter_guy" that is not registered with Qonvoy
       And I am on the home page
      When I press "Register using Twitter"
      Then I should see "Thank you for registering twitter_guy"
+      And Qonvoy should be following "twitter_guy"
 
   Scenario: Denying Qonvoy access to Twitter
     Given a Twitter user that denies access to Qonvoy

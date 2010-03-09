@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                  :integer(4)      not null, primary key
+#  name                :string(255)
+#  twitter_uid         :string(255)
+#  avatar_url          :string(255)
+#  screen_name         :string(255)
+#  location            :string(255)
+#  persistence_token   :string(255)     not null, indexed
+#  single_access_token :string(255)     not null, indexed
+#  perishable_token    :string(255)     not null, indexed
+#  oauth_token         :string(255)     indexed
+#  oauth_secret        :string(255)
+#  created_at          :datetime
+#  updated_at          :datetime
+#
+
 require 'spec_helper'
 
 describe User do
@@ -78,5 +97,11 @@ describe User do
   end
   
   it "#authenticate_with_oauth calls super and #populate_oauth_user when registering"
+  
+  it "#follow_me" do
+    user = Factory.build(:twitter_user)
+    RatingBird.should_receive(:follow).with(user.screen_name)
+    user.follow_me
+  end
   
 end

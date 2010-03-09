@@ -28,4 +28,5 @@ config.gem 'rspec',            :lib => false, :version => '>=1.3.0' unless File.
 config.gem 'rspec-rails',      :lib => false, :version => '>=1.3.2' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
 config.gem 'factory_girl',     :lib => false, :version => '>=1.2.3'
 config.gem 'pickle',           :lib => false, :version => '>=0.2.1'
+config.gem 'fakeweb',          :lib => false, :version => '>=1.2.8'
 

@@ -1,0 +1,66 @@
+--- !map:Hashie::Mash 
+created_at: Thu Mar 04 11:25:53 +0000 2010
+sender_screen_name: ihoka
+sender: !map:Hashie::Mash 
+  name: Istvan Hoka
+  profile_background_tile: false
+  profile_sidebar_border_color: 181A1E
+  profile_sidebar_fill_color: "252429"
+  created_at: Tue Apr 03 11:38:56 +0000 2007
+  location: Cluj-Napoca, Romania
+  profile_image_url: http://a3.twimg.com/profile_images/319667599/twitterProfilePhoto_normal.jpg
+  profile_link_color: 2FC2EF
+  contributors_enabled: false
+  url: http://istvanhoka.com
+  favourites_count: 10
+  utc_offset: 7200
+  id: 3309751
+  followers_count: 95
+  lang: en
+  protected: false
+  profile_text_color: "666666"
+  profile_background_color: 1A1B1F
+  notifications: false
+  verified: false
+  time_zone: Bucharest
+  geo_enabled: true
+  description: ""
+  friends_count: 93
+  statuses_count: 189
+  profile_background_image_url: http://s.twimg.com/a/1267574394/images/themes/theme9/bg.gif
+  screen_name: ihoka
+  following: false
+recipient_screen_name: ratingbird
+text: Hello there little birdie.
+recipient: !map:Hashie::Mash 
+  name: rating bird
+  profile_background_tile: false
+  profile_sidebar_border_color: 87bc44
+  profile_sidebar_fill_color: e0ff92
+  created_at: Tue Mar 02 14:06:40 +0000 2010
+  location: 
+  profile_image_url: http://s.twimg.com/a/1267643725/images/default_profile_1_normal.png
+  profile_link_color: 0000ff
+  contributors_enabled: false
+  url: 
+  favourites_count: 0
+  utc_offset: 
+  id: 119044038
+  followers_count: 1
+  lang: en
+  protected: false
+  profile_text_color: "000000"
+  profile_background_color: 9ae4e8
+  notifications: false
+  verified: false
+  time_zone: 
+  geo_enabled: false
+  description: 
+  friends_count: 5
+  statuses_count: 0
+  profile_background_image_url: http://s.twimg.com/a/1267643725/images/themes/theme1/bg.png
+  screen_name: ratingbird
+  following: true
+recipient_id: 119044038
+id: 895396831
+sender_id: 3309751
