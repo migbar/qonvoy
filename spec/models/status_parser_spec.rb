@@ -24,9 +24,9 @@ describe StatusParser do
       "Soup from Nobu Restaurant 8 out of 10" => {
         :dish => "Soup", :place => "Nobu Restaurant", :rating => "8", :scale => "10", :type => :rating, :qualifier => nil
       },
-      "Soup from Nobu Restaurant 8/10" => {
-        :dish => "Soup", :place => "Nobu Restaurant", :rating => "8", :scale => "10", :type => :rating, :qualifier => nil
-      },
+      # "Soup from Nobu Restaurant 8/10" => {
+      #   :dish => "Soup", :place => "Nobu Restaurant", :rating => "8", :scale => "10", :type => :rating, :qualifier => nil
+      # },
       "8/10 for the Shrimp Noodle Soup at Nobu" => {
         :dish => "Shrimp Noodle Soup", :place => "Nobu", :rating => "8", :scale => "10", :type => :rating, :qualifier => nil
       }
