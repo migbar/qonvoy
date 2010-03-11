@@ -16,6 +16,8 @@
 #
 
 class Status < ActiveRecord::Base
+  include ActionController::UrlWriter
+  
   belongs_to :user
   
   class << self
@@ -25,6 +27,22 @@ class Status < ActiveRecord::Base
   end
   
   def process
-    StatusParser.parse(body)
+    result = StatusParser.parse(body)
+    place = Place.find_or_create_by_name(result[:place])
+    
+    if place.missing_information?
+      message = help_out_message(place)
+      RatingBird.update(message)
+    end
+    
+    # record the rating
+    # tweet out rating on behalf of the user
   end
+  
+  private
+  
+  def help_out_message(place)
+    "@#{sender_screen_name} We don't know much about #{place.name} yet. Could you help out? #{edit_place_url(place, :host => Settings.host)}"
+  end
+  
 end

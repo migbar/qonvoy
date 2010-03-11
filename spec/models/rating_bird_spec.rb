@@ -62,4 +62,12 @@ describe RatingBird do
       YAML.load(File.read(File.dirname(__FILE__) + "/../fixtures/direct_messages/#{name}.yml"))
     end
   end
+  describe "#update" do
+    it "tweets out the specified status" do
+      twitter = mock(Twitter::Base)
+      RatingBird.should_receive(:twitter).and_return(twitter)
+      twitter.should_receive(:update).with("@twitter_dude Help us out...")
+      RatingBird.update("@twitter_dude Help us out...")
+    end
+  end
 end

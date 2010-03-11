@@ -9,7 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100305113236) do
+ActiveRecord::Schema.define(:version => 20100311102821) do
+
+  create_table "places", :force => true do |t|
+    t.string   "name"
+    t.text     "address"
+    t.decimal  "latitude",   :precision => 10, :scale => 8
+    t.decimal  "longitude",  :precision => 12, :scale => 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "places", ["name"], :name => "index_places_on_name"
 
   create_table "statuses", :force => true do |t|
     t.integer  "user_id"

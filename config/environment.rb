@@ -16,5 +16,11 @@ Rails::Initializer.run do |config|
   config.gem "acts-as-taggable-on",                :version => '1.0.19'
   config.gem 'hoptoad_notifier',                   :version => '2.1.2'
   config.gem 'twitter',                            :version => '0.8.4'
+  
   config.time_zone = 'UTC'
+  
+  config.after_initialize do
+    ActionMailer::Base.default_url_options[:host] = Settings.host
+  end
 end
+

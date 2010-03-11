@@ -103,3 +103,10 @@ end
 When /^I direct message Ratingbird with "([^\"]*)"$/ do |message|
   TwitterQueue.add_dm(@twitter_guy, "ratingbird", message)
 end
+
+Then /^"([^\"]*)" should have a reply from "([^\"]*)" with "([^\"]*)"$/ do |recipient, sender, reply|
+  TwitterQueue.for_user(recipient).any? do |status|
+    status[:sender_screen_name] == sender &&
+      status[:text] =~ /#{Regexp.escape(reply)}/
+  end.should be_true
+end

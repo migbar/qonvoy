@@ -10,6 +10,10 @@ class RatingBird
       twitter = Twitter::Base.new(oauth)
     end
     
+    def update(message)
+      twitter.update(message)
+    end
+    
     # def fetch_direct_messages
     #   # for reach received dm:
     #   #   receive_direct_message

@@ -12,8 +12,13 @@ Factory.define(:twitter_user, :parent => :user) do |f|
 end
 
 Factory.define(:status) do |f|
+  f.sequence(:sender_screen_name) { |i| "twitter_guy_#{i}" }
 end
 
 Factory.define(:dm_status, :parent => :status) do |f|
   f.kind "dm"
+end
+
+Factory.define(:place) do |f|
+  f.sequence(:name) { |i| "Place ##{i}" }
 end

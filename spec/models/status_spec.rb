@@ -18,6 +18,8 @@
 require 'spec_helper'
 
 describe Status do
+  include ActionController::UrlWriter
+
   context "associations" do
     should_belong_to :user
   end
@@ -43,6 +45,9 @@ describe Status do
     before(:each) do
       @status = Factory.build(:dm_status, :body => "Awesome Shrimp Noodle Soup from Nobu - 8.5 out of 10.0")
       @parsed_hash = { :dish => "Shrimp Noodle Soup", :place => "Nobu", :rating => "8.5", :scale => "10", :type => "rating" }
+      StatusParser.stub(:parse).and_return(@parsed_hash)
+      @place = mock_model(Place, :name => @parsed_hash[:place], :missing_information? => false)
+      Place.stub(:find_or_create_by_name).and_return(@place)
     end
     it "parses the status" do
       # d ratingbird Awesome sweet and sour Shrimp Noodle soup! 8.5 out of 10.0 
@@ -58,20 +63,37 @@ describe Status do
       StatusParser.should_receive(:parse).with(@status.body).and_return(@parsed_hash)
       @status.process
     end
+    
     it "replies to the user with a link to a resolution page on parse failure" do
-      
+      pending
+      StatusParser.should_receive(:parse).with(@status.body).and_return({})
     end
+    
     it "finds or creates a place" do
-      
+      Place.should_receive(:find_or_create_by_name).with("Nobu").and_return(@place)
+      @status.process
     end
-    it "finds or creates the rated dish within the place" do
+    
+    context "place is missing information" do
+      before(:each) do
+        @place.should_receive(:missing_information?).and_return(true)
+        @tweet = "@#{@status.sender_screen_name} We don't know much about #{@place.name} yet. Could you help out? #{edit_place_url(@place, :host => Settings.host)}"
+      end
       
+      it "sends the tweet to the sender of the DM" do
+        RatingBird.should_receive(:update).with(@tweet)
+        @status.process
+      end
+    end
+    
+    it "finds or creates the rated dish within the place" do
+      pending
     end
     it "rates the dish according to the scale" do
-      
+      pending
     end
     it "tweets out the user's rating on their behalf" do
-      
+      pending
     end
   end
 end
