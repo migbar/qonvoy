@@ -35,6 +35,11 @@ class Status < ActiveRecord::Base
       RatingBird.update(message)
     end
     
+    dish = place.dishes.find_or_create_by_name(result[:dish])
+    rating = dish.add_rating(result[:rating], result[:scale])
+    
+    # associate the status with the place, the dish and the rating
+    
     # record the rating
     # tweet out rating on behalf of the user
   end

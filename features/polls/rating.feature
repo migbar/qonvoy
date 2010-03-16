@@ -16,7 +16,7 @@ Feature: Rating from Twitter
 
   Scenario: Creating a place from Twitter
     Given I am a logged in as the Twitter user "twitter_dude"
-     When I direct message Ratingbird with "Awesome Shrimp Noodle Soup from Nobu - 8.5 out of 10.0"
+     When I direct message Ratingbird with "Awesome Shrimp Noodle Soup from Nobu - 8 out of 10"
        # 1. twitter_dude DMs ratingbird
        # 2. ratingbird fetches DMs (persisted for each user if user found)
        # 3. ratingbird processes DM (by DJ)
@@ -25,8 +25,11 @@ Feature: Rating from Twitter
        # 3.2.1 DM user with query if new place
        # 3.3 rate dish
        # 3.4 tweet out rating for the user
-     Then "twitter_dude" should have a reply from "ratingbird" with "We don't know much about Nobu yet. Could you help out?"
-      And "twitter_dude" should have a tweet
-      And the tweet should contain "Awesome Shrimp Noodle Soup from Nobu - 8.5 out of 10.0 #ratingbird"
-      And I click the first link in the tweet
+     Then I should have a reply from "ratingbird" with "We don't know much about Nobu yet. Could you help out?"
+
+      And a dish should exist with name: "Shrimp Noodle Soup"
+      And the dish "Shrimp Noodle Soup" should have a rating of "8"
+      And my Twitter status should be "Awesome Shrimp Noodle Soup from Nobu - 8 out of 10 #ratingbird"
+      
+     When I click the first link in my status
      Then I should be on the ratings page for "Shrimp Noodle Soup"

@@ -16,6 +16,10 @@ require 'spec_helper'
 describe Place do
   should_validate_presence_of :name
   
+  context "associations" do
+    should_have_many :dishes
+  end
+  
   describe "#missing_information?" do
     it "is true if address is blank" do
       place = Factory.build(:place, :address => "")

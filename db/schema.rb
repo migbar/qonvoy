@@ -9,7 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100311102821) do
+ActiveRecord::Schema.define(:version => 20100315103527) do
+
+  create_table "dishes", :force => true do |t|
+    t.integer  "place_id"
+    t.string   "name"
+    t.integer  "rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "dishes", ["name"], :name => "index_dishes_on_name"
+  add_index "dishes", ["place_id", "name"], :name => "index_dishes_on_place_id_and_name"
+  add_index "dishes", ["place_id"], :name => "index_dishes_on_place_id"
 
   create_table "places", :force => true do |t|
     t.string   "name"

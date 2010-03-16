@@ -6,6 +6,9 @@ describe StatusParser do
       "Awesome Shrimp Noodle Soup from Nobu - 8 out of 10" => {
         :dish => "Shrimp Noodle Soup", :place => "Nobu", :rating => "8", :scale => "10", :type => :rating, :qualifier => "Awesome"
       },
+      # "Awesome Shrimp Noodle Soup from Nobu - 8.5 out of 10.0" => {
+      #   :dish => "Shrimp Noodle Soup", :place => "Nobu", :rating => "8.5", :scale => "10.0", :type => :rating, :qualifier => "Awesome"
+      # },
       "Shrimp Noodle Soup from Nobu - 8 out of 10" => {
         :dish => "Shrimp Noodle Soup", :place => "Nobu", :rating => "8", :scale => "10", :type => :rating, :qualifier => nil
       },

@@ -46,8 +46,10 @@ describe Status do
       @status = Factory.build(:dm_status, :body => "Awesome Shrimp Noodle Soup from Nobu - 8.5 out of 10.0")
       @parsed_hash = { :dish => "Shrimp Noodle Soup", :place => "Nobu", :rating => "8.5", :scale => "10", :type => "rating" }
       StatusParser.stub(:parse).and_return(@parsed_hash)
-      @place = mock_model(Place, :name => @parsed_hash[:place], :missing_information? => false)
+      @place = stub_model(Place, :name => @parsed_hash[:place], :missing_information? => false)
       Place.stub(:find_or_create_by_name).and_return(@place)
+      @dish = mock_model(Dish, :add_rating => true)
+      @place.dishes.stub(:find_or_create_by_name).and_return(@dish)
     end
     it "parses the status" do
       # d ratingbird Awesome sweet and sour Shrimp Noodle soup! 8.5 out of 10.0 
@@ -87,11 +89,15 @@ describe Status do
     end
     
     it "finds or creates the rated dish within the place" do
-      pending
+      @place.dishes.should_receive(:find_or_create_by_name).with(@parsed_hash[:dish]).and_return(@dish)
+      @status.process
     end
+    
     it "rates the dish according to the scale" do
-      pending
+      @dish.should_receive(:add_rating).with(@parsed_hash[:rating], @parsed_hash[:scale])
+      @status.process
     end
+    
     it "tweets out the user's rating on their behalf" do
       pending
     end

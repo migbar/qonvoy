@@ -13,6 +13,7 @@
 
 class Place < ActiveRecord::Base
   validates_presence_of :name
+  has_many :dishes
   
   def missing_information?
     address.blank?

@@ -48,6 +48,8 @@ Given /^a Twitter user "([^\"]*)" registered with Qonvoy$/ do |name|
       self.attempted_record = User.find_by_oauth_token("foo")
     end
   end
+  
+  stub_ratingbird_twitter_update
 end
 
 Given /^a Twitter user that denies access to Qonvoy$/ do
@@ -72,6 +74,7 @@ Given /^I am a logged in as the Twitter user "([^\"]*)"$/ do |name|
    Given %Q{a Twitter user "#{name}" registered with Qonvoy}
    Given %Q{I am on the home page}
    Given %Q{I press "Let me log in using Twitter"}
+   @twitter_guy = name
 end
 
 Given /^I register as "([^\"]*)" using Twitter$/ do |name|
@@ -80,15 +83,9 @@ Given /^I register as "([^\"]*)" using Twitter$/ do |name|
    When %Q{I press "Register using Twitter"}
 end
 
-Then /^"([^\"]*)" should have a tweet$/ do |name|
-  guy_queue = TwitterQueue.for_user(name)
-  guy_queue.size.should == 1
-  @twitter_guy = name
-end
-
-Then /^the tweet should contain "([^\"]*)"$/ do |text|
-  @the_tweet = TwitterQueue.for_user(@twitter_guy).shift
-  @the_tweet.should match(/#{text}/)
+Then /^my Twitter status should be "([^\"]*)"$/ do |text|
+  @the_tweet = TwitterQueue.status_for(@twitter_guy)
+  @the_tweet[:text].should match(/#{text}/)
 end
 
 When /^I click the first link in the tweet$/ do
@@ -104,8 +101,8 @@ When /^I direct message Ratingbird with "([^\"]*)"$/ do |message|
   TwitterQueue.add_dm(@twitter_guy, "ratingbird", message)
 end
 
-Then /^"([^\"]*)" should have a reply from "([^\"]*)" with "([^\"]*)"$/ do |recipient, sender, reply|
-  TwitterQueue.for_user(recipient).any? do |status|
+Then /^I should have a reply from "([^\"]*)" with "([^\"]*)"$/ do |sender, reply|
+  TwitterQueue.for_user(@twitter_guy).any? do |status|
     status[:sender_screen_name] == sender &&
       status[:text] =~ /#{Regexp.escape(reply)}/
   end.should be_true
