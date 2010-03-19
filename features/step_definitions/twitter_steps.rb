@@ -50,6 +50,7 @@ Given /^a Twitter user "([^\"]*)" registered with Qonvoy$/ do |name|
   end
   
   stub_ratingbird_twitter_update
+  stub_user_twitter_update
 end
 
 Given /^a Twitter user that denies access to Qonvoy$/ do
@@ -83,13 +84,13 @@ Given /^I register as "([^\"]*)" using Twitter$/ do |name|
    When %Q{I press "Register using Twitter"}
 end
 
-Then /^my Twitter status should be "([^\"]*)"$/ do |text|
-  @the_tweet = TwitterQueue.status_for(@twitter_guy)
-  @the_tweet[:text].should match(/#{text}/)
+Then /^my Twitter status should be "([^\"]*)"$/ do |text|  
+  @my_status = TwitterQueue.status_for(@twitter_guy)
+  @my_status.should match(/#{text}/)
 end
 
-When /^I click the first link in the tweet$/ do
-  link = URI.extract(@the_tweet).first
+When /^I click the first link in my status$/ do
+  link = URI.extract(@my_status).first
   visit link
 end
 
@@ -98,7 +99,7 @@ Then /^Qonvoy should be following "([^\"]*)"$/ do |screen_name|
 end
 
 When /^I direct message Ratingbird with "([^\"]*)"$/ do |message|
-  TwitterQueue.add_dm(@twitter_guy, "ratingbird", message)
+  TwitterQueue.add_dm(User.find_by_screen_name(@twitter_guy), "ratingbird", message)
 end
 
 Then /^I should have a reply from "([^\"]*)" with "([^\"]*)"$/ do |sender, reply|

@@ -9,7 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100315103527) do
+ActiveRecord::Schema.define(:version => 20100317103811) do
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "dishes", :force => true do |t|
     t.integer  "place_id"
@@ -34,6 +47,15 @@ ActiveRecord::Schema.define(:version => 20100315103527) do
 
   add_index "places", ["name"], :name => "index_places_on_name"
 
+  create_table "ratings", :force => true do |t|
+    t.integer  "dish_id"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ratings", ["dish_id"], :name => "index_ratings_on_dish_id"
+
   create_table "statuses", :force => true do |t|
     t.integer  "user_id"
     t.string   "sender_screen_name"
@@ -45,9 +67,14 @@ ActiveRecord::Schema.define(:version => 20100315103527) do
     t.text     "raw"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "dish_id"
+    t.integer  "place_id"
+    t.integer  "rating_id"
   end
 
+  add_index "statuses", ["dish_id"], :name => "index_statuses_on_dish_id"
   add_index "statuses", ["message_id"], :name => "index_statuses_on_message_id"
+  add_index "statuses", ["place_id"], :name => "index_statuses_on_place_id"
   add_index "statuses", ["user_id"], :name => "index_statuses_on_user_id"
 
   create_table "taggings", :force => true do |t|

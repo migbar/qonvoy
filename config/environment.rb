@@ -16,6 +16,8 @@ Rails::Initializer.run do |config|
   config.gem "acts-as-taggable-on",                :version => '1.0.19'
   config.gem 'hoptoad_notifier',                   :version => '2.1.2'
   config.gem 'twitter',                            :version => '0.8.4'
+  config.gem 'delayed_job',                        :version => '1.8.5'
+
   
   config.time_zone = 'UTC'
   

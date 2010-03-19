@@ -18,6 +18,8 @@
 #
 
 class User < ActiveRecord::Base
+  include ActionController::UrlWriter
+  
   acts_as_authentic
   
   acts_as_taggable_on :interests
@@ -50,6 +52,18 @@ class User < ActiveRecord::Base
   
   def follow_me
     RatingBird.follow(screen_name)
+  end
+  
+  def update_status_with_rating(status)
+    update_status("#{status.body} #ratingbird #{place_dish_url(status.place, status.dish, :host => Settings.host)}")
+  end
+  
+  def update_status(subject)
+    send_later(:perform_twitter_update, subject)
+  end
+  
+  def perform_twitter_update(subject)
+    RatingBird.client(oauth_token, oauth_secret).update(subject)
   end
 
   private

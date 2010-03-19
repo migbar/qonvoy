@@ -8,7 +8,7 @@ describe RatingBird do
     RatingBird.follow("twitter_dude")
   end
   
-  describe "#twitter" do
+  describe "#client" do
     before(:each) do
       @oauth = mock(Twitter::OAuth, :authorize_from_access => true)
       Twitter::OAuth.stub(:new).and_return(@oauth)
@@ -18,18 +18,24 @@ describe RatingBird do
     
     it "builds a Twitter OAuth token for the application" do
       Twitter::OAuth.should_receive(:new).with(Settings.twitter.consumer_key, Settings.twitter.consumer_secret).and_return(@oauth)
-      RatingBird.twitter
+      RatingBird.client("token", "secret")
     end
     
     it "authorizes the RatingBird client" do
-      @oauth.should_receive(:authorize_from_access).with(Settings.twitter.user_key, Settings.twitter.user_secret)
-      RatingBird.twitter
+      @oauth.should_receive(:authorize_from_access).with("token", "secret")
+      RatingBird.client("token", "secret")
     end
     
     it "builds and returns the Twitter endpoint for RatingBird" do
       Twitter::Base.should_receive(:new).with(@oauth).and_return(@endpoint)
-      RatingBird.twitter.should == @endpoint
+      RatingBird.client("token", "secret").should == @endpoint
     end
+  end
+  
+  it "builds a Twitter client for the RatingBird user" do
+    client = mock(Twitter::Base)
+    RatingBird.should_receive(:client).with(Settings.twitter.user_key, Settings.twitter.user_secret).and_return(client)
+    RatingBird.twitter.should == client
   end
   
   describe "#receive_direct_message" do

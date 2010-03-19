@@ -22,3 +22,11 @@ end
 Factory.define(:place) do |f|
   f.sequence(:name) { |i| "Place ##{i}" }
 end
+
+Factory.define(:dish) do |f|
+  f.sequence(:name) { |i| "Dish #{i}"}
+end
+
+Factory.define(:rating) do |f|
+  f.value rand() * 100
+end

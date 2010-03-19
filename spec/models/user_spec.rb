@@ -20,6 +20,8 @@
 require 'spec_helper'
 
 describe User do
+  include ActionController::UrlWriter
+  
   should_have_column :persistence_token, :single_access_token, :perishable_token, 
                      :oauth_token, :oauth_secret,
                      :name, :screen_name, :avatar_url, :twitter_uid, :location,
@@ -104,4 +106,41 @@ describe User do
     user.follow_me
   end
   
+  describe "#update_status_with_rating" do
+    before(:each) do
+      @user = Factory.build(:twitter_user)
+      @place = Factory.create(:place)
+      @dish = Factory.create(:dish, :place => @place) 
+      @status = Factory.build(:status, :body => "Blah blah", :place => @place, :dish => @dish)
+    end
+    
+    it "updates the user's Twitter status with the origina message decorated with #ratingbird and a link to the dish page" do
+      @user.should_receive(:update_status).with("#{@status.body} #ratingbird #{place_dish_url(@place, @dish, :host => Settings.host)}")
+      @user.update_status_with_rating(@status)
+    end
+  end
+  
+  it "#update_status enqueues perform_twitter_update" do 
+    @user = Factory.build(:twitter_user)
+    @user.should_receive(:send_later).with(:perform_twitter_update, "the status")
+    @user.update_status("the status")
+  end
+  
+  describe "#perform_twitter_update" do
+    before(:each) do
+      @user = Factory.build(:twitter_user)
+      @client = mock(Twitter::Base, :update => nil)
+      RatingBird.stub(:client).and_return(@client)
+    end
+    
+    it "authorizes the user with the RatingBird Twitter client using the token and secret" do
+      RatingBird.should_receive(:client).with(@user.oauth_token, @user.oauth_secret).and_return(@client)
+      @user.perform_twitter_update("the status")
+    end
+    
+    it "updates the status using the client" do
+      @client.should_receive(:update).with("the status")
+      @user.perform_twitter_update("the status")
+    end
+  end
 end

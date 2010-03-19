@@ -3,20 +3,20 @@ class TwitterQueue
     def reset
       @@queue = nil
       @@friendships = nil
+      @@updates = nil
     end
     
     def friendships
       @@friendships ||= Hash.new([])
     end
     
-    #twitter inbox
+    #twitter queue (incoming)
     def queue 
       @@queue ||= {}
     end
     
-    #twitter statuses
-    def updates
-      @@updates ||= Hash.new([])
+    def for_user(screen_name)
+      queue[screen_name] ||= []
     end
     
     def text_queue(screen_name)
@@ -26,6 +26,19 @@ class TwitterQueue
       end
     end
     
+    #twitter statuses (outgoing)
+    def updates
+      @@updates ||= Hash.new([])
+    end
+    
+    def update_status(screen_name, status)
+      updates[screen_name] << status.to_s
+    end
+    
+    def status_for(screen_name)
+      updates[screen_name].last
+    end
+    
     def add(screen_name, status, sender=nil)
       for_user(screen_name) << {
         :sender_screen_name => sender,
@@ -33,25 +46,17 @@ class TwitterQueue
       }
       
       if sender
-        updates[sender] << status.to_s
+        update_status(sender, status.to_s)
       end
     end
     
-    def status_for(screen_name)
-      updates[screen_name].last
-    end
-    
     def add_dm(sender, recipient, message)
-      puts "add_dm(#{sender}, recipient, message)"
       RatingBird.receive_direct_message(Hashie::Mash.new({
-        :sender_screen_name => sender,
+        :sender_screen_name => sender.screen_name,
+        :sender_id => sender.twitter_uid,
         :recipient_screen_name => recipient,
         :text => message
       }))
-    end
-    
-    def for_user(screen_name)
-      queue[screen_name] ||= []
     end
   end
 end

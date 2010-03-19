@@ -13,6 +13,9 @@
 #  raw                :text
 #  created_at         :datetime
 #  updated_at         :datetime
+#  dish_id            :integer(4)      indexed
+#  place_id           :integer(4)      indexed
+#  rating_id          :integer(4)
 #
 
 require 'spec_helper'
@@ -22,6 +25,9 @@ describe Status do
 
   context "associations" do
     should_belong_to :user
+    should_belong_to :dish
+    should_belong_to :place
+    should_belong_to :rating
   end
   
   describe "#create_and_process" do
@@ -48,9 +54,13 @@ describe Status do
       StatusParser.stub(:parse).and_return(@parsed_hash)
       @place = stub_model(Place, :name => @parsed_hash[:place], :missing_information? => false)
       Place.stub(:find_or_create_by_name).and_return(@place)
-      @dish = mock_model(Dish, :add_rating => true)
+      @rating = mock_model(Rating)
+      @dish = mock_model(Dish, :add_rating => @rating)
       @place.dishes.stub(:find_or_create_by_name).and_return(@dish)
+      @user = mock_model(User, :update_status_with_rating => nil)
+      User.stub(:find_by_twitter_uid).and_return(@user)
     end
+    
     it "parses the status" do
       # d ratingbird Awesome sweet and sour Shrimp Noodle soup! 8.5 out of 10.0 
       # d ratingbird dish: .... place: ... rating: ...(scale?)
@@ -71,15 +81,16 @@ describe Status do
       StatusParser.should_receive(:parse).with(@status.body).and_return({})
     end
     
-    it "finds or creates a place" do
+    it "finds or creates a place and assigns it to the status" do
       Place.should_receive(:find_or_create_by_name).with("Nobu").and_return(@place)
       @status.process
+      @status.place.should == @place
     end
     
     context "place is missing information" do
       before(:each) do
         @place.should_receive(:missing_information?).and_return(true)
-        @tweet = "@#{@status.sender_screen_name} We don't know much about #{@place.name} yet. Could you help out? #{edit_place_url(@place, :host => Settings.host)}"
+        @tweet = "@#{@status.sender_screen_name} We don't know much about #{@place.name} yet. Could you help out? #{place_url(@place, :host => Settings.host)}"
       end
       
       it "sends the tweet to the sender of the DM" do
@@ -88,18 +99,32 @@ describe Status do
       end
     end
     
-    it "finds or creates the rated dish within the place" do
+    it "finds or creates the dish within the place and assigns it to the status" do
       @place.dishes.should_receive(:find_or_create_by_name).with(@parsed_hash[:dish]).and_return(@dish)
       @status.process
+      @status.dish.should == @dish
     end
     
-    it "rates the dish according to the scale" do
-      @dish.should_receive(:add_rating).with(@parsed_hash[:rating], @parsed_hash[:scale])
+    it "adds a rating for the dish in the proper scale and assigns it to the status" do
+      @dish.should_receive(:add_rating).with(@parsed_hash[:rating], @parsed_hash[:scale]).and_return(@rating)
+      @status.process
+      @status.rating.should == @rating
+    end
+    
+    it "finds the user by screen_name and assigns it to the status" do
+      User.should_receive(:find_by_twitter_uid).with(@status.sender_id).and_return(@user)
+      @status.process
+      @status.user.should == @user
+    end
+    
+    it "tells the user to update their status with the rating" do
+      @user.should_receive(:update_status_with_rating).with(@status)
       @status.process
     end
     
-    it "tweets out the user's rating on their behalf" do
-      pending
+    it "saves the status" do
+      @status.should_receive(:save!)
+      @status.process
     end
   end
 end

@@ -1,13 +1,17 @@
 class RatingBird
   class << self
+    def client(token, secret)
+      oauth = Twitter::OAuth.new(Settings.twitter.consumer_key, Settings.twitter.consumer_secret)
+      oauth.authorize_from_access(token, secret)      
+      Twitter::Base.new(oauth)
+    end
+    
     def follow(screen_name)
       twitter.friendship_create(screen_name)
     end
     
     def twitter
-      oauth = Twitter::OAuth.new(Settings.twitter.consumer_key, Settings.twitter.consumer_secret)
-      oauth.authorize_from_access(Settings.twitter.user_key, Settings.twitter.user_secret)
-      twitter = Twitter::Base.new(oauth)
+      client(Settings.twitter.user_key, Settings.twitter.user_secret)
     end
     
     def update(message)

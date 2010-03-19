@@ -12,6 +12,9 @@ module NavigationHelpers
       '/'
     when /my profile page/
       edit_profile_path
+    when /the ratings page for "([^\"]*)"/
+      dish = Dish.find_by_name($1)
+      place_dish_path(dish.place, dish)
     
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

@@ -10,9 +10,16 @@ module RatingBirdTwitter
   def stub_ratingbird_twitter_update
     RatingBird.class_eval do
       def self.update(message)
-        puts "message: #{message}"
         receiver = message[/@(\w+)/, 1]
         TwitterQueue.add(receiver, message, "ratingbird")
+      end
+    end
+  end
+  
+  def stub_user_twitter_update
+    User.class_eval do
+      def update_status(status)
+        TwitterQueue.update_status(screen_name, status)
       end
     end
   end
