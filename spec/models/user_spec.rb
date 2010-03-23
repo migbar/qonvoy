@@ -29,6 +29,10 @@ describe User do
   
   should_validate_presence_of :screen_name
   
+  describe "associations" do
+    should_have_many :statuses
+  end
+  
   it "#to_s returns the screen_name for the user" do
     user = User.new
     user.screen_name = "bob"

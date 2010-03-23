@@ -15,6 +15,10 @@ module NavigationHelpers
     when /the ratings page for "([^\"]*)"/
       dish = Dish.find_by_name($1)
       place_dish_path(dish.place, dish)
+    when /the edit page for the place "([^\"]*)"/
+      edit_place_path(Place.find_by_name($1))
+    when /the show page for the status "([^\"]*)"/
+      status_path(Status.find_by_body($1))
     
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

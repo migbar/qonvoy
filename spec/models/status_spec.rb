@@ -50,81 +50,136 @@ describe Status do
   describe "#process" do
     before(:each) do
       @status = Factory.build(:dm_status, :body => "Awesome Shrimp Noodle Soup from Nobu - 8.5 out of 10.0")
-      @parsed_hash = { :dish => "Shrimp Noodle Soup", :place => "Nobu", :rating => "8.5", :scale => "10", :type => "rating" }
-      StatusParser.stub(:parse).and_return(@parsed_hash)
-      @place = stub_model(Place, :name => @parsed_hash[:place], :missing_information? => false)
-      Place.stub(:find_or_create_by_name).and_return(@place)
-      @rating = mock_model(Rating)
-      @dish = mock_model(Dish, :add_rating => @rating)
-      @place.dishes.stub(:find_or_create_by_name).and_return(@dish)
       @user = mock_model(User, :update_status_with_rating => nil)
       User.stub(:find_by_twitter_uid).and_return(@user)
     end
     
-    it "parses the status" do
-      # d ratingbird Awesome sweet and sour Shrimp Noodle soup! 8.5 out of 10.0 
-      # d ratingbird dish: .... place: ... rating: ...(scale?)
-      # d ratingbird (Just had) Shrimp Noodle Soup [from|at] nobu [:-]? 8 out of 10
-      # Parser.parse("Just had Shrimp Noodle Soup at nobu - 8.5 out of 10").should == 
-      # { :dish => "Shrimp Noodle Soup", :place => "Nobu", :rating => "8.5", :scale => "10", :type => "rating" }
-      # Parser.connect /(a) blah (b) and (c)/, {:scale => "$1", :rating => "$2", :type => "rating"}
-      # case parsed_status[:type]
-      # when "rating":
-      # d ratingbird I want Noodle Soup
-      
-      StatusParser.should_receive(:parse).with(@status.body).and_return(@parsed_hash)
-      @status.process
-    end
-    
-    it "replies to the user with a link to a resolution page on parse failure" do
-      pending
-      StatusParser.should_receive(:parse).with(@status.body).and_return({})
-    end
-    
-    it "finds or creates a place and assigns it to the status" do
-      Place.should_receive(:find_or_create_by_name).with("Nobu").and_return(@place)
-      @status.process
-      @status.place.should == @place
-    end
-    
-    context "place is missing information" do
+    context "successfully parsing the status" do
       before(:each) do
-        @place.should_receive(:missing_information?).and_return(true)
-        @tweet = "@#{@status.sender_screen_name} We don't know much about #{@place.name} yet. Could you help out? #{place_url(@place, :host => Settings.host)}"
+        @parsed_hash = { :dish => "Shrimp Noodle Soup", :place => "Nobu", :rating => "8.5", :scale => "10", :type => :rating }
+        StatusParser.stub(:parse).and_return(@parsed_hash)
+        @place = stub_model(Place, :name => @parsed_hash[:place], :missing_information? => false)
+        Place.stub(:find_or_create_by_name).and_return(@place)
+        @rating = mock_model(Rating)
+        @dish = mock_model(Dish, :add_rating => @rating)
+        @place.dishes.stub(:find_or_create_by_name).and_return(@dish)
       end
       
-      it "sends the tweet to the sender of the DM" do
-        RatingBird.should_receive(:update).with(@tweet)
+      it "finds the user by Twitter ID and assigns it to the status" do
+        User.should_receive(:find_by_twitter_uid).with(@status.sender_id).and_return(@user)
+        @status.process
+        @status.user.should == @user
+      end
+      
+      it "parses the status" do
+        StatusParser.should_receive(:parse).with(@status.body).and_return(@parsed_hash)
+        @status.process
+      end
+      
+      it "checks the required attributes for rating" do
+        @status.should_receive(:check_rating_options).with(@parsed_hash).and_return(true)
+        @status.process
+      end
+    
+      it "finds or creates a place and assigns it to the status" do
+        Place.should_receive(:find_or_create_by_name).with("Nobu").and_return(@place)
+        @status.process
+        @status.place.should == @place
+      end
+    
+      context "place is missing information" do
+        before(:each) do
+          @place.should_receive(:missing_information?).and_return(true)
+          @tweet = "@#{@status.sender_screen_name} We don't know much about #{@place.name} yet. Could you help out? #{edit_place_url(@place, :host => Settings.host)}"
+        end
+      
+        it "sends the tweet to the sender of the DM" do
+          RatingBird.should_receive(:update).with(@tweet)
+          @status.process
+        end
+      end
+    
+      it "finds or creates the dish within the place and assigns it to the status" do
+        @place.dishes.should_receive(:find_or_create_by_name).with(@parsed_hash[:dish]).and_return(@dish)
+        @status.process
+        @status.dish.should == @dish
+      end
+    
+      it "adds a rating for the dish in the proper scale and assigns it to the status" do
+        @dish.should_receive(:add_rating).with(@parsed_hash[:rating], @parsed_hash[:scale]).and_return(@rating)
+        @status.process
+        @status.rating.should == @rating
+      end
+    
+      it "tells the user to update their status with the rating" do
+        @user.should_receive(:update_status_with_rating).with(@status)
+        @status.process
+      end
+    
+      it "saves the status" do
+        @status.should_receive(:save!)
         @status.process
       end
     end
+
+    context "failing to parse the status" do
+      before(:each) do
+        @status.save!
+        @parsed_hash = { :dish => nil, :type => :rating }
+        StatusParser.stub(:parse).and_return(@parsed_hash)
+        @status.stub(:check_rating_options).and_return(false)
+        @tweet = "@#{@status.sender_screen_name} We could not understand what you meant. Could you help out? #{status_url(@status, :host => Settings.host)}"
+        RatingBird.stub(:update)
+      end
+      
+      it "finds the user by Twitter ID and assigns it to the status" do
+        User.should_receive(:find_by_twitter_uid).with(@status.sender_id).and_return(@user)
+        @status.process
+        @status.user.should == @user
+      end
     
-    it "finds or creates the dish within the place and assigns it to the status" do
-      @place.dishes.should_receive(:find_or_create_by_name).with(@parsed_hash[:dish]).and_return(@dish)
-      @status.process
-      @status.dish.should == @dish
+      it "parses the status" do
+        StatusParser.should_receive(:parse).with(@status.body).and_return(@parsed_hash)
+        @status.process
+      end
+    
+      it "checks the required options for rating" do
+        @status.should_receive(:check_rating_options).with(@parsed_hash).and_return(false)
+        @status.process
+      end
+      
+      it "sends a tweet to the sender of the DM, asking them to clarify their status" do
+        RatingBird.should_receive(:update).with(@tweet)
+        @status.process
+      end
+      
+      it "sends a tweet to the sender of the DM, on total failure to parse -- :type option is unknown" do
+        StatusParser.should_receive(:parse).with(@status.body).and_return(@parsed_hash.merge(:type => nil))
+        RatingBird.should_receive(:update).with(@tweet)
+        @status.process
+      end
+      
+      it "saves the status" do
+        @status.should_receive(:save!)
+        @status.process
+      end
+    end
+  end
+  
+  describe "#check_rating_options" do
+    before(:each) do
+      @status = Factory.build(:dm_status)
+      @valid_rating_options = {:dish => "Shrimp Noodle Soup", :place => "Noby", :rating => "8.5"}
     end
     
-    it "adds a rating for the dish in the proper scale and assigns it to the status" do
-      @dish.should_receive(:add_rating).with(@parsed_hash[:rating], @parsed_hash[:scale]).and_return(@rating)
-      @status.process
-      @status.rating.should == @rating
+    it "is true with valid rating options" do
+      @status.check_rating_options(@valid_rating_options).should be_true
     end
     
-    it "finds the user by screen_name and assigns it to the status" do
-      User.should_receive(:find_by_twitter_uid).with(@status.sender_id).and_return(@user)
-      @status.process
-      @status.user.should == @user
-    end
-    
-    it "tells the user to update their status with the rating" do
-      @user.should_receive(:update_status_with_rating).with(@status)
-      @status.process
-    end
-    
-    it "saves the status" do
-      @status.should_receive(:save!)
-      @status.process
+    [:place, :dish, :rating].each do |key|
+      it "returns false if #{key} is not set" do
+        @status.check_rating_options(@valid_rating_options.merge(key => nil)).should be_false
+      end
     end
   end
 end

@@ -33,7 +33,30 @@ class Status < ActiveRecord::Base
   end
   
   def process
+    self.user = User.find_by_twitter_uid(sender_id)
     result = StatusParser.parse(body)
+    
+    case result[:type].try(:to_sym)
+    when :rating
+      if check_rating_options(result)
+        process_rating(result)
+      else
+        parsing_failure
+      end
+    else
+      parsing_failure
+    end
+    
+    save!
+  end
+  
+  def check_rating_options(result)
+    [:place, :dish, :rating].all? { |k| result[k] }
+  end
+  
+  private
+  
+  def process_rating(result)
     self.place = Place.find_or_create_by_name(result[:place])
     
     if place.missing_information?
@@ -44,22 +67,18 @@ class Status < ActiveRecord::Base
     self.dish = place.dishes.find_or_create_by_name(result[:dish])
     self.rating = dish.add_rating(result[:rating], result[:scale])
     
-    # tweet out rating on behalf of the user
-    # 1. find user by screen name
-    
-    self.user = User.find_by_twitter_uid(sender_id)
     user.update_status_with_rating(self)
-    
-    # 2. tell that user to update their status with the vote
-    
-    # TODO: associate the status with the place, the dish, the rating and the user
-    save!
   end
   
-  private
+  def parsing_failure
+    RatingBird.update(failure_message)
+  end
   
   def help_out_message(place)
-    "@#{sender_screen_name} We don't know much about #{place.name} yet. Could you help out? #{place_url(place, :host => Settings.host)}"
+    "@#{sender_screen_name} We don't know much about #{place.name} yet. Could you help out? #{edit_place_url(place, :host => Settings.host)}"
   end
   
+  def failure_message
+    "@#{sender_screen_name} We could not understand what you meant. Could you help out? #{status_url(self, :host => Settings.host)}"
+  end
 end

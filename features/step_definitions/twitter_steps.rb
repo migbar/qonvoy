@@ -105,6 +105,11 @@ end
 Then /^I should have a reply from "([^\"]*)" with "([^\"]*)"$/ do |sender, reply|
   TwitterQueue.for_user(@twitter_guy).any? do |status|
     status[:sender_screen_name] == sender &&
-      status[:text] =~ /#{Regexp.escape(reply)}/
+      status[:text] =~ /#{Regexp.escape(reply)}/ && @the_reply = status
   end.should be_true
+end
+
+When /^I click the first link in the reply$/ do
+  link = URI.extract(@the_reply[:text]).first
+  visit link
 end

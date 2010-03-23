@@ -57,9 +57,9 @@ DatabaseCleaner.strategy = :truncation
 FakeWeb.allow_net_connect = false
 
 
-# After do |scenario|  
-#   if scenario.failed?
-#     save_and_open_page
-#   end
-# end
+After("@show_page") do |scenario|  
+  if scenario.failed?
+    save_and_open_page
+  end
+end
 
