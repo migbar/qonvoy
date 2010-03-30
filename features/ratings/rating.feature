@@ -23,4 +23,4 @@ Feature: Rating from Twitter
     Given I direct message Ratingbird with "Something that can not be parsed"
      Then I should have a reply from "ratingbird" with "We could not understand what you meant."
      When I click the first link in the reply
-     Then I should be on the show page for the status "Something that can not be parsed"
+     Then I should be on the edit page for the status "Something that can not be parsed"

@@ -30,6 +30,15 @@ class Status < ActiveRecord::Base
     def create_and_process(options)
       Status.create!(options).process
     end
+    
+    def try_parsing(a_body)
+      result = StatusParser.parse(a_body)
+      [check_rating_options(result), result]
+    end
+    
+    def check_rating_options(result)
+      [:place, :dish, :rating].all? { |k| result[k] }
+    end
   end
   
   def process
@@ -38,7 +47,7 @@ class Status < ActiveRecord::Base
     
     case result[:type].try(:to_sym)
     when :rating
-      if check_rating_options(result)
+      if self.class.check_rating_options(result)
         process_rating(result)
       else
         parsing_failure
@@ -48,10 +57,6 @@ class Status < ActiveRecord::Base
     end
     
     save!
-  end
-  
-  def check_rating_options(result)
-    [:place, :dish, :rating].all? { |k| result[k] }
   end
   
   private
@@ -79,6 +84,6 @@ class Status < ActiveRecord::Base
   end
   
   def failure_message
-    "@#{sender_screen_name} We could not understand what you meant. Could you help out? #{status_url(self, :host => Settings.host)}"
+    "@#{sender_screen_name} We could not understand what you meant. Could you help out? #{edit_status_url(self, :host => Settings.host)}"
   end
 end

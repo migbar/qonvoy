@@ -77,7 +77,7 @@ describe Status do
       end
       
       it "checks the required attributes for rating" do
-        @status.should_receive(:check_rating_options).with(@parsed_hash).and_return(true)
+        Status.should_receive(:check_rating_options).with(@parsed_hash).and_return(true)
         @status.process
       end
     
@@ -127,8 +127,8 @@ describe Status do
         @status.save!
         @parsed_hash = { :dish => nil, :type => :rating }
         StatusParser.stub(:parse).and_return(@parsed_hash)
-        @status.stub(:check_rating_options).and_return(false)
-        @tweet = "@#{@status.sender_screen_name} We could not understand what you meant. Could you help out? #{status_url(@status, :host => Settings.host)}"
+        Status.stub(:check_rating_options).and_return(false)
+        @tweet = "@#{@status.sender_screen_name} We could not understand what you meant. Could you help out? #{edit_status_url(@status, :host => Settings.host)}"
         RatingBird.stub(:update)
       end
       
@@ -144,7 +144,7 @@ describe Status do
       end
     
       it "checks the required options for rating" do
-        @status.should_receive(:check_rating_options).with(@parsed_hash).and_return(false)
+        Status.should_receive(:check_rating_options).with(@parsed_hash).and_return(false)
         @status.process
       end
       
@@ -168,18 +168,23 @@ describe Status do
   
   describe "#check_rating_options" do
     before(:each) do
-      @status = Factory.build(:dm_status)
       @valid_rating_options = {:dish => "Shrimp Noodle Soup", :place => "Noby", :rating => "8.5"}
     end
     
     it "is true with valid rating options" do
-      @status.check_rating_options(@valid_rating_options).should be_true
+      Status.check_rating_options(@valid_rating_options).should be_true
     end
     
     [:place, :dish, :rating].each do |key|
       it "returns false if #{key} is not set" do
-        @status.check_rating_options(@valid_rating_options.merge(key => nil)).should be_false
+        Status.check_rating_options(@valid_rating_options.merge(key => nil)).should be_false
       end
     end
+  end
+  
+  it ".try_parsing tries to parse the status and returns the success flag and the parsing result as a pair" do
+    StatusParser.should_receive(:parse).with("blah blah").and_return({ :rating => 5 })
+    Status.should_receive(:check_rating_options).with({ :rating => 5 }).and_return(false)
+    Status.try_parsing("blah blah").should == [false, { :rating => 5 }]    
   end
 end

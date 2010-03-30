@@ -102,7 +102,9 @@ describe User do
     end
   end
   
-  it "#authenticate_with_oauth calls super and #populate_oauth_user when registering"
+  it "#authenticate_with_oauth calls super and #populate_oauth_user when registering" do
+    pending "DEBT: speccing requires authlogic_oauth mocking"
+  end
   
   it "#follow_me" do
     user = Factory.build(:twitter_user)

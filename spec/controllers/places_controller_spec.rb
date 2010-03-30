@@ -8,6 +8,8 @@ describe PlacesController do
     should_assign_to :place, :with => place_proc
     should_render_template :edit
     
-    it "requires a user to be logged in"
+    it "requires a user to be logged in" do
+      pending "TODO: when we implement the place edit page"
+    end
   end
 end

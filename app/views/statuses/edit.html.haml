@@ -1,0 +1,7 @@
+
+- semantic_form_for @status, :url => parse_status_path(@status) do |f|
+  - f.inputs do
+    = f.input :body, :label => "Status"
+  - f.buttons do
+    = f.commit_button "Parse"
+    
