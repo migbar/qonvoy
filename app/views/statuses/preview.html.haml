@@ -1,0 +1,18 @@
+.rating
+  .dish
+    Dish:
+    = h(@result[:dish])
+  .place
+    Place:
+    = h(@result[:place])
+  .rating
+    Rating:
+    = h(@result[:rating])
+  .scale
+    Scale:
+    = h(@result[:scale])
+     
+
+= button_to "Edit", edit_status_path(@status), :method => :get
+= button_to "Accept", status_path(@status), :method => :put
+

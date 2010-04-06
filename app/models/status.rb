@@ -3,7 +3,7 @@
 # Table name: statuses
 #
 #  id                 :integer(4)      not null, primary key
-#  user_id            :integer(4)      indexed
+#  user_id            :integer(4)      indexed, indexed, indexed => [processed]
 #  sender_screen_name :string(255)
 #  sender_id          :integer(8)
 #  body               :string(1000)
@@ -16,6 +16,7 @@
 #  dish_id            :integer(4)      indexed
 #  place_id           :integer(4)      indexed
 #  rating_id          :integer(4)
+#  processed          :boolean(1)      indexed, indexed => [user_id]
 #
 
 class Status < ActiveRecord::Base
@@ -59,12 +60,18 @@ class Status < ActiveRecord::Base
     save!
   end
   
-  private
+  def process_updated_status!
+    success, result = self.class.try_parsing(body)
+    if success
+      process_rating(result, false)
+      save!
+    end
+  end
   
-  def process_rating(result)
+  def process_rating(result, ask_for_place_info=true)
     self.place = Place.find_or_create_by_name(result[:place])
     
-    if place.missing_information?
+    if place.missing_information? && ask_for_place_info
       message = help_out_message(place)
       RatingBird.update(message)
     end
@@ -73,7 +80,10 @@ class Status < ActiveRecord::Base
     self.rating = dish.add_rating(result[:rating], result[:scale])
     
     user.update_status_with_rating(self)
+    self.processed = true
   end
+  
+  private
   
   def parsing_failure
     RatingBird.update(failure_message)

@@ -3,7 +3,7 @@
 # Table name: statuses
 #
 #  id                 :integer(4)      not null, primary key
-#  user_id            :integer(4)      indexed
+#  user_id            :integer(4)      indexed, indexed, indexed => [processed]
 #  sender_screen_name :string(255)
 #  sender_id          :integer(8)
 #  body               :string(1000)
@@ -16,6 +16,7 @@
 #  dish_id            :integer(4)      indexed
 #  place_id           :integer(4)      indexed
 #  rating_id          :integer(4)
+#  processed          :boolean(1)      indexed, indexed => [user_id]
 #
 
 require 'spec_helper'
@@ -80,42 +81,7 @@ describe Status do
         Status.should_receive(:check_rating_options).with(@parsed_hash).and_return(true)
         @status.process
       end
-    
-      it "finds or creates a place and assigns it to the status" do
-        Place.should_receive(:find_or_create_by_name).with("Nobu").and_return(@place)
-        @status.process
-        @status.place.should == @place
-      end
-    
-      context "place is missing information" do
-        before(:each) do
-          @place.should_receive(:missing_information?).and_return(true)
-          @tweet = "@#{@status.sender_screen_name} We don't know much about #{@place.name} yet. Could you help out? #{edit_place_url(@place, :host => Settings.host)}"
-        end
       
-        it "sends the tweet to the sender of the DM" do
-          RatingBird.should_receive(:update).with(@tweet)
-          @status.process
-        end
-      end
-    
-      it "finds or creates the dish within the place and assigns it to the status" do
-        @place.dishes.should_receive(:find_or_create_by_name).with(@parsed_hash[:dish]).and_return(@dish)
-        @status.process
-        @status.dish.should == @dish
-      end
-    
-      it "adds a rating for the dish in the proper scale and assigns it to the status" do
-        @dish.should_receive(:add_rating).with(@parsed_hash[:rating], @parsed_hash[:scale]).and_return(@rating)
-        @status.process
-        @status.rating.should == @rating
-      end
-    
-      it "tells the user to update their status with the rating" do
-        @user.should_receive(:update_status_with_rating).with(@status)
-        @status.process
-      end
-    
       it "saves the status" do
         @status.should_receive(:save!)
         @status.process
@@ -186,5 +152,97 @@ describe Status do
     StatusParser.should_receive(:parse).with("blah blah").and_return({ :rating => 5 })
     Status.should_receive(:check_rating_options).with({ :rating => 5 }).and_return(false)
     Status.try_parsing("blah blah").should == [false, { :rating => 5 }]    
+  end
+  
+  describe "#process_rating" do
+    before(:each) do
+      @user = Factory.build(:twitter_user)
+      @status = Factory.build(:dm_status, :user => @user, :body => "Awesome Shrimp Noodle Soup from Nobu - 8.5 out of 10.0")
+      @parsed_hash = { :dish => "Shrimp Noodle Soup", :place => "Nobu", :rating => "8.5", :scale => "10", :type => :rating }
+      @place = stub_model(Place, :name => @parsed_hash[:place], :missing_information? => false)
+      Place.stub(:find_or_create_by_name).and_return(@place)
+      @rating = mock_model(Rating)
+      @dish = mock_model(Dish, :add_rating => @rating)
+      @place.dishes.stub(:find_or_create_by_name).and_return(@dish)
+    end
+    
+    it "finds or creates a place and assigns it to the status" do
+      Place.should_receive(:find_or_create_by_name).with("Nobu").and_return(@place)
+      @status.process_rating(@parsed_hash)
+      @status.place.should == @place
+    end
+  
+    context "place is missing information" do
+      before(:each) do
+        @place.should_receive(:missing_information?).and_return(true)
+        @tweet = "@#{@status.sender_screen_name} We don't know much about #{@place.name} yet. Could you help out? #{edit_place_url(@place, :host => Settings.host)}"
+      end
+    
+      it "sends the tweet asking for help to the sender of the DM" do
+        RatingBird.should_receive(:update).with(@tweet)
+        @status.process_rating(@parsed_hash)
+      end
+      
+      it "does not ask for help if the ask_for_place_info flag is false" do
+        RatingBird.should_not_receive(:update)
+        @status.process_rating(@parsed_hash, false)
+      end
+    end
+  
+    it "finds or creates the dish within the place and assigns it to the status" do
+      @place.dishes.should_receive(:find_or_create_by_name).with(@parsed_hash[:dish]).and_return(@dish)
+      @status.process_rating(@parsed_hash)
+      @status.dish.should == @dish
+    end
+  
+    it "adds a rating for the dish in the proper scale and assigns it to the status" do
+      @dish.should_receive(:add_rating).with(@parsed_hash[:rating], @parsed_hash[:scale]).and_return(@rating)
+      @status.process_rating(@parsed_hash)
+      @status.rating.should == @rating
+    end
+  
+    it "tells the user to update their status with the rating" do
+      @user.should_receive(:update_status_with_rating).with(@status)
+      @status.process_rating(@parsed_hash)
+    end
+    
+    it "sets the processed flag to true" do
+      expect {
+        @status.process_rating(@parsed_hash)
+      }.to change { @status.processed? }.to(true)
+    end
+  end
+  
+  describe "#process_updated_status" do
+    before(:each) do
+      @status = Factory.build(:status, :body => "Awesome Shrimp Noodle Soup from Nobu - 8.5 out of 10.0") 
+    end
+    
+    context "successful parsing" do
+      before(:each) do
+        Status.should_receive(:try_parsing).with(@status.body).and_return([true, { :rating => 8.5 }])
+        @status.stub(:process_rating)
+      end
+      
+      it "processes the rating" do
+        @status.should_receive(:process_rating).with({ :rating => 8.5 }, false)
+        @status.process_updated_status!
+      end
+      
+      it "saves the status and returns true" do
+        @status.should_receive(:save!).and_return(true)
+        @status.process_updated_status!.should be_true
+      end
+    end
+    
+    context "failed parsing" do
+      before(:each) do
+        Status.should_receive(:try_parsing).with(@status.body).and_return([false, { }])
+      end
+      
+      it "returns false" do
+        @status.process_updated_status!.should be_false
+      end
+    end
   end
 end

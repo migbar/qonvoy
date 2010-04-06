@@ -3,7 +3,7 @@
 # Table name: dishes
 #
 #  id         :integer(4)      not null, primary key
-#  place_id   :integer(4)      indexed, indexed => [name]
+#  place_id   :integer(4)      indexed => [name], indexed
 #  name       :string(255)     indexed, indexed => [place_id]
 #  rating     :integer(4)
 #  created_at :datetime

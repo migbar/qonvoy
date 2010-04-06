@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100317103811) do
+ActiveRecord::Schema.define(:version => 20100402122001) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -70,11 +70,15 @@ ActiveRecord::Schema.define(:version => 20100317103811) do
     t.integer  "dish_id"
     t.integer  "place_id"
     t.integer  "rating_id"
+    t.boolean  "processed"
   end
 
   add_index "statuses", ["dish_id"], :name => "index_statuses_on_dish_id"
   add_index "statuses", ["message_id"], :name => "index_statuses_on_message_id"
   add_index "statuses", ["place_id"], :name => "index_statuses_on_place_id"
+  add_index "statuses", ["processed", "user_id"], :name => "index_statuses_on_processed_and_user_id"
+  add_index "statuses", ["processed"], :name => "index_statuses_on_processed"
+  add_index "statuses", ["user_id"], :name => "index_statuses_on_parsed_and_user_id"
   add_index "statuses", ["user_id"], :name => "index_statuses_on_user_id"
 
   create_table "taggings", :force => true do |t|

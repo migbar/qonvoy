@@ -4,6 +4,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :places, :only => [:edit, :update] do |place|
     place.resources :dishes, :only => [:show]
   end
-  map.resources :statuses, :only => [:edit, :update], :member => {:parse => :put}
+  map.resources :statuses, :only => [:edit, :update], :member => { :preview => :put }
   map.resource :user_session
 end
