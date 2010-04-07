@@ -17,18 +17,26 @@ describe StatusesController do
       login_user
     end
     
-    expects :find, :on => proc { current_user.statuses }, :with => "31", :returns => status_proc
+    expects :find, :on => proc { current_user.statuses }, :with => "31", :returns => proc { mock_status(:place => mock_place) }
     
-    should_assign_to :status, :with => status_proc
-    should_render_template :edit
-    
-    context "status_body exists in session" do
-      before(:each) do
-        session[:status_body] = "Existing status"
+    context "status is unprocessed" do
+      expects :processed?, :on => status_proc, :returns => false
+      should_assign_to :status, :with => status_proc
+      should_render_template :edit
+
+      context "status_body exists in session" do
+        before(:each) do
+          session[:status_body] = "Existing status"
+        end
+
+        expects :body=, :on => status_proc, :with => "Existing status"
+        should_not_set_session :status_body
       end
-      
-      expects :body=, :on => status_proc, :with => "Existing status"
-      should_not_set_session :status_body
+    end
+    
+    context "status is processed" do
+      expects :processed?, :on => status_proc, :returns => true
+      should_redirect_to { place_dish_path(mock_place, mock_status.dish) }
     end
    end
   

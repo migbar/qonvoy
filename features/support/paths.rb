@@ -19,7 +19,9 @@ module NavigationHelpers
       edit_place_path(Place.find_by_name($1))
     when /the edit page for the status "([^\"]*)"/
       edit_status_path(Status.find_by_body($1))
-    
+    when /the show page for the dish "([^\"]*)"/
+      dish = Dish.find_by_name($1)
+      place_dish_path(dish.place, dish)
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
@@ -35,10 +37,10 @@ module NavigationHelpers
   def resource_to(page_name, record)
     case page_name
     
-    when /the model page/
-      url_for(record)
     when /the status edit page/
       edit_status_path(record)
+    when /the dish show page/
+      place_dish_path(record.place, record)
     else
       raise "Can't find mapping from \"#{page_name}\" to a resource.\n" +
         "Now, go and add a mapping in #{__FILE__}"

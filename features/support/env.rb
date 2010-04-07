@@ -63,3 +63,5 @@ After("@show_page") do |scenario|
   end
 end
 
+World(ActionView::Helpers::RecordIdentificationHelper)
+World(ActionView::Helpers::UrlHelper)

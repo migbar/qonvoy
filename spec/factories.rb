@@ -15,6 +15,10 @@ Factory.define(:status) do |f|
   f.sequence(:sender_screen_name) { |i| "twitter_guy_#{i}" }
 end
 
+Factory.define(:processed_status, :parent => :status) do |f|
+  f.processed true
+end
+
 Factory.define(:dm_status, :parent => :status) do |f|
   f.kind "dm"
 end

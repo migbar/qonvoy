@@ -3,7 +3,7 @@ class StatusesController < ApplicationController
   before_filter :find_status, :only => [:edit, :update, :preview]
 
   def edit
-    # redirect_to @status and return if @status.processed?
+    redirect_to [@status.place, @status.dish] and return if @status.processed?
     @status.body = session.delete(:status_body) if session[:status_body]
   end
   
