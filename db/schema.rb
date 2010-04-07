@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100402122001) do
+ActiveRecord::Schema.define(:version => 20100407110533) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -43,6 +43,10 @@ ActiveRecord::Schema.define(:version => 20100402122001) do
     t.decimal  "longitude",  :precision => 12, :scale => 8
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "z_food"
+    t.integer  "z_decor"
+    t.integer  "z_service"
+    t.integer  "z_price"
   end
 
   add_index "places", ["name"], :name => "index_places_on_name"
