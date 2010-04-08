@@ -13,6 +13,7 @@
 class Dish < ActiveRecord::Base
   belongs_to :place
   has_many :ratings
+  has_many :statuses
   
   def add_rating(value, scale)
     new_rating = Rating.normalize(value, scale)
@@ -23,7 +24,11 @@ class Dish < ActiveRecord::Base
   end
   
   def rating
-    _rating / 10
+    _rating / 10.0
+  end
+  
+  def latest_status
+    statuses.descend_by_created_at.first
   end
   
   private

@@ -17,6 +17,8 @@ module NavigationHelpers
       place_dish_path(dish.place, dish)
     when /the edit page for the place "([^\"]*)"/
       edit_place_path(Place.find_by_name($1))
+    when /the show page for the place "([^\"]*)"/
+      place_path(Place.find_by_name($1))
     when /the edit page for the status "([^\"]*)"/
       edit_status_path(Status.find_by_body($1))
     when /the show page for the dish "([^\"]*)"/

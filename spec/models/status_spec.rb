@@ -31,6 +31,11 @@ describe Status do
     should_belong_to :rating
   end
   
+  describe "#to_s" do
+    subject { Status.new(:body => "blah blah") }
+    its(:to_s) { should == "blah blah" }
+  end
+  
   describe "#create_and_process" do
     before(:each) do
       @status = Factory.build(:status)

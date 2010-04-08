@@ -16,6 +16,10 @@ describe Rating do
     should_belong_to :dish
   end
   
+  it "#to_s" do
+    Rating.new(:value => 85).to_s.should == "8.5"
+  end
+  
   describe ".normalize" do
     it "defaults the scale to 10 if not specified" do
       Rating.normalize(4).should == 40

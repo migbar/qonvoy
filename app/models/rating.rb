@@ -18,4 +18,8 @@ class Rating < ActiveRecord::Base
       (value.to_f * 100 / scale).round
     end
   end
+  
+  def to_s
+    (value / 10.0).to_s
+  end
 end

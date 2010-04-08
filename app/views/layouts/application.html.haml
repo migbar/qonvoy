@@ -13,3 +13,6 @@
           %h2= h yield(:title)
         = render "shared/flash", :flash => flash
         = yield
+      #sidebar
+        = yield :sidebar
+      

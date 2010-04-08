@@ -42,6 +42,10 @@ class Status < ActiveRecord::Base
     end
   end
   
+  def to_s
+    body
+  end
+  
   def process
     self.user = User.find_by_twitter_uid(sender_id)
     result = StatusParser.parse(body)

@@ -1,0 +1,15 @@
+- title @place
+
+.place
+  .rating= @place.rating
+  .dishes
+    - @place.dishes.each do |dish|
+      .name= h dish.name
+      .rating= h dish.rating
+      .status
+        .body= h dish.latest_status
+        .rating= h dish.latest_status.rating
+      
+- content_for :sidebar do
+  .place
+    .address= h @place.address

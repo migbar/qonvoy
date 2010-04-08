@@ -9,6 +9,10 @@
 #  longitude  :decimal(12, 8)
 #  created_at :datetime
 #  updated_at :datetime
+#  z_food     :integer(4)
+#  z_decor    :integer(4)
+#  z_service  :integer(4)
+#  z_price    :integer(4)
 #
 
 class Place < ActiveRecord::Base
@@ -17,5 +21,13 @@ class Place < ActiveRecord::Base
   
   def missing_information?
     address.blank?
+  end
+  
+  def to_s
+    name
+  end
+  
+  def rating
+    z_food / 3
   end
 end

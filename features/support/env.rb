@@ -54,7 +54,24 @@ require 'database_cleaner'
 require 'fakeweb'
 DatabaseCleaner.strategy = :truncation
 
-FakeWeb.allow_net_connect = false
+Capybara.javascript_driver = :selenium
+
+module Net
+  class HTTP
+    # Must allow http://localhost/ connections to pass for Capybara to work in Selenium/Culerity mode.
+    def request_with_localhost(request, body = nil, &block)
+      if self.address == "localhost"
+        connect_without_fakeweb
+        request_without_fakeweb(request, body, &block)
+      else
+        request_with_fakeweb(request, body, &block)
+      end
+    end
+    
+    alias_method :request_without_localhost, :request
+    alias_method :request, :request_with_localhost
+  end
+end
 
 
 After("@show_page") do |scenario|  

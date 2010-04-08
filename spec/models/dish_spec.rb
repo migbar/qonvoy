@@ -16,6 +16,7 @@ describe Dish do
   context "associations" do
     should_belong_to :place
     should_have_many :ratings
+    should_have_many :statuses
   end
   
   describe "#add_rating" do
@@ -40,6 +41,26 @@ describe Dish do
     it "saves the dish" do
       @dish.should_receive(:save!)
       @dish.add_rating("7", "10")
+    end
+  end
+  
+  describe "#rating" do
+    it "returns the db stored attribute value for rating divided by 10.0" do
+      Dish.new(:rating => 85).rating.should == 8.5
+    end
+  end
+  
+  describe "#latest_status" do
+    subject do
+      returning(Dish.new) do |s|
+        s.stub_chain(:statuses, :descend_by_created_at, :first)
+      end
+    end
+    let(:status) { mock_model(Status) }
+    
+    it "fetches the lastest status for the dish" do
+      subject.statuses.descend_by_created_at.should_receive(:first).and_return(status)
+      subject.latest_status.should == status
     end
   end
 end

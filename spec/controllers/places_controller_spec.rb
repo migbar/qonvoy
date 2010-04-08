@@ -12,4 +12,10 @@ describe PlacesController do
       pending "TODO: when we implement the place edit page"
     end
   end
+  
+  describe :get => :show, :id => "42" do
+    expects :find, :on => Place, :with => "42", :returns => place_proc
+    should_assign_to :place, :with => place_proc
+    should_render_template :show
+  end
 end
