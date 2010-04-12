@@ -11,7 +11,6 @@ When /^I click the map marker at "([^\"]*)"$/ do |coords|
   
   map = locate(:xpath, Capybara::XPath.append("//area[@id='#{dom_area_id}']"), "no map found")
   map.click
-  sleep 5
 end
 
 Then /^the marker bubble should contain "([^\"]*)"$/ do |text|

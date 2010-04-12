@@ -4,6 +4,7 @@ class PlacesController < ApplicationController
   before_filter :find_place
   
   def show
+    @dishes = @place.dishes.descend_by_rating
     @map = GMap.new(dom_id(@place))
     @map.control_init(:large_map => false, :small_map => true, :scale => true)
     @map.center_zoom_init([@place.latitude, @place.longitude], 11)

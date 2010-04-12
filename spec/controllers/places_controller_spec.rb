@@ -32,12 +32,15 @@ describe PlacesController do
   end
   
   describe :get => :show, :id => "42" do
+    let(:dishes) { (1..3).map { mock_model(Dish) } }
+    
     expects :find,
       :on      => Place,
       :with    => "42",
-      :returns => proc { mock_place(:name => "Nobu", :latitude => 42, :longitude => 24) }
+      :returns => proc { mock_place(:name => "Nobu", :latitude => 42, :longitude => 24, :dishes => dishes) }
     
-    should_assign_to :place, :with => place_proc
+    expects :descend_by_rating, :on => proc { mock_place.dishes }, :returns => proc { dishes }
+    
     
     expects :new, :on => GMap, :with => proc { dom_id(mock_place) }, :returns => map_proc
     
@@ -58,6 +61,8 @@ describe PlacesController do
       :on => map_proc,
       :with => marker_proc
     
+    should_assign_to :place, :with => place_proc
+    should_assign_to :dishes, :with => proc { dishes }
     should_render_template :show
     
   end

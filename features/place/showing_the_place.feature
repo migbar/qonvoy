@@ -7,7 +7,7 @@ Feature: Showing the place
     Given the following places exists:
       | place | name | address         | latitude  | longitude  | z_food |
       | nobu  | Nobu | 123 bleecker St | 40.771324 | -73.985887 | 24     |
-    
+  
   Scenario: rendering the place details on the show page
      Given the following dishes exist:
       | dish | name               | rating |place       |
@@ -33,11 +33,11 @@ Feature: Showing the place
      
      And I should see the following dishes:
        | name               | rating | status       | status_rating |
-       | Pork Buns          | 8.5    | The greatest | 9             |
-       | Shrimp noodle soup | 7.5    | Awesome      | 7             |
-       | Chicken fried rice | 6      | not so bad   | 6             |
+       | Pork Buns          | 8.5    | The greatest | 9.0           |
+       | Shrimp noodle soup | 7.5    | Awesome      | 7.0           |
+       | Chicken fried rice | 6.0    | not so bad   | 6.0           |
   
-  @wip @selenium
+  @selenium
   Scenario: rendering the map for the place on the show page
      When I am on the show page for the place "Nobu"
       And I click the map marker at "40.771324,-73.985887"
