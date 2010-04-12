@@ -1,5 +1,9 @@
 - title @place
 
+- content_for :head do
+  = GMap.header
+  = @map.to_html
+
 .place
   .rating= @place.rating
   .dishes
@@ -13,3 +17,5 @@
 - content_for :sidebar do
   .place
     .address= h @place.address
+    = @map.div(:width => 300, :height => 300)
+    

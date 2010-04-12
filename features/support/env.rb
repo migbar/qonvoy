@@ -54,7 +54,7 @@ require 'database_cleaner'
 require 'fakeweb'
 DatabaseCleaner.strategy = :truncation
 
-Capybara.javascript_driver = :selenium
+# Capybara.javascript_driver = :selenium
 
 module Net
   class HTTP

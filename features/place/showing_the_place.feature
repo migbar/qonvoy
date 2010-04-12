@@ -37,9 +37,9 @@ Feature: Showing the place
        | Shrimp noodle soup | 7.5    | Awesome      | 7             |
        | Chicken fried rice | 6      | not so bad   | 6             |
   
-@wip @javascript
+  @wip @selenium
   Scenario: rendering the map for the place on the show page
      When I am on the show page for the place "Nobu"
-     Then I should see a map with a marker at "40.771324,-73.985887"
-      And the marker should contain "Nobu"
+      And I click the map marker at "40.771324,-73.985887"
+      And the marker bubble should contain "Nobu" 
   
