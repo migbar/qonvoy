@@ -8,6 +8,7 @@ Feature: Showing the place
       | place | name | address         | latitude  | longitude  | z_food |
       | nobu  | Nobu | 123 bleecker St | 40.771324 | -73.985887 | 24     |
   
+  @wip
   Scenario: rendering the place details on the show page
      Given the following dishes exist:
       | dish | name               | rating |place       |
@@ -16,14 +17,21 @@ Feature: Showing the place
       | pb   | Pork Buns          | 85     |place "nobu"|
      And the following ratings exist:
       | rating | dish       | value   |
-      | sns    | dish "sns" | 70      |
-      | cfr    | dish "cfr" | 60      |
-      | pb     | dish "pb"  | 90      |
+      | sns1    | dish "sns" | 70      |
+      | cfr1    | dish "cfr" | 60      |
+      | pb1     | dish "pb"  | 90      |
+      | sns2    | dish "sns" | 10      |
+      | cfr2    | dish "cfr" | 10      |
+      | pb2     | dish "pb"  | 10      |
+
      And the following statuses exist:
-      | dish       | body         | rating       | 
-      | dish "sns" | Awesome      | rating "sns" |
-      | dish "cfr" | not so bad   | rating "cfr" |
-      | dish "pb"  | The greatest | rating "pb"  |
+      | dish       | body            | rating        | processed_at        |
+      | dish "sns" | Awesome         | rating "sns1" | 2010-03-23 10:04:54 |
+      | dish "sns" | not-to-be-shown | rating "sns2" | 2010-03-23 09:04:54 |
+      | dish "cfr" | not so bad      | rating "cfr1" | 2010-03-23 10:04:54 |
+      | dish "cfr" | not-to-be-shown | rating "cfr2" | 2010-03-23 09:04:54 |
+      | dish "pb"  | The greatest    | rating "pb1"  | 2010-03-23 10:04:54 |
+      | dish "pb"  | not-to-be-shown | rating "pb2"  | 2010-03-23 09:04:54 |
     
      When I am on the show page for the place "Nobu"
      Then I should see the following within:

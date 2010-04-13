@@ -211,10 +211,13 @@ describe Status do
       @status.process_rating(@parsed_hash)
     end
     
-    it "sets the processed flag to true" do
+    it "sets the processed timestamp to Time.now" do
+      now = Time.now
+      Time.should_receive(:now).any_number_of_times.and_return(now)
+
       expect {
         @status.process_rating(@parsed_hash)
-      }.to change { @status.processed? }.to(true)
+      }.to change { @status.processed_at }.from(nil).to(now)
     end
   end
   

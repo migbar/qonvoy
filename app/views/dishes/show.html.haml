@@ -1,0 +1,10 @@
+- title @dish
+
+.dish
+  .rating= @dish.rating
+
+- content_for :sidebar do
+  .place
+    %h3= h(@place)
+    .rating= @place.rating
+    %address= h @place.address

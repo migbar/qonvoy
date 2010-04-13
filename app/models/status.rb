@@ -84,7 +84,7 @@ class Status < ActiveRecord::Base
     self.rating = dish.add_rating(result[:rating], result[:scale])
     
     user.update_status_with_rating(self)
-    self.processed = true
+    self.processed_at = Time.now
   end
   
   private

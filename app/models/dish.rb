@@ -15,6 +15,10 @@ class Dish < ActiveRecord::Base
   has_many :ratings
   has_many :statuses
   
+  def to_s
+    name
+  end
+  
   def add_rating(value, scale)
     new_rating = Rating.normalize(value, scale)
     returning(ratings.create(:value => new_rating)) do
@@ -28,7 +32,7 @@ class Dish < ActiveRecord::Base
   end
   
   def latest_status
-    statuses.descend_by_created_at.first
+    statuses.descend_by_processed_at.first
   end
   
   private

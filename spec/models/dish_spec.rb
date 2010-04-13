@@ -13,11 +13,15 @@
 require 'spec_helper'
 
 describe Dish do
+  subject { Factory.build(:dish, :name => "Shrimp noodle soup") }
+  
   context "associations" do
     should_belong_to :place
     should_have_many :ratings
     should_have_many :statuses
   end
+  
+  its(:to_s) { should eql("Shrimp noodle soup") }
   
   describe "#add_rating" do
     before(:each) do
@@ -53,13 +57,13 @@ describe Dish do
   describe "#latest_status" do
     subject do
       returning(Dish.new) do |s|
-        s.stub_chain(:statuses, :descend_by_created_at, :first)
+        s.stub_chain(:statuses, :descend_by_processed_at, :first)
       end
     end
     let(:status) { mock_model(Status) }
     
     it "fetches the lastest status for the dish" do
-      subject.statuses.descend_by_created_at.should_receive(:first).and_return(status)
+      subject.statuses.descend_by_processed_at.should_receive(:first).and_return(status)
       subject.latest_status.should == status
     end
   end
