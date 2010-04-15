@@ -21,6 +21,9 @@ Rails::Initializer.run do |config|
   
   config.time_zone = 'UTC'
   
+  # Add additional load paths for your own custom dirs
+  config.load_paths << "app/presenters"
+  
   config.after_initialize do
     ActionMailer::Base.default_url_options[:host] = Settings.host
   end

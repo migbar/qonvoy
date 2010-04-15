@@ -16,7 +16,7 @@ Factory.define(:status) do |f|
 end
 
 Factory.define(:processed_status, :parent => :status) do |f|
-  f.processed true
+  f.processed_at 1.hour.ago
 end
 
 Factory.define(:dm_status, :parent => :status) do |f|
@@ -25,6 +25,8 @@ end
 
 Factory.define(:place) do |f|
   f.sequence(:name) { |i| "Place ##{i}" }
+  f.latitude 41.132945
+  f.longitude -23.12934
 end
 
 Factory.define(:dish) do |f|

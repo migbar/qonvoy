@@ -1,10 +1,27 @@
 - title @dish
 
+- content_for :head do
+  = @map.to_html_with_header
+  
 .dish
   .rating= @dish.rating
+  
+  .ratings
+    - @statuses.each do |status|
+      .status
+        .body= h status
+        .rating= h status.rating
+        .user= h status.user
 
 - content_for :sidebar do
   .place
     %h3= h(@place)
     .rating= @place.rating
     %address= h @place.address
+    = @map.div(:width => 300, :height => 300)
+  
+  .dishes
+    - @dishes.each do |dish|
+      .dish
+        .name= h dish.name
+        .rating= h dish.rating

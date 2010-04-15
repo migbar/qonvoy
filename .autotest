@@ -1,0 +1,12 @@
+Autotest.add_hook :initialize do |autotest|
+  %w{.git .DS_Store ._* vendor tmp log doc rerun.txt capybara*}.each do |exception|
+    autotest.add_exception(exception)
+  end
+  autotest.add_mapping %r{^app/presenters/(.*)\.rb$} do |_, m|
+    "spec/presenters/#{m[1]}_spec.rb"
+  end
+  autotest.add_mapping %r{^spec/presenters/(.*)\.rb$} do |_, m|
+    "spec/presenters/#{m[1]}.rb"
+  end
+  false
+end

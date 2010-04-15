@@ -19,6 +19,7 @@ describe Dish do
     should_belong_to :place
     should_have_many :ratings
     should_have_many :statuses
+    should_have_many :processed_statuses, :class_name => "Status", :conditions => "#{Status.table_name}.processed_at is not null"
   end
   
   its(:to_s) { should eql("Shrimp noodle soup") }

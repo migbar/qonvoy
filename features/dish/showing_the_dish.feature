@@ -3,14 +3,17 @@ Feature: Showing the dish
   As a visitor
   I want see the dish show page
 
-  @wip @show_page
-  Scenario: rendering the dish details and ratings
+  Background:
     Given the following places exists:
       | place | name | address         | latitude  | longitude  | z_food |
       | nobu  | Nobu | 123 bleecker St | 40.771324 | -73.985887 | 24     |
     And the following dishes exist:
       | dish | name               | rating |place       |
       | sns  | Shrimp noodle soup | 75     |place "nobu"|
+
+  Scenario: rendering the dish details and ratings
+    Given the following dishes exist:
+      | dish | name               | rating |place       |
       | cfr  | Chicken fried rice | 60     |place "nobu"|
       | pb   | Pork Buns          | 85     |place "nobu"|
     And the following ratings exist:
@@ -41,3 +44,15 @@ Feature: Showing the dish
       | The greatest | 9.0    | charlie |
       | Awesome      | 7.5    | alice   |
       | not so bad   | 6.0    | bob     |
+     And I should see the following dishes in the sidebar
+      | name               | rating |
+      | Pork Buns          | 8.5    |
+      | Shrimp noodle soup | 7.5    |
+      | Chicken fried rice | 6.0    |
+      
+  @wip @selenium
+  Scenario: rendering the map for the place on the dish show page
+     When I am on the show page for the dish "Shrimp noodle soup"
+      And I click the map marker at "40.771324,-73.985887"
+      And the marker bubble should contain "Nobu"
+     

@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe PlacesController do
-  include ActionView::Helpers::RecordIdentificationHelper
-  
   mock_models :place
   
   def mock_map
@@ -33,6 +31,7 @@ describe PlacesController do
   
   describe :get => :show, :id => "42" do
     let(:dishes) { (1..3).map { mock_model(Dish) } }
+    let(:map)    { mock(MapPresenter) }
     
     expects :find,
       :on      => Place,
@@ -41,26 +40,9 @@ describe PlacesController do
     
     expects :descend_by_rating, :on => proc { mock_place.dishes }, :returns => proc { dishes }
     
+    expects :new, :on => MapPresenter, :with => proc { [mock_place, {:controller => controller}] }, :returns => proc { map }
     
-    expects :new, :on => GMap, :with => proc { dom_id(mock_place) }, :returns => map_proc
-    
-    expects :control_init, :on => map_proc, :with => {:large_map => false, :small_map => true, :scale => true}
-    expects :center_zoom_init, :on => map_proc, :with => [[42, 24], 11]
-    
-    expects :new,
-      :on => GMarker,
-      :with => [[42, 24], {:title => "Nobu", :info_window => "bubble content"}],
-      :returns => marker_proc
-    
-    expects :render_to_string,
-      :on      => proc { controller },
-      :with    => proc { { :partial => "bubble", :locals => { :place => mock_place } } },
-      :returns => "bubble content"
-    
-    expects :overlay_init,
-      :on => map_proc,
-      :with => marker_proc
-    
+    should_assign_to :map, :with => proc { map }
     should_assign_to :place, :with => place_proc
     should_assign_to :dishes, :with => proc { dishes }
     should_render_template :show

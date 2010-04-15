@@ -3,7 +3,7 @@
 # Table name: statuses
 #
 #  id                 :integer(4)      not null, primary key
-#  user_id            :integer(4)      indexed, indexed, indexed => [processed]
+#  user_id            :integer(4)      indexed, indexed, indexed
 #  sender_screen_name :string(255)
 #  sender_id          :integer(8)
 #  body               :string(1000)
@@ -16,7 +16,7 @@
 #  dish_id            :integer(4)      indexed
 #  place_id           :integer(4)      indexed
 #  rating_id          :integer(4)
-#  processed          :boolean(1)      indexed, indexed => [user_id]
+#  processed_at       :datetime        indexed
 #
 
 class Status < ActiveRecord::Base
@@ -26,6 +26,8 @@ class Status < ActiveRecord::Base
   belongs_to :dish
   belongs_to :place
   belongs_to :rating
+  
+  named_scope :processed, :conditions => "#{Status.table_name}.processed_at is not null"
   
   class << self
     def create_and_process(options)

@@ -14,6 +14,7 @@ class Dish < ActiveRecord::Base
   belongs_to :place
   has_many :ratings
   has_many :statuses
+  has_many :processed_statuses, :class_name => "Status", :conditions => "#{Status.table_name}.processed_at is not null"
   
   def to_s
     name

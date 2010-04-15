@@ -3,7 +3,7 @@
 # Table name: statuses
 #
 #  id                 :integer(4)      not null, primary key
-#  user_id            :integer(4)      indexed, indexed, indexed => [processed]
+#  user_id            :integer(4)      indexed, indexed, indexed
 #  sender_screen_name :string(255)
 #  sender_id          :integer(8)
 #  body               :string(1000)
@@ -16,7 +16,7 @@
 #  dish_id            :integer(4)      indexed
 #  place_id           :integer(4)      indexed
 #  rating_id          :integer(4)
-#  processed          :boolean(1)      indexed, indexed => [user_id]
+#  processed_at       :datetime        indexed
 #
 
 require 'spec_helper'
@@ -24,11 +24,21 @@ require 'spec_helper'
 describe Status do
   include ActionController::UrlWriter
 
-  context "associations" do
+  describe "associations" do
     should_belong_to :user
     should_belong_to :dish
     should_belong_to :place
     should_belong_to :rating
+  end
+  
+  describe "named scopes" do
+    describe "processed" do
+      it "only finds the processed statuses" do
+        expected = (1..3).map { Factory.create(:processed_status) }
+        Factory.create(:status)
+        Status.processed.should == expected
+      end
+    end
   end
   
   describe "#to_s" do

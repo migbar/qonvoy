@@ -8,7 +8,6 @@ Feature: Showing the place
       | place | name | address         | latitude  | longitude  | z_food |
       | nobu  | Nobu | 123 bleecker St | 40.771324 | -73.985887 | 24     |
   
-  @wip
   Scenario: rendering the place details on the show page
      Given the following dishes exist:
       | dish | name               | rating |place       |
