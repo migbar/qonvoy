@@ -50,7 +50,7 @@ Feature: Showing the dish
       | Shrimp noodle soup | 7.5    |
       | Chicken fried rice | 6.0    |
       
-  @wip @selenium
+  @selenium
   Scenario: rendering the map for the place on the dish show page
      When I am on the show page for the dish "Shrimp noodle soup"
       And I click the map marker at "40.771324,-73.985887"

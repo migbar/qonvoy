@@ -18,6 +18,7 @@ Rails::Initializer.run do |config|
   config.gem 'twitter',                            :version => '0.8.4'
   config.gem 'delayed_job',                        :version => '1.8.5'
   config.gem 'searchlogic',                        :version => '2.4.14'
+  config.gem 'geokit',                             :version => '1.5.0'
   
   config.time_zone = 'UTC'
   

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100413103124) do
+ActiveRecord::Schema.define(:version => 20100420101742) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -36,20 +36,44 @@ ActiveRecord::Schema.define(:version => 20100413103124) do
   add_index "dishes", ["place_id", "name"], :name => "index_dishes_on_place_id_and_name"
   add_index "dishes", ["place_id"], :name => "index_dishes_on_place_id"
 
+  create_table "locations", :force => true do |t|
+    t.string   "provider"
+    t.string   "zip"
+    t.decimal  "latitude",       :precision => 10, :scale => 8
+    t.decimal  "longitude",      :precision => 12, :scale => 8
+    t.string   "district"
+    t.string   "state"
+    t.string   "province"
+    t.string   "country"
+    t.string   "city"
+    t.string   "street_address"
+    t.string   "full_address"
+    t.string   "country_code"
+    t.integer  "accuracy"
+    t.string   "precision"
+    t.text     "bounds"
+    t.integer  "place_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "locations", ["place_id"], :name => "index_locations_on_place_id"
+
   create_table "places", :force => true do |t|
     t.string   "name"
     t.text     "address"
-    t.decimal  "latitude",   :precision => 10, :scale => 8
-    t.decimal  "longitude",  :precision => 12, :scale => 8
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "z_food"
     t.integer  "z_decor"
     t.integer  "z_service"
     t.integer  "z_price"
+    t.integer  "z_id"
+    t.string   "phone"
   end
 
   add_index "places", ["name"], :name => "index_places_on_name"
+  add_index "places", ["z_id"], :name => "index_places_on_z_id"
 
   create_table "ratings", :force => true do |t|
     t.integer  "dish_id"

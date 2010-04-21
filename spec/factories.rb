@@ -25,8 +25,12 @@ end
 
 Factory.define(:place) do |f|
   f.sequence(:name) { |i| "Place ##{i}" }
-  f.latitude 41.132945
-  f.longitude -23.12934
+  f.address '1 Central Park W. (bet. 60th & 61st Sts.) Manhattan, NY'
+  f.association(:location)
+end
+
+Factory.define(:zagat_place, :parent => :place) do |f|
+  f.sequence(:z_id) { |i| i }
 end
 
 Factory.define(:dish) do |f|
@@ -35,4 +39,10 @@ end
 
 Factory.define(:rating) do |f|
   f.value rand() * 100
+end
+
+Factory.define(:location) do |f|
+  f.bounds(:sw => { :latitude => 1, :longitude => 2 }, :ne => { :latitude => 3, :longitude => 4 })
+  f.latitude 41.132945
+  f.longitude -23.12934
 end
