@@ -5,8 +5,8 @@
 #  id             :integer(4)      not null, primary key
 #  provider       :string(255)
 #  zip            :string(255)
-#  latitude       :integer(10)
-#  longitude      :integer(10)
+#  latitude       :decimal(10, 8)
+#  longitude      :decimal(12, 8)
 #  district       :string(255)
 #  state          :string(255)
 #  province       :string(255)
@@ -18,6 +18,7 @@
 #  accuracy       :integer(4)
 #  precision      :string(255)
 #  bounds         :text
+#  place_id       :integer(4)      indexed
 #  created_at     :datetime
 #  updated_at     :datetime
 #

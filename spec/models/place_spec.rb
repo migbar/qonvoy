@@ -5,8 +5,6 @@
 #  id         :integer(4)      not null, primary key
 #  name       :string(255)     indexed
 #  address    :text
-#  latitude   :decimal(10, 8)
-#  longitude  :decimal(12, 8)
 #  created_at :datetime
 #  updated_at :datetime
 #  z_food     :integer(4)
@@ -56,9 +54,11 @@ describe Place do
     place.longitude.should == 40.87239
   end
   
-  it "#rating returns the z_food value divided by 3" do
+  it "#rating returns the z_food value divided by 3, or nil if there is no z_food rating" do
     Place.new(:z_food => 27).rating.should == 9
     Place.new(:z_food => 24).rating.should == 8
+    Place.new(:z_food => 26).rating.should == 8.3
+    Place.new.rating.should be_nil
   end
   
   describe "#from_zagat?" do

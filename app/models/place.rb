@@ -5,8 +5,6 @@
 #  id         :integer(4)      not null, primary key
 #  name       :string(255)     indexed
 #  address    :text
-#  latitude   :decimal(10, 8)
-#  longitude  :decimal(12, 8)
 #  created_at :datetime
 #  updated_at :datetime
 #  z_food     :integer(4)
@@ -64,7 +62,7 @@ class Place < ActiveRecord::Base
   end
   
   def rating
-    z_food / 3
+    z_food / 3.0 if z_food
   end
   
   private 

@@ -3,7 +3,7 @@ class MapPresenter
 
   attr_reader :mappable, :map, :controller
   
-  delegate :to_html, :div, :to => :map
+  delegate :div, :to => :map
   
   def initialize(object, options={})
     @mappable = object
@@ -13,6 +13,17 @@ class MapPresenter
   
   def to_html_with_header
     GMap.header + to_html
+  end
+  
+  def to_html
+    %Q{
+      <script type="text/javascript">
+      MapController.init(function () {
+      	#{map.to_html(:no_load => true, :no_script_tag => true)}
+      	return map;
+      });
+      </script>
+    }
   end
   
   private
@@ -32,7 +43,7 @@ class MapPresenter
       # @map.center_zoom_init([mappable.latitude, mappable.longitude], 13)
       @map.center_zoom_on_bounds_init(bounds)
       bubble_content = controller.send(:render_to_string, :partial => "#{mappable_type.pluralize}/small_bubble", :locals => { mappable_type.to_sym => mappable })
-      marker = GMarker.new([mappable.latitude, mappable.longitude], :title => mappable.name, :info_window => bubble_content)
+      marker = GrbMarker.new([mappable.latitude, mappable.longitude], :title => mappable.name, :info_window => bubble_content)
       @map.overlay_init(marker)
     end
 end

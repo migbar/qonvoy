@@ -4,9 +4,12 @@ Feature: Showing the dish
   I want see the dish show page
 
   Background:
-    Given the following places exists:
-      | place | name | address         | latitude  | longitude  | z_food |
-      | nobu  | Nobu | 123 bleecker St | 40.771324 | -73.985887 | 24     |
+    Given the following locations exists:
+      | location | latitude | longitude   | 
+      | loc1     | 40.771324 | -73.985887 |
+    And the following places exists:
+      | place | name | address         | z_food | location        |
+      | nobu  | Nobu | 123 bleecker St | 24     | location "loc1" | 
     And the following dishes exist:
       | dish | name               | rating |place       |
       | sns  | Shrimp noodle soup | 75     |place "nobu"|

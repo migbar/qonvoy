@@ -4,9 +4,12 @@ Feature: Showing the place
   I want to see the show page for the place
 
   Background: 
-    Given the following places exists:
-      | place | name | address         | latitude  | longitude  | z_food |
-      | nobu  | Nobu | 123 bleecker St | 40.771324 | -73.985887 | 24     |
+    Given the following locations exists:
+      | location | latitude | longitude   | 
+      | loc1     | 40.771324 | -73.985887 |  
+     And the following places exists:
+      | place | name | address         | z_food | location        |
+      | nobu  | Nobu | 123 bleecker St | 24     | location "loc1" |
   
   Scenario: rendering the place details on the show page
      Given the following dishes exist:
@@ -35,7 +38,7 @@ Feature: Showing the place
      When I am on the show page for the place "Nobu"
      Then I should see the following within:
        | Nobu            | h2              |
-       | 123 bleecker St | .place .address |
+       | 123 bleecker St | .place address |
        | 8               | .place .rating  |
      
      And I should see the following dishes:
