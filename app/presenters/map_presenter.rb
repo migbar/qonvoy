@@ -19,8 +19,8 @@ class MapPresenter
     %Q{
       <script type="text/javascript">
       MapController.init(function () {
-      	#{map.to_html(:no_load => true, :no_script_tag => true)}
-      	return map;
+        #{map.to_html(:no_load => true, :no_script_tag => true)};
+        return map;
       });
       </script>
     }

@@ -51,27 +51,10 @@ Cucumber::Rails::World.use_transactional_fixtures = true
 # How to clean your database when transactions are turned off. See
 # http://github.com/bmabey/database_cleaner for more info.
 require 'database_cleaner'
-require 'fakeweb'
+
 DatabaseCleaner.strategy = :truncation
 
 # Capybara.javascript_driver = :selenium
-
-module Net
-  class HTTP
-    # Must allow http://localhost/ connections to pass for Capybara to work in Selenium/Culerity mode.
-    def request_with_localhost(request, body = nil, &block)
-      if self.address == "localhost"
-        connect_without_fakeweb
-        request_without_fakeweb(request, body, &block)
-      else
-        request_with_fakeweb(request, body, &block)
-      end
-    end
-    
-    alias_method :request_without_localhost, :request
-    alias_method :request, :request_with_localhost
-  end
-end
 
 
 After("@show_page") do |scenario|  

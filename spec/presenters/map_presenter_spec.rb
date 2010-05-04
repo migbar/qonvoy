@@ -1,19 +1,21 @@
 require 'spec_helper'
 
 describe MapPresenter do
-  include ActionView::Helpers::RecordIdentificationHelper
+  include ActionView::Helpers::RecordIdentificationHelper     
+  include ActionController::Assertions::SelectorAssertions
   
   subject { MapPresenter.new(place, :controller => controller) }
   
-  let(:place) { Factory.create(:place) }
+  let(:place) { Factory.create(:place, :location => location) }
+  let(:location) { Factory.create(:location, :bounds => { :sw => { :latitude => 1, :longitude => 2 }, :ne => {:latitude => 3, :longitude => 4} }) }
   let(:map) { mock(GMap).as_null_object }
   let(:controller) { mock("Controller", :render_to_string => bubble_content) }
-  let(:place_marker) { mock(GMarker) }
+  let(:place_marker) { mock(GrbMarker) }
   let(:bubble_content) { "bubble content" }
   
   before(:each) do
     GMap.stub(:new => map)
-    GMarker.stub(:new => place_marker)
+    GrbMarker.stub(:new => place_marker)
   end
   
   describe "#new" do
@@ -28,7 +30,7 @@ describe MapPresenter do
     end
     
     it "centers and zooms the map to the mappable location" do
-      map.should_receive(:center_zoom_init).with([place.latitude, place.longitude], 13)
+      map.should_receive(:center_zoom_on_bounds_init).with([[1,2], [3,4]])
       subject
     end
     
@@ -37,7 +39,7 @@ describe MapPresenter do
         should_receive(:render_to_string).
         with(:partial => "places/small_bubble", :locals => { :place => place }).
         and_return(bubble_content)
-      GMarker.
+      GrbMarker.
         should_receive(:new).
         with([place.latitude, place.longitude], :title => place.name, :info_window => bubble_content).
         and_return(place_marker)
@@ -51,17 +53,18 @@ describe MapPresenter do
   end
   
   it "#to_html is delegated to map" do
-    map.should_receive(:to_html).and_return("some html")
-    subject.to_html.should == "some html"
+    map.should_receive(:to_html).with(:no_load => true, :no_script_tag => true).and_return("map_to_html")
+    result = subject.to_html.gsub(/[\n\t]/, ' ').gsub(/\s+/, ' ')
+    result.should have_tag("script", :text => " MapController.init(function () { map_to_html; return map; }); " )
   end
   
-  it "#di is delegated to map" do
+  it "#div is delegated to map" do
     map.should_receive(:div).with(:height => "55px").and_return("some html")
     subject.div(:height => "55px").should == "some html"
   end
   
   it "#to_html_with_header returns the GMap.header and the map script code" do
-    map.should_receive(:to_html).and_return("<script></script>")
+    subject.should_receive(:to_html).and_return("<script></script>")
     GMap.should_receive(:header).and_return("GMap.header.content")
     subject.to_html_with_header.should == "GMap.header.content<script></script>"
   end

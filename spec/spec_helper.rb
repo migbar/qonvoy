@@ -9,9 +9,6 @@ require 'remarkable_rails'
 require 'factory_girl'
 require File.dirname(__FILE__) + '/factories'
 
-require 'fakeweb'
-FakeWeb.allow_net_connect = false
-
 # Uncomment the next line to use webrat's matchers
 #require 'webrat/integrations/rspec-rails'
 

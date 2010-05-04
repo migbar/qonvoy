@@ -57,7 +57,7 @@ describe Place do
   it "#rating returns the z_food value divided by 3, or nil if there is no z_food rating" do
     Place.new(:z_food => 27).rating.should == 9
     Place.new(:z_food => 24).rating.should == 8
-    Place.new(:z_food => 26).rating.should == 8.3
+    Place.new(:z_food => 26).rating.should be_close(8.66, 0.01)
     Place.new.rating.should be_nil
   end
   

@@ -105,7 +105,6 @@ ActiveRecord::Schema.define(:version => 20100420101742) do
   add_index "statuses", ["message_id"], :name => "index_statuses_on_message_id"
   add_index "statuses", ["place_id"], :name => "index_statuses_on_place_id"
   add_index "statuses", ["processed_at"], :name => "index_statuses_on_processed_at"
-  add_index "statuses", ["user_id"], :name => "index_statuses_on_parsed_and_user_id"
   add_index "statuses", ["user_id"], :name => "index_statuses_on_processed_and_user_id"
   add_index "statuses", ["user_id"], :name => "index_statuses_on_user_id"
 
@@ -132,9 +131,9 @@ ActiveRecord::Schema.define(:version => 20100420101742) do
     t.string   "avatar_url"
     t.string   "screen_name"
     t.string   "location"
-    t.string   "persistence_token",   :null => false
-    t.string   "single_access_token", :null => false
-    t.string   "perishable_token",    :null => false
+    t.string   "persistence_token",   :default => "", :null => false
+    t.string   "single_access_token", :default => "", :null => false
+    t.string   "perishable_token",    :default => "", :null => false
     t.string   "oauth_token"
     t.string   "oauth_secret"
     t.datetime "created_at"
