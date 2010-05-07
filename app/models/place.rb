@@ -19,7 +19,7 @@ class Place < ActiveRecord::Base
   validates_presence_of :name
   has_many :dishes
   has_one :location, :dependent => :destroy
-  delegate :latitude, :longitude, :bounds, :to => :location
+  delegate :latitude, :longitude, :bounds, :sw_bounds, :ne_bounds, :to => :location, :allow_nil => true
   
   def missing_information?
     address.blank?
@@ -30,6 +30,7 @@ class Place < ActiveRecord::Base
   end
   
   def geocode
+    return if address.blank?
     geoloc = Geokit::Geocoders::GoogleGeocoder.geocode(address_without_intersection)
     
     Location.destroy(location.id) if location

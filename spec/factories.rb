@@ -13,6 +13,7 @@ end
 
 Factory.define(:status) do |f|
   f.sequence(:sender_screen_name) { |i| "twitter_guy_#{i}" }
+  f.body { |s| "Status from #{s.sender_screen_name}" }
 end
 
 Factory.define(:processed_status, :parent => :status) do |f|
@@ -42,7 +43,10 @@ Factory.define(:rating) do |f|
 end
 
 Factory.define(:location) do |f|
-  f.bounds(:sw => { :latitude => 1, :longitude => 2 }, :ne => { :latitude => 3, :longitude => 4 })
+  # f.bounds(:sw => { :latitude => 1, :longitude => 2 }, :ne => { :latitude => 3, :longitude => 4 })
+  f.bounds do |l|
+    l.json_bounds && JSON.parse(l.json_bounds) || {:sw => { :latitude => 1, :longitude => 2 }, :ne => { :latitude => 3, :longitude => 4 }}
+  end
   f.latitude 41.132945
-  f.longitude -23.12934
+  f.longitude -23.12934 
 end

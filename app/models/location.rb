@@ -25,5 +25,18 @@
 
 class Location < ActiveRecord::Base
   belongs_to :place
-  serialize :bounds, Hash
+  serialize :bounds, Hash    
+  attr_accessor :json_bounds    
+  
+  def sw_bounds
+    bounds.symbolize_keys[:sw].symbolize_keys
+  end
+
+  def ne_bounds
+    bounds.symbolize_keys[:ne].symbolize_keys
+  end
+  
+  # def json_bounds=(json)
+  #   self.bounds = JSON.parse(json)
+  # end  
 end

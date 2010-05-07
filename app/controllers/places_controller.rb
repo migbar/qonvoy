@@ -3,9 +3,12 @@ class PlacesController < ApplicationController
   
   before_filter :find_place
   
-  def show
+  def show                                     
+    logger.debug("> inside show")
     @dishes = @place.dishes.descend_by_rating
+    logger.debug("> loaded dishes")
     @map = MapPresenter.new(@place, :controller => self)
+    logger.debug("> built presenter")
   end
   
   def edit

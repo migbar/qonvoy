@@ -3,10 +3,11 @@ Feature: Showing the place
   As a User
   I want to see the show page for the place
 
-  Background: 
+  Background:    
     Given the following locations exists:
-      | location | latitude | longitude   | 
-      | loc1     | 40.771324 | -73.985887 |  
+      | location | latitude | longitude   | json_bounds | 
+      | loc1     | 40.7553308 | -73.9852183 | {"sw":{"latitude":40.7521754,"longitude":-73.9883716},"ne":{"latitude":40.7584706,"longitude":-73.9820763}} |
+
      And the following places exists:
       | place | name | address         | z_food | location        |
       | nobu  | Nobu | 123 bleecker St | 24     | location "loc1" |
@@ -47,9 +48,9 @@ Feature: Showing the place
        | Shrimp noodle soup | 7.5    | Awesome      | 7.0           |
        | Chicken fried rice | 6.0    | not so bad   | 6.0           |
   
-  @selenium
+  @selenium 
   Scenario: rendering the map for the place on the show page
      When I am on the show page for the place "Nobu"
-      And I click the map marker at "40.771324,-73.985887"
+      And I click the map marker at "40.7553308,-73.9852183"
       And the marker bubble should contain "Nobu" 
   
