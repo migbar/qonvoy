@@ -54,8 +54,13 @@ require 'database_cleaner'
 
 DatabaseCleaner.strategy = :truncation
 
-# Capybara.javascript_driver = :selenium
+# Capybara.javascript_driver = :selenium    
+Capybara.default_host = "qonvoy.local"
+# Capybara.run_server = true
 
+Before do            
+  activate_authlogic
+end
 
 After("@show_page") do |scenario|  
   if scenario.failed?
@@ -65,3 +70,4 @@ end
 
 World(ActionView::Helpers::RecordIdentificationHelper)
 World(ActionView::Helpers::UrlHelper)
+World(Authlogic::TestCase)

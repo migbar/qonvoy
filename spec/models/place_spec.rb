@@ -52,6 +52,13 @@ describe Place do
     place = Place.new(:location => Location.new)
     place.location.should_receive(:longitude).and_return(40.87239)
     place.longitude.should == 40.87239
+  end             
+  
+  it "allows location to be nil for delegates" do
+    place = Place.new
+    %w[latitude longitude bounds sw_bounds ne_bounds].each do |msg|
+      place.send(msg).should be_nil
+    end
   end
   
   it "#rating returns the z_food value divided by 3, or nil if there is no z_food rating" do

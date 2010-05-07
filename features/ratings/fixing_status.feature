@@ -17,7 +17,7 @@ Feature: Fixing status
       And I should see "8" within ".rating .rating"
       And I should see "10" within ".rating .scale"
      When I press "Accept"
-     Then a status should exist with body: "Awesome Shrimp Noodle Soup from Nobu - 8 out of 10", processed: true
+     Then a processed status should exist having body "Awesome Shrimp Noodle Soup from Nobu - 8 out of 10"
       And I should be on the show page for the dish "Shrimp Noodle Soup"
 
   Scenario: amending the status to a parsable format when place is missing information

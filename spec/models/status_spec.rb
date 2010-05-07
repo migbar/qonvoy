@@ -62,7 +62,22 @@ describe Status do
       @status.should_receive(:process)
       Status.create_and_process(:body => "Blah")
     end
-  end
+  end              
+  
+  describe "#processed?" do
+    subject { Factory.build(:status, :processed_at => processed_at) }
+    
+    context "when processed_at is nil" do
+      let(:processed_at) { nil }
+      it { should_not be_processed }
+    end
+    
+    context "when processed_at is set" do
+      let(:processed_at) { 2.days.ago }
+      it { should be_processed }
+    end
+  end                  
+  
   describe "#process" do
     before(:each) do
       @status = Factory.build(:dm_status, :body => "Awesome Shrimp Noodle Soup from Nobu - 8.5 out of 10.0")

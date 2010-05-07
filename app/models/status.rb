@@ -74,6 +74,10 @@ class Status < ActiveRecord::Base
     end
   end
   
+  def processed?
+    !!processed_at
+  end
+  
   def process_rating(result, ask_for_place_info=true)
     self.place = Place.find_or_create_by_name(result[:place])
     

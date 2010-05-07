@@ -49,9 +49,17 @@ describe Dish do
     end
   end
   
-  describe "#rating" do
-    it "returns the db stored attribute value for rating divided by 10.0" do
-      Dish.new(:rating => 85).rating.should == 8.5
+  describe "#rating" do                                                     
+    subject {Dish.new(:rating => _rating)} 
+    
+    context "when rating is set" do
+      let(:_rating) { 85 }
+      its(:rating)  { should == 8.5 }
+    end
+    
+    context "when rating is nil" do
+      let(:_rating) { nil }
+      its(:rating)  { should be_nil }
     end
   end
   

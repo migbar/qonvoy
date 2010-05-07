@@ -29,7 +29,7 @@ class Dish < ActiveRecord::Base
   end
   
   def rating
-    _rating / 10.0
+    _rating / 10.0 if _rating
   end
   
   def latest_status
