@@ -5,5 +5,5 @@ rerun_opts = rerun.to_s.strip.empty? ? "--format progress features" : "--format 
 std_opts = "#{rerun_opts} --format rerun --out rerun.txt --strict --tags @wip" #  --tags ~@selenium "
 %>
 autotest: <%= std_opts %>
-default: --format pretty --strict --tags ~@wip
+default: --format pretty --strict --tags ~@wip -r features
 wip: --tags @wip:4 --wip features

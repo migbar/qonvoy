@@ -66,6 +66,10 @@ class Place < ActiveRecord::Base
     z_food / 3.0 if z_food
   end
   
+  def has_location?
+    !location.blank?
+  end
+  
   private 
     def address_without_intersection
       address.gsub(/\(([^\)]*)\)/, '').gsub(/\s+/, ' ')

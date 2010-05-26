@@ -165,4 +165,17 @@ describe Place do
       subject { Factory.build :user_place, :address => '1 Central Park W. (bet. 60th & 61st Sts.) Manhattan, NY' }
     end
   end
+  
+  describe "#has_location?" do
+    subject { Factory.build(:place, :location => location) }
+    
+    context "without a location" do
+      let(:location) { nil }
+      its(:has_location?) { should be_false }
+    end
+    context "with location" do
+      let(:location) { Factory.build(:location) }
+      its(:has_location?) { should be_true }
+    end
+  end
 end

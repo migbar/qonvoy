@@ -8,7 +8,6 @@ When /^I click the map marker at "([^\"]*)"$/ do |coords|
   
   marker_lat.should == lat
   marker_lng.should == lng
-  sleep 5
   map = locate(:xpath, Capybara::XPath.append("//area[@id='#{dom_area_id}']"), "no map marker found")    
   
   map.click

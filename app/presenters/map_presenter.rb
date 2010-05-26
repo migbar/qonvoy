@@ -3,8 +3,6 @@ class MapPresenter
 
   attr_reader :mappable, :map, :controller
   
-  delegate :div, :to => :map              
-  
   class <<self
     def logger
       Rails.logger
@@ -18,12 +16,11 @@ class MapPresenter
   def initialize(object, options={})
     @mappable = object
     @controller = options.delete(:controller) 
-             logger.debug(">> map presenter initialized")
-    setup_map
+    setup_map if mappable.has_location?
   end
   
   def to_html_with_header
-    GMap.header + to_html
+    GMap.header + to_html if mappable.has_location?
   end
   
   def to_html
@@ -37,7 +34,20 @@ class MapPresenter
     }
   end
   
+  def div(options={})
+    if mappable.has_location?
+      map.div(options)
+    else
+      %{<div id="#{dom_id}"></div>}
+    end
+  end
+  
+  
   private
+    def dom_id
+      super(mappable, :map)
+    end
+    
     def mappable_type
       @mappable_type ||= mappable.class.name.underscore
     end
@@ -46,8 +56,9 @@ class MapPresenter
       [ [mappable.sw_bounds[:latitude], mappable.sw_bounds[:longitude] ], [ mappable.ne_bounds[:latitude], mappable.ne_bounds[:longitude] ] ]
     end
     
+    
     def setup_map
-      @map = GMap.new(dom_id(mappable, :map))
+      @map = GMap.new(dom_id)
       @map.control_init(:large_map => false, :small_map => true, :scale => true)
       # @map.center_zoom_init([mappable.latitude, mappable.longitude], 13)  
       @map.center_zoom_on_bounds_init(bounds)                
