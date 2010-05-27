@@ -21,6 +21,9 @@ class Place < ActiveRecord::Base
   has_one :location, :dependent => :destroy
   delegate :latitude, :longitude, :bounds, :sw_bounds, :ne_bounds, :to => :location, :allow_nil => true
   
+  acts_as_taggable_on :cuisines
+  acts_as_taggable_on :neighborhoods
+  
   def missing_information?
     address.blank?
   end

@@ -66,13 +66,7 @@ describe UsersController do
       do_get
       assigns[:user].should == current_user
     end
-    
-    it "builds up to 5 interests for the user" do
-      @user.stub(:interest_list).and_return(%w[foo bar])
-      @user.interests.should_receive(:build).exactly(3).times
-      do_get
-    end
-    
+        
     it "renders the edit template" do
       do_get
       response.should render_template(:edit)

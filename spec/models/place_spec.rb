@@ -23,6 +23,8 @@ describe Place do
   context "associations" do
     should_have_many :dishes
     should_have_one :location
+    should_have_many :cuisines, :through => :cuisine_taggings
+    should_have_many :neighborhoods, :through => :neighborhood_taggings
   end
   
   describe "#missing_information?" do

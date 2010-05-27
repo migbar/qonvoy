@@ -3,7 +3,8 @@
   %head
     = title_tag
     %meta{"http-equiv"=>"Content-type", :content=>"text/html; charset=utf-8"}
-    = javascript_include_tag "jquery-1.4.2.min", "map_controller"
+    = javascript_include_tag "jquery-1.4.2.min", "jquery-ui-1.8.1.custom.min.js", "interests", "map_controller"
+    = stylesheet_link_tag "ui-lightness/jquery-ui-1.8.1.custom", "screen"
     = yield(:head)
   %body
     #container

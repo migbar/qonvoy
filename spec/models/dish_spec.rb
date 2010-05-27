@@ -20,6 +20,8 @@ describe Dish do
     should_have_many :ratings
     should_have_many :statuses
     should_have_many :processed_statuses, :class_name => "Status", :conditions => "#{Status.table_name}.processed_at is not null"
+    
+    should_have_many :cuisines, :through => :cuisine_taggings
   end
   
   its(:to_s) { should eql("Shrimp noodle soup") }

@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
   
   acts_as_authentic
   
-  acts_as_taggable_on :interests
+  acts_as_taggable_on :cuisines
+  acts_as_taggable_on :neighborhoods
   has_many :statuses
   
   validates_presence_of :screen_name
@@ -65,6 +66,14 @@ class User < ActiveRecord::Base
   
   def perform_twitter_update(subject)
     RatingBird.client(oauth_token, oauth_secret).update(subject)
+  end
+  
+  def cuisine=(csv)
+    self.cuisine_list = csv.split(',').map(&:strip)
+  end
+  
+  def cuisine
+    cuisine_list.sort.join(', ')
   end
 
   private

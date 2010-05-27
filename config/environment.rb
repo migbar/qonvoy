@@ -13,7 +13,7 @@ Rails::Initializer.run do |config|
   config.gem "authlogic-oauth",                    :version => '1.0.8', :lib => "authlogic_oauth"
   config.gem "settingslogic",                      :version => '2.0.3'
   config.gem "formtastic",                         :version => '0.9.7'
-  config.gem "acts-as-taggable-on",                :version => '1.0.19'
+  config.gem "acts-as-taggable-on",                :version => '2.0.6'
   config.gem 'hoptoad_notifier',                   :version => '2.1.2'
   config.gem 'twitter',                            :version => '0.8.4'
   config.gem 'delayed_job',                        :version => '1.8.5'

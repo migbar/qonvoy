@@ -26,9 +26,6 @@ class UsersController < ApplicationController
   
   def edit
     @user = current_user
-    (5 - @user.interest_list.length).times do
-      @user.interests.build
-    end
   end
   
   def update

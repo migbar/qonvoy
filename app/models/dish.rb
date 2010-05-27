@@ -16,6 +16,8 @@ class Dish < ActiveRecord::Base
   has_many :statuses
   has_many :processed_statuses, :class_name => "Status", :conditions => "#{Status.table_name}.processed_at is not null"
   
+  acts_as_taggable_on :cuisines
+  
   def to_s
     name
   end

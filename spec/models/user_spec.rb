@@ -31,6 +31,7 @@ describe User do
   
   describe "associations" do
     should_have_many :statuses
+    should_have_many :cuisines, :through => :cuisine_taggings
   end
   
   it "#to_s returns the screen_name for the user" do
@@ -147,6 +148,24 @@ describe User do
     it "updates the status using the client" do
       @client.should_receive(:update).with("the status")
       @user.perform_twitter_update("the status")
+    end
+  end
+  
+  describe "#cuisine" do
+    it "returns a comma joined sorted list of cuisines" do
+      @user = Factory.build(:twitter_user, :cuisine_list => ["italian", "chinese", "french"])
+      @user.cuisine.should == "chinese, french, italian"
+      
+    end
+  end
+  
+  describe "#cuisine=" do
+    subject { Factory.create(:twitter_user) }
+    
+    it "creates cuisines associated with the user from a comma separated list" do
+      subject.cuisine = "italian, chinese, french"
+      subject.save
+      subject.cuisines.map(&:name).should include(*%w[italian chinese french])
     end
   end
 end

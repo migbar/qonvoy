@@ -1,0 +1,7 @@
+DONE:
+For fetching the scoped interests for the user to choose from.
+
+ActsAsTaggableOn::Tag.find(:all, :joins => :taggings, :conditions => { :taggings => { :context => "cuisines" }}, :select => "distinct(tags.*)")
+
+TODO:
+populate the interests field when the user clicks on an interest tag
