@@ -1,6 +1,6 @@
 var Interests = function ($) {
 	function split(val) {
-		return val.split(/,\s*/);
+		return $.grep(val.split(/,\s+/), function (v) { return v !== ''; });
 	}
 	
 	function extractLast(term) {
@@ -9,38 +9,78 @@ var Interests = function ($) {
 	
 	return {
 		init: function (group) {
-			var linksQuery = '#' + group + '.interests a';
-			var availableTags = $(linksQuery).map(function (i, e) { return $(e).text(); });
+			var linksSelector = '#' + group + '.interests a';
+			var interestsField = $('#user_' + group);
+			var availableTags = $(linksSelector).map(function (i, e) { return $(e).text(); });
+			
+			function appendTag(existing, added, pop) {
+				var terms = split( existing );
+				
+				if (pop) terms.pop();
+				terms.push( added );
+				terms.push("");
+				return terms.join(", ");
+			}
+			
+			$(linksSelector).click(function (event) {
+				var link = $(this), text = link.text();
+				
+				if (link.hasClass('selected')) {
+					link.removeClass('selected');
+					var terms = split(interestsField.val());
+					terms.splice($.inArray(text, terms), 1);
+					interestsField.val(terms.join(', '));
+				} else {
+					link.addClass('selected');
+					interestsField.val(appendTag(interestsField.val(), text));
+				}
+			});
 			
 			function selectInterests(values) {
-				$(linksQuery).removeClass('selected');
+				$(linksSelector).removeClass('selected');
 
 				$.each(values, function (i, value) {
-					console.log(value);
-					$(linksQuery+'[title='+value+']').addClass('selected');
+					$(linksSelector+'[title='+value+']').addClass('selected');
 				});
 			}			
-			selectInterests(split($('#user_' + group).val()));
+			selectInterests(split(interestsField.val()));
 			
-			$('#user_' + group).autocomplete({
-				minLength: 0,
+			interestsField.keydown(function (event) {
+				var keyCode    = $.ui.keyCode,
+					autocomplete = $(this).data('autocomplete'),
+					menu         = autocomplete.menu;
+				if (event.keyCode === keyCode.ENTER) {
+					menu.next();
+					menu.select();
+					event.preventDefault();
+				}
+			});
+			
+			interestsField.autocomplete({
+				minLength: 1,
 				source: function(request, response) {
 					var values = split(request.term);
 					var last = values[values.length-1];
 					
 					selectInterests(values);
 					
-					response($.ui.autocomplete.filter(availableTags, last));
+					var filtered = $.ui.autocomplete.filter(availableTags, last);
+					console.log(filtered);
+					
+					if (filtered.length === 0) {
+						values.pop();
+						values.push("");
+						interestsField.val(values.join(', '));
+					}
+					
+					response(filtered);
 				},
 				focus: function() {
 					return false;
 				},
 				select: function(event, ui) {
-					var terms = split( this.value );
-					terms.pop();
-					terms.push( ui.item.value );
-					terms.push("");
-					this.value = terms.join(", ");
+					this.value = appendTag(this.value, ui.item.value, true);
+					selectInterests(split(this.value));
 					return false;
 				}
 			});

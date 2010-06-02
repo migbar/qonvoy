@@ -8,9 +8,9 @@
 #  avatar_url          :string(255)
 #  screen_name         :string(255)
 #  location            :string(255)
-#  persistence_token   :string(255)     not null, indexed
-#  single_access_token :string(255)     not null, indexed
-#  perishable_token    :string(255)     not null, indexed
+#  persistence_token   :string(255)     default(""), not null, indexed
+#  single_access_token :string(255)     default(""), not null, indexed
+#  perishable_token    :string(255)     default(""), not null, indexed
 #  oauth_token         :string(255)     indexed
 #  oauth_secret        :string(255)
 #  created_at          :datetime

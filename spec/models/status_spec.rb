@@ -3,7 +3,7 @@
 # Table name: statuses
 #
 #  id                 :integer(4)      not null, primary key
-#  user_id            :integer(4)      indexed, indexed, indexed
+#  user_id            :integer(4)      indexed, indexed
 #  sender_screen_name :string(255)
 #  sender_id          :integer(8)
 #  body               :string(1000)
