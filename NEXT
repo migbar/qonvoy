@@ -4,4 +4,11 @@ For fetching the scoped interests for the user to choose from.
 ActsAsTaggableOn::Tag.find(:all, :joins => :taggings, :conditions => { :taggings => { :context => "cuisines" }}, :select => "distinct(tags.*)")
 
 TODO:
+Still here: 
+  - emulating the down/enter events is tricky due to limitations built in
+  - we are loosing the contents of the autoselect text field when selecting from menu 
+  
 enter key select the first completion in the menu. 
+
+speccing the key press events .. partial typing and down arrow + enter will autocomplete 
+

@@ -3,9 +3,9 @@ Feature: Adding interests
   As a user
   I want to share my interests
   
-  @javascript @wip @show_page
+  @javascript @wip
   Scenario: Specifying my interests when I register
-    Given a place exists with cuisine: "italian, french"
+    Given a place exists with cuisine_list: "italian, french"
       And I register as "twitter_guy" using Twitter
      Then I should be on my profile page
       And I should see "Specify your interests"
