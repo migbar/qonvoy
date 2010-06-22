@@ -76,6 +76,7 @@ Given /^I am a logged in as the Twitter user "([^\"]*)"$/ do |name|
    Given %Q{I am on the home page}
    Given %Q{I press "Let me log in using Twitter"}
    @twitter_guy = name
+   set_current_user(name)
 end
 
 Given /^I register as "([^\"]*)" using Twitter$/ do |name|

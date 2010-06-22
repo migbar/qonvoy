@@ -3,20 +3,26 @@ Feature: Adding interests
   As a user
   I want to share my interests
   
+  Background:
+    Given a place exists with cuisine_list: "italian, french"
+  
   @javascript @wip
   Scenario: Specifying my interests when I register
-    Given a place exists with cuisine_list: "italian, french"
-      And I register as "twitter_guy" using Twitter
+    Given I register as "twitter_guy" using Twitter
      Then I should be on my profile page
       And I should see "Specify your interests"
-     
+  
+  @javascript @wip
+  Scenario: Filling in my interests on the profile page
+    Given I am a logged in as the Twitter user "twitter_guy"
+      And I am on my profile page
      When I fill in "Cuisine" with "italian"
      Then "italian" should be selected in the "cuisine" interests panel
-     When I follow "Chinese" within "#cuisine.interests"
-     Then the "cuisine" field should contain "Chinese"
+     When I follow "french" within "#cuisine.interests"
+     Then the "Cuisine" field should contain "french"
+     When I press "Save my interests"
+     Then my cuisine_list should be "italian, french"
      
-  
-
   # Scenario: Specifying my interests when I register
   #   Given I register as "twitter_guy" using Twitter
   #    Then I should be on my profile page

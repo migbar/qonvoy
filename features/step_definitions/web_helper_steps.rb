@@ -20,3 +20,7 @@ Then /^I should see the following within:$/ do |table|
     end
   end
 end
+
+When /^I wait (\d+) seconds/ do |seconds|
+  sleep seconds.to_i
+end

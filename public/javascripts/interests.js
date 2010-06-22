@@ -63,7 +63,7 @@ var Interests = function ($) {
 			});
 			
 			interestsField.autocomplete({
-				minLength: 1,
+				minLength: 0,
 				source: function(request, response) {
 					var values = split(request.term);
 					var last = values[values.length-1];
@@ -80,8 +80,11 @@ var Interests = function ($) {
 					
 					response(filtered);
 				},
+				focus: function() {
+					// prevent value inserted on focus
+					return false;
+				},
 				select: function(event, ui) {
-					console.log("select(): ", this.value, ui.item.value);
 					this.value = appendTag(this.value, ui.item.value, true);
 					selectInterests(split(this.value));
 					return false;
