@@ -4,13 +4,15 @@
   - f.inputs do
     = f.input :location
   - f.inputs "Interests" do
-    = f.input :cuisine
+    - User.interest_groups.each do |group|
+      = f.input group
   - f.buttons do
     = f.commit_button "Save my interests"
 
-#cuisine.interests
-  - all_cuisines.each do |cuisine|
-    %a{ :href => "#", :title => h(cuisine) }= h cuisine
+- User.interest_groups.each do |group|
+  %div.interests{ :id => group }
+    - all_interests(group).each do |interest|
+      %a{ :href => "#", :title => h(interest) }= h interest
 
-:javascript
-  Interests.init('cuisine')
+  :javascript
+    Interests.init('#{group}')

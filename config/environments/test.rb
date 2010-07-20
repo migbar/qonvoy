@@ -30,8 +30,8 @@ config.action_mailer.delivery_method = :test
 config.gem 'rspec-rails', :version => '>= 1.3.2',     :lib => false unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
 config.gem "remarkable_rails", :version => '>=3.1.12',  :lib => false
 config.gem 'factory_girl',     :lib => false, :version => '>=1.2.3'
-config.gem 'webmock',          :version => '>=1.0.0'
+# config.gem 'webmock',          :version => '>=1.0.0'
 
 config.after_initialize do
-  WebMock.disable_net_connect!(:allow_localhost => true)
+  # WebMock.disable_net_connect!(:allow_localhost => true)
 end

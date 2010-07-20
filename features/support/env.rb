@@ -58,6 +58,9 @@ DatabaseCleaner.strategy = :truncation
 Capybara.default_host = "qonvoy.local"
 # Capybara.run_server = true
 
+# require 'selenium/webdriver'
+# Selenium::WebDriver.for :firefox, :http_client => Selenium::WebDriver::Remote::Http::Curb
+
 Before do            
   activate_authlogic
 end

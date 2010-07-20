@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe TagsHelper do
-  describe "#all_cuisines" do
-    subject { helper.all_cuisines }
+  describe "#all_interests" do
+    subject { helper.all_interests 'cuisine' }
     
     before(:each) do
       Factory.create(:place, :cuisine_list => %w[chinese french italian])

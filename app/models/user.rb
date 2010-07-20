@@ -22,8 +22,27 @@ class User < ActiveRecord::Base
   
   acts_as_authentic
   
-  acts_as_taggable_on :cuisines
-  acts_as_taggable_on :neighborhoods
+  INTEREST_GROUPS = %w[cuisine feature neighborhood dish_type]
+  # INTEREST_GROUPS = %w[cuisine]
+  
+  class << self
+    def interest_groups
+      INTEREST_GROUPS
+    end
+  end
+  
+  interest_groups.each do |group|
+    acts_as_taggable_on group.pluralize
+    
+    define_method(:"#{group}=") do |csv|
+      send(:"#{group}_list=", csv.split(',').map(&:strip))
+    end
+
+    define_method(:"#{group}") do
+      send(:"#{group}_list").sort.join(', ')
+    end
+  end
+  
   has_many :statuses
   
   validates_presence_of :screen_name
@@ -66,14 +85,6 @@ class User < ActiveRecord::Base
   
   def perform_twitter_update(subject)
     RatingBird.client(oauth_token, oauth_secret).update(subject)
-  end
-  
-  def cuisine=(csv)
-    self.cuisine_list = csv.split(',').map(&:strip)
-  end
-  
-  def cuisine
-    cuisine_list.sort.join(', ')
   end
 
   private

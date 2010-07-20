@@ -90,6 +90,11 @@ var Interests = function ($) {
 					return false;
 				}
 			});
+		},
+		
+		_dimissAutocomplete: function (group) {
+			// alert($(group).attr('id'));
+			$(group).data('autocomplete').close();
 		}
 	};
 }(jQuery);

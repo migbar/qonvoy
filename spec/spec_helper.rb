@@ -19,6 +19,10 @@ Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].e
 Spec::Runner.configure do |config|
   include Authlogic::TestCase
   
+  config.before(:each) do
+    activate_authlogic
+  end
+  
   # If you're not using ActiveRecord you should remove these
   # lines, delete config/database.yml and disable :active_record
   # in your config/boot.rb

@@ -31,7 +31,9 @@ describe User do
   
   describe "associations" do
     should_have_many :statuses
-    should_have_many :cuisines, :through => :cuisine_taggings
+    User.interest_groups.each do |group|
+      should_have_many :"#{group.pluralize}", :through => :"#{group}_taggings"
+    end
   end
   
   it "#to_s returns the screen_name for the user" do
@@ -151,21 +153,25 @@ describe User do
     end
   end
   
-  describe "#cuisine" do
-    it "returns a comma joined sorted list of cuisines" do
-      @user = Factory.build(:twitter_user, :cuisine_list => ["italian", "chinese", "french"])
-      @user.cuisine.should == "chinese, french, italian"
-      
-    end
-  end
-  
-  describe "#cuisine=" do
-    subject { Factory.create(:twitter_user) }
+  User.interest_groups.each do |group|
     
-    it "creates cuisines associated with the user from a comma separated list" do
-      subject.cuisine = "italian, chinese, french"
-      subject.save
-      subject.cuisines.map(&:name).should include(*%w[italian chinese french])
+    describe "##{group}" do
+      it "returns a comma joined sorted list of #{group.pluralize}" do
+        @user = Factory.build(:twitter_user, :"#{group}_list" => ["foo", "bar", "baz"])
+        @user.send(group).should == "bar, baz, foo"
+      end
     end
+    
+    describe "##{group}=" do
+      subject { Factory.create(:twitter_user) }
+      it "creates #{group.pluralize} associated with the user from a comma separated list" do
+        subject.send(:"#{group}=", "foo, bar, baz")
+        subject.save
+        subject.send(group.pluralize).map(&:name).should include(*%w[foo bar baz])
+        
+      end
+    end
+    
   end
+
 end
