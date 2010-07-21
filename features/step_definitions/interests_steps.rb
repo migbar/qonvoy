@@ -10,13 +10,15 @@ When /^I select the following interests:$/ do |table|
   table.hashes.each do |hash|
     human_name, value, tag_name = hash['interest'], hash['fill_in'], hash['click']
     interest_name = human_name.downcase.gsub(/\W/, '_')
-    
+
     When %{I fill in "#{human_name}" with "#{value}"}
     # ..trying to force close the autocomplete or menu so we can move to the next field
     # evaluate_script "$('#user_#{interest_name}').data('autocomplete').menu.deactivate();"
 		
 		Then %{"#{value}" should be selected in the "#{interest_name}" interests panel}
     When %{I follow "#{tag_name}" within "##{interest_name}.interests"}
+
+		# evaluate_script "alert(1)"
 
 		# evaluate_script "Interests._dimissAutocomplete('#user_#{interest_name}')"
 		# evaluate_script "$('#user_#{interest_name}').data('autocomplete').close()"

@@ -11,3 +11,5 @@ webrat-*.html
 config/application.yml
 rerun.txt
 capybara-*.html
+.bundle
+.idea

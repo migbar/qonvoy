@@ -21,15 +21,6 @@ config.action_controller.allow_forgery_protection    = false
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
 
-config.gem 'cucumber-rails',   :lib => false, :version => '>=0.2.4' unless File.directory?(File.join(Rails.root, 'vendor/plugins/cucumber-rails'))
-config.gem 'database_cleaner', :lib => false, :version => '>=0.4.3' unless File.directory?(File.join(Rails.root, 'vendor/plugins/database_cleaner'))
-config.gem 'capybara',         :lib => false, :version => '>=0.3.6' unless File.directory?(File.join(Rails.root, 'vendor/plugins/capybara'))
-config.gem 'rspec',            :lib => false, :version => '>=1.3.0' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec'))
-config.gem 'rspec-rails',      :lib => false, :version => '>=1.3.2' unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
-config.gem 'factory_girl',     :lib => false, :version => '>=1.2.3'
-config.gem 'pickle',           :lib => false, :version => '>=0.2.8'
-# config.gem 'webmock',          :version => '>=1.0.0'
-
 config.after_initialize do
-  # WebMock.disable_net_connect!(:allow_localhost => true)
+  WebMock.disable_net_connect!(:allow_localhost => true)
 end

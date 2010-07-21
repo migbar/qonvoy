@@ -53,6 +53,7 @@ Cucumber::Rails::World.use_transactional_fixtures = true
 require 'database_cleaner'
 
 DatabaseCleaner.strategy = :truncation
+DatabaseCleaner.clean_with(:truncation)
 
 # Capybara.javascript_driver = :selenium    
 Capybara.default_host = "qonvoy.local"
@@ -65,7 +66,7 @@ Before do
   activate_authlogic
 end
 
-After("@show_page") do |scenario|  
+After("@show-page") do |scenario|  
   if scenario.failed?
     save_and_open_page
   end
