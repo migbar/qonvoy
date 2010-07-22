@@ -23,7 +23,6 @@ class User < ActiveRecord::Base
   acts_as_authentic
   
   INTEREST_GROUPS = %w[cuisine feature neighborhood dish_type]
-  # INTEREST_GROUPS = %w[cuisine]
   
   class << self
     def interest_groups
@@ -84,8 +83,21 @@ class User < ActiveRecord::Base
   end
   
   def perform_twitter_update(subject)
-    RatingBird.client(oauth_token, oauth_secret).update(subject)
+    twitter_api.update(subject)
   end
+	
+	def update_social_graph!
+		rating_bird_users = User.find_by_twitter_uid(twitter_api.friends.map(&:id))
+		graph_api.add_or_update_followees(self, rating_bird_users)
+	end
+	
+	def graph_api
+		@graph_api ||= GraphClient.new
+	end
+	
+	def twitter_api
+		@twitter_api ||= RatingBird.client(oauth_token, oauth_secret)
+	end
 
   private
     def authenticate_with_oauth

@@ -33,11 +33,15 @@ Given /^a Twitter user "([^\"]*)" that is not registered with Qonvoy$/ do |twitt
   
   stub_ratingbird_twitter_following
 end
-
+ 
 Given /^a Twitter user "([^\"]*)" registered with Qonvoy$/ do |name|
-  Given %Q{a twitter user "#{name}" exists with oauth_token: "foo", oauth_secret: "secret", screen_name: "#{name}", name: "#{name}", avatar_url: "http://a3.twimg.com/profile_images/63673063/images-2_normal.jpeg"}
+  Given %Q{a twitter user "#{name}" exists with screen_name: "#{name}", name: "#{name}", avatar_url: "http://a3.twimg.com/profile_images/63673063/images-2_normal.jpeg"}
   
   UserSession.class_eval do
+		define_method("user_twitter_name") do
+      name
+    end
+		
     def redirect_to_oauth
       oauth_controller.session[:oauth_callback_method] = "POST"
       oauth_controller.session[:oauth_request_class] = self.class.name
@@ -45,13 +49,21 @@ Given /^a Twitter user "([^\"]*)" registered with Qonvoy$/ do |name|
     end
 
     def authenticate_with_oauth
-      self.attempted_record = User.find_by_oauth_token("foo")
+      self.attempted_record = User.find_by_oauth_token("#{user_twitter_name}_token")
     end
   end
   
   stub_ratingbird_twitter_update
   stub_user_twitter_update
 end
+
+Given /^the following Twitter users are registered with RatingBird$/ do |table|
+  table.rows.each do |row|
+  	twitter_screen_name = row[0]
+			Given %Q{a Twitter user "#{twitter_screen_name}" registered with Qonvoy}
+  end
+end
+
 
 Given /^a Twitter user that denies access to Qonvoy$/ do
   UserSession.class_eval do
@@ -113,4 +125,8 @@ end
 When /^I click the first link in the reply$/ do
   link = URI.extract(@the_reply[:text]).first
   visit link
+end
+
+Given /^"([^"]*)" is following the following Twitter users:$/ do |twitter_name, users_table|
+  stub_twitter_followees(twitter_name, users_table.rows.flatten)
 end

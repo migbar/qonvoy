@@ -23,6 +23,10 @@ module RatingBirdTwitter
       end
     end
   end
+
+	def stub_twitter_followees(screen_name, twitter_users)
+		# Stub out the Twitter response using webmock
+	end
 end
 
 World(RatingBirdTwitter)

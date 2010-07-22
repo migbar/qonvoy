@@ -1,0 +1,1067 @@
+--- 
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: 87bc44
+  name: migbar
+  profile_sidebar_fill_color: e0ff92
+  profile_background_tile: false
+  location: ""
+  created_at: Wed Mar 12 14:43:30 +0000 2008
+  profile_image_url: http://a2.twimg.com/profile_images/855221178/half_of_me_normal.jpg
+  follow_request_sent: false
+  profile_link_color: 0000ff
+  contributors_enabled: false
+  favourites_count: 68
+  url: 
+  id: 14132510
+  utc_offset: -25200
+  profile_use_background_image: true
+  followers_count: 59
+  lang: en
+  profile_text_color: "000000"
+  protected: false
+  description: compulsive chronic eclectic curiosity
+  geo_enabled: false
+  profile_background_color: 9ae4e8
+  verified: false
+  notifications: false
+  time_zone: Mountain Time (US & Canada)
+  statuses_count: 164
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Fri Jul 16 16:14:03 +0000 2010
+    truncated: true
+    retweeted_status: !map:Hashie::Mash 
+      coordinates: 
+      favorited: false
+      created_at: Fri Jul 16 15:18:43 +0000 2010
+      truncated: false
+      text: "The Yoda Methodology: \"Do, or Do Not.  There is no Try.\"  Note that \"Do Not\" is a perfectly valid, if    underutilized,  approach."
+      contributors: 
+      id: 18693589763
+      geo: 
+      in_reply_to_user_id: 
+      place: 
+      in_reply_to_screen_name: 
+      source: <a href="http://www.hootsuite.com" rel="nofollow">HootSuite</a>
+      in_reply_to_status_id: 
+    text: "RT @PragmaticAndy: The Yoda Methodology: \"Do, or Do Not.  There is no Try.\"  Note that \"Do Not\" is a perfectly valid, if    underutilize ..."
+    contributors: 
+    id: 18697715298
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: <a href="http://dev.twitter.com/" rel="nofollow">API</a>
+    in_reply_to_status_id: 
+  friends_count: 179
+  profile_background_image_url: http://s.twimg.com/a/1279322210/images/themes/theme1/bg.png
+  following: true
+  screen_name: migbar
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: 87bc44
+  name: David Barcos
+  profile_sidebar_fill_color: e0ff92
+  profile_background_tile: false
+  location: ""
+  created_at: Thu Apr 01 18:04:28 +0000 2010
+  profile_image_url: http://a2.twimg.com/profile_images/791012766/DB_Entrenador_Emocional_normal.jpg
+  follow_request_sent: false
+  profile_link_color: 0000ff
+  contributors_enabled: false
+  favourites_count: 0
+  url: http://www.davidbarcos.com
+  id: 128627098
+  utc_offset: 
+  profile_use_background_image: true
+  followers_count: 3
+  lang: es
+  profile_text_color: "000000"
+  protected: false
+  description: ""
+  geo_enabled: false
+  profile_background_color: 9ae4e8
+  verified: false
+  notifications: false
+  time_zone: 
+  statuses_count: 1
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Thu Apr 01 18:17:15 +0000 2010
+    truncated: false
+    text: "Cuanto m\xC3\xA1s fuerte es el viento, m\xC3\xA1s vigorosos son los \xC3\xA1rboles..."
+    contributors: 
+    id: 11437907561
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: web
+    in_reply_to_status_id: 
+  friends_count: 3
+  profile_background_image_url: http://s.twimg.com/a/1279649509/images/themes/theme1/bg.png
+  following: true
+  screen_name: DBentrenador
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: 181A1E
+  name: Tyler Florence
+  profile_sidebar_fill_color: "252429"
+  profile_background_tile: false
+  location: San Francisco, California
+  created_at: Mon Dec 15 02:26:40 +0000 2008
+  profile_image_url: http://a1.twimg.com/profile_images/67963193/n532514366_3874_normal.jpg
+  follow_request_sent: false
+  profile_link_color: 2FC2EF
+  contributors_enabled: false
+  favourites_count: 4
+  url: http://www.TylerFlorence.com
+  id: 18128265
+  utc_offset: -28800
+  profile_use_background_image: true
+  followers_count: 193780
+  lang: en
+  profile_text_color: "666666"
+  protected: false
+  description: "Chef, Restaurateur, Wine Maker, Cookbook Writer, Shop Keep, Product Designer, Dad. "
+  geo_enabled: false
+  profile_background_color: 1A1B1F
+  verified: true
+  notifications: false
+  time_zone: Pacific Time (US & Canada)
+  statuses_count: 2570
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Mon Jul 19 14:57:42 +0000 2010
+    truncated: false
+    text: Thanks @visualeyemedia , great job in ATL. The show went off with out a hitch. Great social media company, doing amazing things.
+    contributors: 
+    id: 18921843993
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: web
+    in_reply_to_status_id: 
+  friends_count: 447
+  profile_background_image_url: http://s.twimg.com/a/1279649509/images/themes/theme9/bg.gif
+  following: true
+  screen_name: TylerFlorence
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: cccccc
+  name: The Epicenter Blog
+  profile_sidebar_fill_color: e5f8ff
+  profile_background_tile: false
+  location: New York City, Baby!
+  created_at: Mon Jun 23 15:41:55 +0000 2008
+  profile_image_url: http://a2.twimg.com/profile_images/196568862/73x73_epicenter_normal.jpg
+  follow_request_sent: false
+  profile_link_color: 007ca5
+  contributors_enabled: false
+  favourites_count: 111
+  url: http://www.wired.com/epicenter/
+  id: 15208246
+  utc_offset: -18000
+  profile_use_background_image: true
+  followers_count: 313560
+  lang: en
+  profile_text_color: "333333"
+  protected: false
+  description: "Business, disruption and media \xE2\x80\x94 Oh My! Your host: @johncabell"
+  geo_enabled: false
+  profile_background_color: "000000"
+  verified: false
+  notifications: false
+  time_zone: Eastern Time (US & Canada)
+  statuses_count: 3532
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Tue Jul 20 21:28:40 +0000 2010
+    truncated: false
+    text: Apple is the New Microsoft, Part 2  http://bit.ly/bbP1zK
+    contributors: 
+    id: 19023677364
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: <a href="http://bit.ly" rel="nofollow">bitly</a>
+    in_reply_to_status_id: 
+  friends_count: 159
+  profile_background_image_url: http://a3.twimg.com/profile_background_images/21077559/twitter_bg_epicenter.jpg
+  following: true
+  screen_name: epicenterblog
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: 736c6c
+  name: Cheryl
+  profile_sidebar_fill_color: dbd2d2
+  profile_background_tile: true
+  location: San Francisco
+  created_at: Wed Feb 25 22:09:07 +0000 2009
+  profile_image_url: http://a0.twimg.com/profile_images/964296360/Picture_6_normal.png
+  follow_request_sent: false
+  profile_link_color: ff4314
+  contributors_enabled: false
+  favourites_count: 10
+  url: http://twitter.com/jobs
+  id: 21926959
+  utc_offset: -28800
+  profile_use_background_image: true
+  followers_count: 344806
+  lang: en
+  profile_text_color: "333333"
+  protected: false
+  description: Human Resources @ Twitter
+  geo_enabled: true
+  profile_background_color: a19b9b
+  verified: false
+  notifications: false
+  time_zone: Pacific Time (US & Canada)
+  statuses_count: 3122
+  status: !map:Hashie::Mash 
+    coordinates: !map:Hashie::Mash 
+      coordinates: 
+      - -122.417223
+      - 37.770856
+      type: Point
+    favorited: false
+    created_at: Wed Jul 21 05:26:44 +0000 2010
+    truncated: false
+    text: "Holy! #sfgiants! :)"
+    contributors: 
+    id: 19053368397
+    geo: !map:Hashie::Mash 
+      coordinates: 
+      - 37.770856
+      - -122.417223
+      type: Point
+    in_reply_to_user_id: 
+    place: !map:Hashie::Mash 
+      name: SoMa
+      country: The United States of America
+      country_code: US
+      attributes: !map:Hashie::Mash {}
+
+      url: http://api.twitter.com/1/geo/id/2b6ff8c22edd9576.json
+      id: 2b6ff8c22edd9576
+      bounding_box: !map:Hashie::Mash 
+        coordinates: 
+        - - - -122.42284884
+            - 37.76893497
+          - - -122.3964
+            - 37.76893497
+          - - -122.3964
+            - 37.78752897
+          - - -122.42284884
+            - 37.78752897
+        type: Polygon
+      full_name: SoMa, San Francisco
+      place_type: neighborhood
+    in_reply_to_screen_name: 
+    source: <a href="http://mobile.twitter.com" rel="nofollow">Twitter for Android</a>
+    in_reply_to_status_id: 
+  friends_count: 273
+  profile_background_image_url: http://a1.twimg.com/profile_background_images/108240590/SFDistO_B.jpg
+  following: true
+  screen_name: che
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: 87bc44
+  name: Scott Simon
+  profile_sidebar_fill_color: e0ff92
+  profile_background_tile: false
+  location: Washington, DC
+  created_at: Fri Feb 06 15:47:24 +0000 2009
+  profile_image_url: http://a3.twimg.com/profile_images/77669155/scottsimon_normal.jpg
+  follow_request_sent: false
+  profile_link_color: 0000ff
+  contributors_enabled: false
+  favourites_count: 816
+  url: http://www.npr.org/blogs/sundaysoapbox/
+  id: 20245775
+  utc_offset: -18000
+  profile_use_background_image: true
+  followers_count: 1294917
+  lang: en
+  profile_text_color: "000000"
+  protected: false
+  description: Host of NPR's Weekend Edition Saturday
+  geo_enabled: false
+  profile_background_color: 9ae4e8
+  verified: true
+  notifications: false
+  time_zone: Eastern Time (US & Canada)
+  statuses_count: 1962
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Wed Jul 21 01:31:29 +0000 2010
+    truncated: false
+    text: Interviewing Dave Matthews this week. Any questions you'd like us to bring to him?
+    contributors: 
+    id: 19038468435
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: web
+    in_reply_to_status_id: 
+  friends_count: 67
+  profile_background_image_url: http://s.twimg.com/a/1279322210/images/themes/theme1/bg.png
+  following: true
+  screen_name: nprscottsimon
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: BDDCAD
+  name: Pete Wentz
+  profile_sidebar_fill_color: DDFFCC
+  profile_background_tile: true
+  location: lost in my head.
+  created_at: Fri Sep 12 21:34:37 +0000 2008
+  profile_image_url: http://a0.twimg.com/profile_images/273391156/twitpic_normal.jpg
+  follow_request_sent: false
+  profile_link_color: 0084B4
+  contributors_enabled: false
+  favourites_count: 0
+  url: http://www.petewentz.com
+  id: 16264006
+  utc_offset: -18000
+  profile_use_background_image: true
+  followers_count: 2056275
+  lang: en
+  profile_text_color: "333333"
+  protected: false
+  description: the official pete wentz twitter. bass, clothes, mischief
+  geo_enabled: false
+  profile_background_color: 9AE4E8
+  verified: true
+  notifications: false
+  time_zone: Quito
+  statuses_count: 5688
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Wed Jul 21 08:08:51 +0000 2010
+    truncated: false
+    text: "@joejonas mine a blackberry or something that contains guacamole."
+    contributors: 
+    id: 19060773119
+    geo: 
+    in_reply_to_user_id: 104249727
+    place: 
+    in_reply_to_screen_name: joejonas
+    source: <a href="http://ubertwitter.com" rel="nofollow">UberTwitter</a>
+    in_reply_to_status_id: 19058704938
+  friends_count: 124
+  profile_background_image_url: http://a1.twimg.com/profile_background_images/58859374/get_japansese.jpg
+  following: true
+  screen_name: petewentz
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: dcb7ad
+  name: Ann Curry
+  profile_sidebar_fill_color: fff9cc
+  profile_background_tile: false
+  location: new york, ny
+  created_at: Thu Feb 05 00:34:31 +0000 2009
+  profile_image_url: http://a0.twimg.com/profile_images/331538056/_-2_normal.jpg
+  follow_request_sent: false
+  profile_link_color: 0084B4
+  contributors_enabled: false
+  favourites_count: 283
+  url: http://anncurry.msnbc.com
+  id: 20109973
+  utc_offset: -21600
+  profile_use_background_image: true
+  followers_count: 1002678
+  lang: en
+  profile_text_color: "333333"
+  protected: false
+  description: Journalism is an act of faith in the future.
+  geo_enabled: false
+  profile_background_color: 0574a8
+  verified: true
+  notifications: false
+  time_zone: Central Time (US & Canada)
+  statuses_count: 2436
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Wed Jul 21 02:02:05 +0000 2010
+    truncated: false
+    text: Tony Hayward to quit as BP chief executive before October 1 according to The Times in UK.
+    contributors: 
+    id: 19040434216
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: <a href="http://ping.fm/" rel="nofollow">Ping.fm</a>
+    in_reply_to_status_id: 
+  friends_count: 681
+  profile_background_image_url: http://a1.twimg.com/profile_background_images/6707336/_-39.jpg
+  following: true
+  screen_name: AnnCurry
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: ffffff
+  name: Women's Pro Soccer
+  profile_sidebar_fill_color: "303030"
+  profile_background_tile: false
+  location: San Francisco, CA 94103
+  created_at: Tue Jan 15 22:34:43 +0000 2008
+  profile_image_url: http://a2.twimg.com/profile_images/786867890/WPS_FBook_Pic_normal.jpg
+  follow_request_sent: false
+  profile_link_color: a50d22
+  contributors_enabled: false
+  favourites_count: 2
+  url: http://www.womensprosoccer.com
+  id: 12297052
+  utc_offset: -21600
+  profile_use_background_image: true
+  followers_count: 244696
+  lang: en
+  profile_text_color: "808080"
+  protected: false
+  description: "Women's Professional Soccer: The premier women's soccer league in the world."
+  geo_enabled: true
+  profile_background_color: "050000"
+  verified: false
+  notifications: false
+  time_zone: Central Time (US & Canada)
+  statuses_count: 2430
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Tue Jul 20 18:35:52 +0000 2010
+    truncated: false
+    text: "Christine Sinclair is the WPS Player of the Week! http://bit.ly/bFiE11 Check out the photo gallery: http://bit.ly/cwnD9U #WPS #FCGP"
+    contributors: 
+    id: 19014104926
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: web
+    in_reply_to_status_id: 
+  friends_count: 759
+  profile_background_image_url: http://a3.twimg.com/profile_background_images/87648429/WPS_Twitter.jpg
+  following: true
+  screen_name: womensprosoccer
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: 6c6c6c
+  name: AstrobiologyNAI
+  profile_sidebar_fill_color: f8f8f8
+  profile_background_tile: false
+  location: We've got scientists all over
+  created_at: Tue Jun 10 22:49:56 +0000 2008
+  profile_image_url: http://a3.twimg.com/profile_images/55299999/Picture_3_normal.png
+  follow_request_sent: false
+  profile_link_color: 066A9B
+  contributors_enabled: false
+  favourites_count: 2
+  url: http://nai.nasa.gov
+  id: 15078840
+  utc_offset: -28800
+  profile_use_background_image: true
+  followers_count: 1023611
+  lang: en
+  profile_text_color: "000000"
+  protected: false
+  description: "NASA Astrobiology Institute: we study life in the Universe!"
+  geo_enabled: false
+  profile_background_color: "000000"
+  verified: false
+  notifications: false
+  time_zone: Pacific Time (US & Canada)
+  statuses_count: 321
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Mon Jul 19 15:54:19 +0000 2010
+    truncated: false
+    text: "Outer Space, Under Water: http://astrobiology.nasa.gov/articles/outer-space-under-water/ #astrobiology"
+    contributors: 
+    id: 18925803118
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: <a href="http://dev.twitter.com/" rel="nofollow">API</a>
+    in_reply_to_status_id: 
+  friends_count: 7
+  profile_background_image_url: http://a3.twimg.com/profile_background_images/3525073/twitter2.jpg
+  following: true
+  screen_name: AstrobiologyNAI
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: 86A4A6
+  name: Bruce Lowry
+  profile_sidebar_fill_color: A0C5C7
+  profile_background_tile: false
+  location: Palo Alto
+  created_at: Mon May 18 18:26:56 +0000 2009
+  profile_image_url: http://a1.twimg.com/profile_images/257885330/very-small-logo-_letterhead_bigger_normal.jpg
+  follow_request_sent: false
+  profile_link_color: FF3300
+  contributors_enabled: false
+  favourites_count: 0
+  url: http://www.skollfoundation.org
+  id: 40932856
+  utc_offset: -28800
+  profile_use_background_image: true
+  followers_count: 315587
+  lang: en
+  profile_text_color: "333333"
+  protected: false
+  description: From Bruce Lowry, the communications director at the Skoll Foundation. We invest in, connect and celebrate social entrepreneurs to drive large-scale change.
+  geo_enabled: false
+  profile_background_color: "000000"
+  verified: false
+  notifications: false
+  time_zone: Pacific Time (US & Canada)
+  statuses_count: 730
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Tue Jul 20 20:16:37 +0000 2010
+    truncated: false
+    text: "From the Skoll Foundation's community site RT @socialedge: Newsletter: Social Entrepreneurs in Asia - http://eepurl.com/JLr3"
+    contributors: 
+    id: 19019647447
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: <a href="http://www.tweetdeck.com" rel="nofollow">TweetDeck</a>
+    in_reply_to_status_id: 
+  friends_count: 87
+  profile_background_image_url: http://a3.twimg.com/profile_background_images/16843461/twitter-background.jpg
+  following: true
+  screen_name: SkollFoundation
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: "000000"
+  name: Nonprofit Orgs
+  profile_sidebar_fill_color: "666666"
+  profile_background_tile: false
+  location: Springfield, MO
+  created_at: Tue Nov 18 18:35:40 +0000 2008
+  profile_image_url: http://a2.twimg.com/profile_images/628471286/twitterProfilePhoto_normal.jpg
+  follow_request_sent: false
+  profile_link_color: 14c4ff
+  contributors_enabled: false
+  favourites_count: 772
+  url: http://nonprofitorgs.wordpress.com/
+  id: 17467699
+  utc_offset: -25200
+  profile_use_background_image: false
+  followers_count: 373631
+  lang: en
+  profile_text_color: "000000"
+  protected: false
+  description: The mission of this Twitter profile is to serve as a portal to all nonprofit organizations on Twitter [by only following nonprofit organizations].
+  geo_enabled: true
+  profile_background_color: 14c4ff
+  verified: false
+  notifications: false
+  time_zone: Mountain Time (US & Canada)
+  statuses_count: 2514
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Tue Jul 20 20:08:22 +0000 2010
+    truncated: false
+    text: "August 3 Webinar :: How Nonprofits Can Successfully Use LinkedIn and Foursquare: http://bit.ly/cByN45"
+    contributors: 
+    id: 19019197351
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: web
+    in_reply_to_status_id: 
+  friends_count: 26469
+  profile_background_image_url: http://s.twimg.com/a/1279322210/images/themes/theme1/bg.png
+  following: true
+  screen_name: nonprofitorgs
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: 7E75AA
+  name: Ryan Penagos
+  profile_sidebar_fill_color: FFFFFF
+  profile_background_tile: false
+  location: NYC
+  created_at: Tue Jul 10 16:21:11 +0000 2007
+  profile_image_url: http://a2.twimg.com/profile_images/613876378/SAMNEE_Agent_M_avatar_1_normal.jpg
+  follow_request_sent: false
+  profile_link_color: 0000ff
+  contributors_enabled: false
+  favourites_count: 35
+  url: "http://agentmlovestacos.com "
+  id: 7376382
+  utc_offset: -18000
+  profile_use_background_image: true
+  followers_count: 1463921
+  lang: en
+  profile_text_color: "000000"
+  protected: false
+  description: "Editor of Marvel.com. Writer, blogger, lover of tacos, tattoos, comics, video games, pop culture and cute stuff. See also: @Marvel and marvel.com/blogs/Agent_M"
+  geo_enabled: false
+  profile_background_color: "000000"
+  verified: true
+  notifications: false
+  time_zone: Eastern Time (US & Canada)
+  statuses_count: 51942
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Wed Jul 21 10:12:45 +0000 2010
+    truncated: false
+    text: "@Brennanator you forgot the underscore! And the hyphen in Comic-Con! Has @stephenwacker taught you nothing?!"
+    contributors: 
+    id: 19065866344
+    geo: 
+    in_reply_to_user_id: 34522803
+    place: 
+    in_reply_to_screen_name: Brennanator
+    source: <a href="http://mobile.twitter.com" rel="nofollow">Twitter for Android</a>
+    in_reply_to_status_id: 
+  friends_count: 976
+  profile_background_image_url: http://a1.twimg.com/profile_background_images/337292/am.jpg
+  following: true
+  screen_name: Agent_M
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: F2E195
+  name: Giuliana Rancic
+  profile_sidebar_fill_color: FFF7CC
+  profile_background_tile: false
+  location: Los Angeles
+  created_at: Mon Feb 23 19:12:50 +0000 2009
+  profile_image_url: http://a3.twimg.com/profile_images/975582331/giuliana_pic_peach_dress_normal.jpg
+  follow_request_sent: false
+  profile_link_color: FF0000
+  contributors_enabled: false
+  favourites_count: 6
+  url: http://giulianarancic.com
+  id: 21681809
+  utc_offset: -28800
+  profile_use_background_image: true
+  followers_count: 1800805
+  lang: en
+  profile_text_color: 0C3E53
+  protected: false
+  description: TV Host/Wife/Chick
+  geo_enabled: false
+  profile_background_color: BADFCD
+  verified: true
+  notifications: false
+  time_zone: Pacific Time (US & Canada)
+  statuses_count: 2398
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Sun Jul 18 15:12:12 +0000 2010
+    truncated: false
+    text: "Want to become a TV Host?  Come to my seminar next weekend in Chicago!  Few seats left. U can sign up here: http://tinyurl.com/2bamqve"
+    contributors: 
+    id: 18845721377
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: <a href="http://twitterrific.com" rel="nofollow">Twitterrific</a>
+    in_reply_to_status_id: 
+  friends_count: 269
+  profile_background_image_url: http://a3.twimg.com/profile_background_images/63027273/Twitter_mystyle_G_B_GIULIANA.jpg
+  following: true
+  screen_name: GiulianaRancic
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: 99B2B7
+  name: jenna
+  profile_sidebar_fill_color: 7A6A53
+  profile_background_tile: true
+  location: "San Francisco "
+  created_at: Tue Oct 14 15:31:55 +0000 2008
+  profile_image_url: http://a0.twimg.com/profile_images/769738168/2293240394_df17c2777c_normal.jpg
+  follow_request_sent: false
+  profile_link_color: 84AD96
+  contributors_enabled: false
+  favourites_count: 5
+  url: 
+  id: 16739704
+  utc_offset: -28800
+  profile_use_background_image: true
+  followers_count: 318889
+  lang: en
+  profile_text_color: C2BDAE
+  protected: false
+  description: "Alaska to Cali. Baskin Robbins to Twitter. That is my life story...so far.    "
+  geo_enabled: true
+  profile_background_color: 94772B
+  verified: false
+  notifications: false
+  time_zone: Pacific Time (US & Canada)
+  statuses_count: 695
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Wed Jul 21 05:16:20 +0000 2010
+    truncated: false
+    retweeted_status: !map:Hashie::Mash 
+      coordinates: 
+      favorited: false
+      created_at: Wed Jul 21 04:00:07 +0000 2010
+      truncated: false
+      text: "Meet Flipboard: http://www.youtube.com/watch?v=v2vpvEDS00o -- made by the incredible @lonelysandwich"
+      contributors: 
+      id: 19048299979
+      geo: 
+      in_reply_to_user_id: 
+      place: 
+      in_reply_to_screen_name: 
+      source: web
+      in_reply_to_status_id: 
+    text: "RT @flipboard: Meet Flipboard: http://www.youtube.com/watch?v=v2vpvEDS00o -- made by the incredible @lonelysandwich"
+    contributors: 
+    id: 19052811821
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: web
+    in_reply_to_status_id: 
+  friends_count: 265
+  profile_background_image_url: http://a1.twimg.com/profile_background_images/57156824/x42bd28c0929b9851130bc9e5455ad11.jpg
+  following: true
+  screen_name: jennadawn
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: CADCF2
+  name: Kevin Rudd
+  profile_sidebar_fill_color: E3EDFB
+  profile_background_tile: false
+  location: Australia
+  created_at: Fri Oct 17 23:08:00 +0000 2008
+  profile_image_url: http://a3.twimg.com/profile_images/555769631/KevinRuddTwitterProfile_normal.JPG
+  follow_request_sent: false
+  profile_link_color: 004ED9
+  contributors_enabled: false
+  favourites_count: 0
+  url: 
+  id: 16832632
+  utc_offset: 36000
+  profile_use_background_image: true
+  followers_count: 940937
+  lang: en
+  profile_text_color: 5B5B5B
+  protected: false
+  description: "Federal Member for Griffith. Proud father of 3 great kids with my wife Th\xC3\xA9r\xC3\xA8se. Born and raised in country Queensland."
+  geo_enabled: false
+  profile_background_color: "003164"
+  verified: true
+  notifications: false
+  time_zone: Canberra
+  statuses_count: 673
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Mon Jul 19 00:21:08 +0000 2010
+    truncated: false
+    text: Back to being a parent today. I drove Marcus to school. A minor miracle that I still know how to drive. KRudd
+    contributors: 
+    id: 18874537448
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: web
+    in_reply_to_status_id: 
+  friends_count: 229327
+  profile_background_image_url: http://a3.twimg.com/profile_background_images/124653011/rudd_twitter_bg_1.jpg
+  following: true
+  screen_name: KRuddMP
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: C6E2EE
+  name: TwitCause
+  profile_sidebar_fill_color: DAECF4
+  profile_background_tile: false
+  location: San Francisco
+  created_at: Mon Aug 03 18:39:51 +0000 2009
+  profile_image_url: http://a0.twimg.com/profile_images/421548244/TwitCause_Gift_80x80_normal.jpg
+  follow_request_sent: false
+  profile_link_color: 1F98C7
+  contributors_enabled: false
+  favourites_count: 3
+  url: http://www.twitcause.com
+  id: 62586762
+  utc_offset: -28800
+  profile_use_background_image: true
+  followers_count: 550365
+  lang: en
+  profile_text_color: 663B12
+  protected: false
+  description: TwitCause helps nonprofits get discovered on Twitter and enables passionate people to support the causes they care about.
+  geo_enabled: true
+  profile_background_color: C6E2EE
+  verified: false
+  notifications: false
+  time_zone: Pacific Time (US & Canada)
+  statuses_count: 1095
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Tue Jul 20 21:10:50 +0000 2010
+    truncated: false
+    text: "RT@ MSF_USA Donate a lunchtime tweet to #STRVD: sign/RT the petition + help fight malnutrition http://bit.ly/195mill"
+    contributors: 
+    id: 19022633057
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: web
+    in_reply_to_status_id: 
+  friends_count: 346
+  profile_background_image_url: http://a1.twimg.com/profile_background_images/37780966/TwitCause_Twitter_Background_v07_090309.jpg
+  following: true
+  screen_name: TwitCause
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: 87bc44
+  name: Steven Johnson
+  profile_sidebar_fill_color: e0ff92
+  profile_background_tile: false
+  location: "iPhone: 40.662964,-73.980927"
+  created_at: Sun Mar 25 15:42:05 +0000 2007
+  profile_image_url: http://a0.twimg.com/profile_images/34699972/sbjbeach2005
+  follow_request_sent: false
+  profile_link_color: 0000ff
+  contributors_enabled: false
+  favourites_count: 5
+  url: http://www.stevenberlinjohnson.com
+  id: 2182641
+  utc_offset: -18000
+  profile_use_background_image: true
+  followers_count: 1459698
+  lang: en
+  profile_text_color: "000000"
+  protected: false
+  description: Writer. (Six books, most recently Invention of Air.) Web site creator (3 companies, most recently outside.in.) Dad (three boys.)
+  geo_enabled: false
+  profile_background_color: 9ae4e8
+  verified: true
+  notifications: false
+  time_zone: Eastern Time (US & Canada)
+  statuses_count: 989
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Sun Jul 18 07:09:51 +0000 2010
+    truncated: false
+    text: "@pstein211 no!!! I'm at the airport, headed back. Were you here last night? That would have been so much fun."
+    contributors: 
+    id: 18823643635
+    geo: 
+    in_reply_to_user_id: 6322652
+    place: 
+    in_reply_to_screen_name: pstein211
+    source: <a href="http://twitter.com/" rel="nofollow">Twitter for iPhone</a>
+    in_reply_to_status_id: 18822425375
+  friends_count: 81
+  profile_background_image_url: http://s.twimg.com/a/1279322210/images/themes/theme1/bg.png
+  following: true
+  screen_name: stevenbjohnson
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: 87bc44
+  name: Jenna Wortham
+  profile_sidebar_fill_color: e0ff92
+  profile_background_tile: false
+  location: "brooklyn, new york "
+  created_at: Wed Nov 21 23:47:58 +0000 2007
+  profile_image_url: http://a1.twimg.com/profile_images/66712101/IMG_0043_normal.jpg
+  follow_request_sent: false
+  profile_link_color: 0000FF
+  contributors_enabled: false
+  favourites_count: 796
+  url: http://bits.blogs.nytimes.com/
+  id: 10454572
+  utc_offset: -18000
+  profile_use_background_image: false
+  followers_count: 344295
+  lang: en
+  profile_text_color: "000000"
+  protected: false
+  description: "New York Times tech reporter, \xE2\x99\xA5, nerd, hustler. Contact info:  jenna@nytimes.com"
+  geo_enabled: true
+  profile_background_color: B20A4C
+  verified: true
+  notifications: false
+  time_zone: Eastern Time (US & Canada)
+  statuses_count: 2965
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Wed Jul 21 04:01:49 +0000 2010
+    truncated: false
+    text: "@cvvalencia @randizuckerberg @eleanorproctor @tikkers @eqx1979 @caitlinroper - many thx for the kind words about my facebook story. &lt;3"
+    contributors: 
+    id: 19048420386
+    geo: 
+    in_reply_to_user_id: 14604255
+    place: !map:Hashie::Mash 
+      name: Prospect Lefferts Gardens
+      country: The United States of America
+      country_code: US
+      attributes: !map:Hashie::Mash {}
+
+      url: http://api.twitter.com/1/geo/id/f957d93d3b62a40c.json
+      id: f957d93d3b62a40c
+      bounding_box: !map:Hashie::Mash 
+        coordinates: 
+        - - - -73.963088
+            - 40.642854
+          - - -73.947123
+            - 40.642854
+          - - -73.947123
+            - 40.664078
+          - - -73.963088
+            - 40.664078
+        type: Polygon
+      full_name: Prospect Lefferts Gardens, New York
+      place_type: neighborhood
+    in_reply_to_screen_name: cvvalencia
+    source: web
+    in_reply_to_status_id: 18968189835
+  friends_count: 1542
+  profile_background_image_url: http://a1.twimg.com/profile_background_images/2810962/barcelona_graf5.jpg
+  following: true
+  screen_name: jennydeluxe
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: C0DEED
+  name: Mindy Kaling
+  profile_sidebar_fill_color: DDEEF6
+  profile_background_tile: false
+  location: Los Angeles
+  created_at: Tue Mar 10 02:29:28 +0000 2009
+  profile_image_url: http://a0.twimg.com/profile_images/952130864/pink3_normal.jpg
+  follow_request_sent: false
+  profile_link_color: 0084B4
+  contributors_enabled: false
+  favourites_count: 1
+  url: http://twitter.com/mindykaling
+  id: 23544596
+  utc_offset: -28800
+  profile_use_background_image: true
+  followers_count: 1190328
+  lang: en
+  profile_text_color: "333333"
+  protected: false
+  description: writer/performer/shopper
+  geo_enabled: false
+  profile_background_color: C0DEED
+  verified: true
+  notifications: false
+  time_zone: Pacific Time (US & Canada)
+  statuses_count: 1482
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Tue Jul 20 17:15:03 +0000 2010
+    truncated: false
+    text: "I can now visualize what almost every corner and intersection looks like in the Hollywood grid. Superpower? #NightShyamalanMovie"
+    contributors: 
+    id: 19009265796
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: "<a href=\"http://blackberry.com/twitter\" rel=\"nofollow\">Twitter for BlackBerry\xC2\xAE</a>"
+    in_reply_to_status_id: 
+  friends_count: 79
+  profile_background_image_url: http://a3.twimg.com/profile_background_images/48648003/SS-twitterBackground.jpg
+  following: true
+  screen_name: mindykaling
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: 99cc33
+  name: Amazon MP3
+  profile_sidebar_fill_color: ebebeb
+  profile_background_tile: false
+  location: Seattle
+  created_at: Mon May 12 04:02:08 +0000 2008
+  profile_image_url: http://a1.twimg.com/profile_images/340137940/twitteravatar_normal.jpeg
+  follow_request_sent: false
+  profile_link_color: "669933"
+  contributors_enabled: false
+  favourites_count: 27
+  url: http://www.amazonmp3.com
+  id: 14740219
+  utc_offset: -28800
+  profile_use_background_image: true
+  followers_count: 1484145
+  lang: en
+  profile_text_color: "000000"
+  protected: false
+  description: Daily Deals and special sales on DRM-free, play-anywhere music downloads from Amazon. The official Amazon MP3 twitter feed.
+  geo_enabled: false
+  profile_background_color: "000000"
+  verified: false
+  notifications: false
+  time_zone: Pacific Time (US & Canada)
+  statuses_count: 1666
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Tue Jul 20 16:30:01 +0000 2010
+    truncated: false
+    text: "7/20 Daily Deal: David Garrett's brand-new Rock Symphonies. $3.99 today: http://amzn.to/a3UaBG"
+    contributors: 
+    id: 19006254597
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: <a href="http://www.tweetdeck.com" rel="nofollow">TweetDeck</a>
+    in_reply_to_status_id: 
+  friends_count: 580
+  profile_background_image_url: http://a1.twimg.com/profile_background_images/53396456/bg_w_url.gif
+  following: true
+  screen_name: amazonmp3
+- !map:Hashie::Mash 
+  profile_sidebar_border_color: DFDFDF
+  name: David Pakman
+  profile_sidebar_fill_color: F3F3F3
+  profile_background_tile: false
+  location: NYC
+  created_at: Wed Jun 18 14:31:56 +0000 2008
+  profile_image_url: http://a1.twimg.com/profile_images/916662434/DP_Side_for_twitter_normal.jpg
+  follow_request_sent: false
+  profile_link_color: "990000"
+  contributors_enabled: false
+  favourites_count: 1
+  url: http://dpakman.wordpress.com
+  id: 15158441
+  utc_offset: -18000
+  profile_use_background_image: true
+  followers_count: 293970
+  lang: en
+  profile_text_color: "333333"
+  protected: false
+  description: NYC digital media VC at Venrock
+  geo_enabled: false
+  profile_background_color: EBEBEB
+  verified: false
+  notifications: false
+  time_zone: Eastern Time (US & Canada)
+  statuses_count: 1797
+  status: !map:Hashie::Mash 
+    coordinates: 
+    favorited: false
+    created_at: Tue Jul 20 16:36:43 +0000 2010
+    truncated: false
+    text: "Closed-door session at New Music Seminar. #nms (@ Webster Hall w/ 35 others) http://4sq.com/3aQpoi"
+    contributors: 
+    id: 19006709867
+    geo: 
+    in_reply_to_user_id: 
+    place: 
+    in_reply_to_screen_name: 
+    source: <a href="http://foursquare.com" rel="nofollow">foursquare</a>
+    in_reply_to_status_id: 
+  friends_count: 253
+  profile_background_image_url: http://s.twimg.com/a/1278630136/images/themes/theme7/bg.gif
+  following: true
+  screen_name: pakman

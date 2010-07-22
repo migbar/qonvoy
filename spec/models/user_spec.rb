@@ -135,20 +135,43 @@ describe User do
     @user.update_status("the status")
   end
   
+	describe "#twitter_api" do
+    subject { Factory.build(:twitter_user) }
+		let(:twitter_client) { mock("RatingBird") }
+		
+	  it "builds and memoizes the creation of the RatingBird client with the user's oauth_token and oauth_secret " do
+	    RatingBird.should_receive(:client).with(subject.oauth_token, subject.oauth_secret).once.and_return(twitter_client)
+			subject.twitter_api.should == twitter_client
+			subject.twitter_api.should == twitter_client
+	  end
+	end
+	
+	describe "#graph_client" do
+    subject { Factory.build(:twitter_user) }
+		let(:graph_client) { mock("GraphClient") }
+		
+	  it "instantiates and memoizes the graph client" do
+	    GraphClient.should_receive(:new).once.and_return(graph_client)
+			subject.graph_api.should == graph_client
+			subject.graph_api.should == graph_client
+	  end
+	end
+	
   describe "#perform_twitter_update" do
+		let(:twitter_client) {mock("RatingBird", :update => nil)}
+		
     before(:each) do
       @user = Factory.build(:twitter_user)
-      @client = mock(Twitter::Base, :update => nil)
-      RatingBird.stub(:client).and_return(@client)
-    end
+    	@user.stub(:twitter_api => twitter_client)
+		end
     
     it "authorizes the user with the RatingBird Twitter client using the token and secret" do
-      RatingBird.should_receive(:client).with(@user.oauth_token, @user.oauth_secret).and_return(@client)
+			@user.should_receive(:twitter_api).and_return(twitter_client)
       @user.perform_twitter_update("the status")
     end
     
     it "updates the status using the client" do
-      @client.should_receive(:update).with("the status")
+      twitter_client.should_receive(:update).with("the status")
       @user.perform_twitter_update("the status")
     end
   end
@@ -173,5 +196,36 @@ describe User do
     end
     
   end
+
+	describe "#update_social_graph!" do
+		subject {Factory.build(:twitter_user)}
+		let(:twitter_api){mock("twitter_api")}
+		let(:friends) { YAML.load(File.read(File.dirname(__FILE__) + "/../fixtures/friends/hyewyetest1.yml")) }
+		let(:ratingbird_users) { (1..3).map { mock_model(User) } }
+		let(:graph_api) {mock("GraphClient")}
+		
+		before(:each) do
+		  subject.stub(:twitter_api => twitter_api)
+		  subject.stub(:graph_api => graph_api)
+			twitter_api.stub(:friends => friends)
+			User.stub(:find_by_twitter_uid => ratingbird_users)
+			graph_api.stub(:add_or_update_followees)
+		end
+	  
+		it "fetches the twitter friends" do
+	    twitter_api.should_receive(:friends).and_return(friends)
+			subject.update_social_graph!
+	  end
+	
+		it "looks for the Twitter friends which have RatingBird accounts" do
+		  User.should_receive(:find_by_twitter_uid).with(friends.map(&:id)).and_return(ratingbird_users)
+			subject.update_social_graph!
+		end
+		
+		it "updates the RatingBird graph with the Twitter friends that are also in RatingBird" do
+			graph_api.should_receive(:add_or_update_followees).with(subject, ratingbird_users).and_return(true)
+			subject.update_social_graph! 
+		end
+	end
 
 end

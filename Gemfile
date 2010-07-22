@@ -17,6 +17,7 @@ gem "twitter", "0.8.4"
 gem "delayed_job", "~> 2.0.0"
 gem "searchlogic", "2.4.14"
 gem "geokit", "1.5.0"
+gem "json"
 
 group :development do
   # bundler requires these gems in development
