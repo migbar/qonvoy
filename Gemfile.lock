@@ -14,22 +14,22 @@ dependencies:
     version: ">= 0"
     require: []
 
-  searchlogic: 
-    group: 
-    - :default
-    version: = 2.4.14
-  mysql: 
-    group: 
-    - :default
-    version: ">= 0"
-  haml: 
-    group: 
-    - :default
-    version: ~> 3.0.0
   authlogic: 
     group: 
     - :default
     version: = 2.1.3
+  haml: 
+    group: 
+    - :default
+    version: ~> 3.0.0
+  mysql: 
+    group: 
+    - :default
+    version: ">= 0"
+  searchlogic: 
+    group: 
+    - :default
+    version: = 2.4.14
   selenium-webdriver: 
     group: 
     - :cucumber
@@ -38,32 +38,32 @@ dependencies:
     group: 
     - :default
     version: = 0.3.6
-  acts-as-taggable-on: 
+  delayed_job: 
     group: 
     - :default
-    version: = 2.0.6
+    version: ~> 2.0.0
   authlogic-oauth: 
     group: 
     - :default
     version: = 1.0.8
     require: 
     - authlogic_oauth
-  delayed_job: 
+  acts-as-taggable-on: 
     group: 
     - :default
-    version: ~> 2.0.0
+    version: = 2.0.6
   thin: 
     group: 
     - :cucumber
     version: ">= 0"
-  formtastic: 
-    group: 
-    - :default
-    version: = 0.9.7
   geokit: 
     group: 
     - :default
     version: = 1.5.0
+  formtastic: 
+    group: 
+    - :default
+    version: = 0.9.7
   database_cleaner: 
     group: 
     - :cucumber
@@ -90,7 +90,15 @@ dependencies:
     group: 
     - :test
     version: ">= 0"
+  rest-client: 
+    group: 
+    - :default
+    version: = 1.6.0
   json: 
+    group: 
+    - :default
+    version: ">= 0"
+  bundler: 
     group: 
     - :default
     version: ">= 0"
@@ -98,10 +106,6 @@ dependencies:
     group: 
     - :default
     version: = 2.0.3
-  bundler: 
-    group: 
-    - :default
-    version: ">= 0"
   pickle: 
     group: 
     - :cucumber
@@ -248,6 +252,8 @@ specs:
     version: 1.3.2
 - remarkable_rails: 
     version: 3.1.13
+- rest-client: 
+    version: 1.6.0
 - searchlogic: 
     version: 2.4.14
 - settingslogic: 
@@ -258,7 +264,7 @@ specs:
     version: 0.8.4
 - webmock: 
     version: 1.2.2
-hash: 69cd0983240d0d5eb7fe2fc2237d98d592d16b2b
+hash: 8ca1e77e0d81d4000d1e2c6bf0b571e3d17b1502
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org
