@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100420101742) do
+ActiveRecord::Schema.define(:version => 20100727103019) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -138,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20100420101742) do
     t.string   "oauth_secret"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_node_id"
   end
 
   add_index "users", ["oauth_token"], :name => "index_users_on_oauth_token"

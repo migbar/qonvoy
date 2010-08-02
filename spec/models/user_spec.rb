@@ -15,6 +15,7 @@
 #  oauth_secret        :string(255)
 #  created_at          :datetime
 #  updated_at          :datetime
+#  user_node_id        :integer(4)
 #
 
 require 'spec_helper'

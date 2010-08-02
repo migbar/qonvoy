@@ -5,4 +5,6 @@ ActsAsTaggableOn::Tag.find(:all, :joins => :taggings, :conditions => { :taggings
 
 TODO:
 
-*** We are running without Webmock !! (with it Selenium was having issues on ..)
+- implement error handling on GraphAccessor for the Neo4J responses
+
+

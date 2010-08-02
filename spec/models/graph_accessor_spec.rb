@@ -1,7 +1,11 @@
 require 'spec_helper'
 
 describe GraphAccessor do
-	class TestGraphClient; include GraphAccessor; end
+	class TestGraphClient
+		include GraphAccessor
+		
+		node_accessor :restaurant
+	end
 	
 	subject { TestGraphClient.new }
 	let(:nodes_url) { mock("nodes_url") }
@@ -105,20 +109,57 @@ describe GraphAccessor do
 	  subject.create_relationship("fred", "rates", "nobu", create_options)
 	end
 	
-	#update rels goes here ...
-
-	it "#delete_relationship performs a delete request to the relationships_url of the specified node with the specified to_node and rel_name" do
+	it "#update_relationship performs a put request to the relationships url" do
 	  subject.should_receive(:relationships_url).with("fred").and_return(relationships_url)
-		subject.should_receive(:perform_request).with(:delete, relationships_url, {:type => "likes", :to => "haru"})
+	  subject.should_receive(:perform_request).with(:put, relationships_url, {:type => "likes", :to => "nobu", :when => Date.today})
+		subject.update_relationship("fred", "likes", "nobu", { :when => Date.today })
+	end
+
+	it "#delete_relationship calls delete_relationships with a hash containing from, to and type" do
+		subject.should_receive(:delete_relationships).with("fred", [{:type => "likes", :to => "haru"}])
 		subject.delete_relationship("fred", "likes", "haru")
 	end
 	
-	# see graph_accessor_thoughts on bulk operations.
-	# right now the sematics are that you can only supply a from_node and a rel_name(type) and those (OUTBOUND) rels will be deleted 
-	it "#delete_relationship performs a delete request to the relationships_url of the specified node with the specified rel_name" do
+	it "#delete_relationships performs a delete request to the relationships_url of the specified node with the specified rel_name" do
 	  subject.should_receive(:relationships_url).with("fred").and_return(relationships_url)
-		subject.should_receive(:perform_request).with(:delete, relationships_url, :type => "likes")
-		subject.delete_relationships("fred", "likes")
+		subject.should_receive(:perform_request).with(:delete, relationships_url, [{:type => "likes", :to => "haru"}, {:type => "likes", :to => "nobu"}])
+		subject.delete_relationships("fred", [{:type => "likes", :to => "haru"}, {:type => "likes", :to => "nobu"}])
+	end
+
+	describe ".node_accessor" do
+		let(:restaurants) { mock("Restaurants returned by neo4j") }
+		let(:restaurant) { mock("Nobu") }
+		
+		describe "index accessor" do
+		  it "fetches the nodes by type" do
+				subject.should_receive(:get_nodes).with(:type => "restaurant").and_return(restaurants)
+		    subject.get_restaurant_nodes.should == restaurants
+		  end
+		
+			it "fetches the nodes by type with options" do
+				subject.should_receive(:get_nodes).with(:type => "restaurant", :active_record_id => 42).and_return(restaurants)
+		    subject.get_restaurant_nodes(:active_record_id => 42).should == restaurants
+		  end
+		end
+	
+		describe "create action" do
+	  	it "creates a node" do
+	  	  subject.should_receive(:create_node).with(:type => "restaurant", :name => "nobu").and_return(restaurant)
+				subject.create_restaurant_node("nobu").should == restaurant
+	  	end
+	
+			it "creates a node with options" do
+	  	  subject.should_receive(:create_node).with(:type => "restaurant", :name => "nobu", :stars => 5).and_return(restaurant)
+				subject.create_restaurant_node("nobu", :stars => 5).should == restaurant
+	  	end
+		end
+		
+		describe "update action" do
+		  it "updates a node" do
+		    subject.should_receive(:update_node).with("1234", :name => "nobu next door")
+	  	  subject.update_restaurant_node("1234", :name => "nobu next door")
+		  end
+		end
 	end
 end
 

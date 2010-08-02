@@ -15,8 +15,9 @@ module GraphAccessor
 			# - or - 
 			# graph.api.get_restaurant_nodes(:accepts_credit_cards => "true")
 			#
-			define_method(:"get_#{node_type}_nodes") do |params|
-				get_nodes(params.merge(:type => node_type))
+			define_method(:"get_#{node_type}_nodes") do |*args|
+				params = args.extract_options!
+				get_nodes(params.merge(:type => node_type.to_s))
 	    end
 	
 			# CREATE
@@ -29,7 +30,7 @@ module GraphAccessor
 	    define_method(:"create_#{node_type}_node") do |*args|
 				params = args.extract_options!
 				node_name = *args # enforces node_name to be present
-				create_node(params.merge(:type => node_type, :name => node_name))
+				create_node(params.merge(:type => node_type.to_s, :name => node_name))
 	    end
 	
 			# UPDATE
@@ -118,16 +119,16 @@ module GraphAccessor
 		perform_request(:post, relationships_url(from_node), params.merge(:type => rel_name, :to => to_node))
 	end
 	
-	def update_relationship(from_node, to_node, rel_name, options={})
-		perform_request(:put, relationships_url(from_node), options.merge(:to => to_node.node_id, :type => rel_name, :when => Time.now.to_s))
+	def update_relationship(from_node, rel_name, to_node, params)
+		perform_request(:put, relationships_url(from_node), params.merge(:to => to_node, :type => rel_name))
 	end
 	
 	def delete_relationship(from_node, rel_name, to_node)
-		perform_request(:delete, relationships_url(from_node), :type => rel_name, :to => to_node)		
+		delete_relationships(from_node, [{:to => to_node, :type => rel_name}])
 	end
 	
-	def delete_relationships(from_node, rel_name)
-		perform_request(:delete, relationships_url(from_node), :type => rel_name)		
+	def delete_relationships(from_node, params)
+		perform_request(:delete, relationships_url(from_node), params)		
 	end
 
 	
