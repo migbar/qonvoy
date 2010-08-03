@@ -29,6 +29,10 @@ describe User do
                      :type => :string
   
   should_validate_presence_of :screen_name
+
+	before(:each) do
+	  UserNode.stub(:create => mock_model(UserNode))
+	end
   
   describe "associations" do
     should_have_many :statuses
@@ -44,7 +48,9 @@ describe User do
   end
   
   it "is valid as a twitter user" do
-    user = Factory.create(:twitter_user)
+    user = Factory.build(:twitter_user)
+		user.stub(:create_user_node)
+		user.save
     user.should_not be_new_record
   end
   
@@ -187,12 +193,17 @@ describe User do
     end
     
     describe "##{group}=" do
-      subject { Factory.create(:twitter_user) }
-      it "creates #{group.pluralize} associated with the user from a comma separated list" do
+      subject { Factory.build(:twitter_user) }
+
+			before(:each) do
+			  subject.stub(:create_user_node)
+				subject.save
+			end
+			
+	    it "creates #{group.pluralize} associated with the user from a comma separated list" do
         subject.send(:"#{group}=", "foo, bar, baz")
         subject.save
         subject.send(group.pluralize).map(&:name).should include(*%w[foo bar baz])
-        
       end
     end
     
@@ -227,6 +238,30 @@ describe User do
 			graph_api.should_receive(:add_or_update_followees).with(subject, ratingbird_users).and_return(true)
 			subject.update_social_graph! 
 		end
+	end 
+	
+	describe "#ensure_user_node" do
+		subject{ Factory.build(:twitter_user) }
+		let(:node_attributes){ { :ar_id => "42" } }
+		let(:user_node){ mock_model( UserNode ) }
+		
+		before(:each) do
+		  subject.stub(:node_creation_attributes => node_attributes)
+			UserNode.stub(:create => user_node)
+		end
+		
+	  it "calls create on UserNode with the relevant attributes " do
+	    subject.should_receive(:create_user_node).with(node_attributes).and_return(user_node)
+			subject.save!
+			subject.reload.user_node_id.should == user_node.id
+	  end
 	end
-
+	
+	describe "#node_creation_attributes" do
+		subject { Factory.create( :twitter_user ) }
+		
+	  it "returns a hash with the attributes to build a new UserNode" do
+	    subject.node_creation_attributes.should == { :ar_id => subject.id }
+	  end
+	end
 end

@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   
   acts_as_authentic
 
-	after_save :ensure_user_node
+	after_create :ensure_user_node
   
   INTEREST_GROUPS = %w[cuisine feature neighborhood dish_type]
   
@@ -104,37 +104,28 @@ class User < ActiveRecord::Base
 		@twitter_api ||= RatingBird.client(oauth_token, oauth_secret)
 	end
 
-	
-	# def save_belongs_to_association(arg)
-	# 	# puts "arg inspect: #{arg.inspect}"
-	# 	# assoc = association_instance_get(arg.name)
-	# 	# puts "association_instance_get(arg.name): #{assoc}"
-	# 	if (assoc = association_instance_get(arg.name))
-	# 		hack_destroyed_method(assoc) {false}
-	# 	end
-	# 	super arg
-	# end
-	# 
-	#   def hack_destroyed_method(receiver, &block)
-	#     receiver.class.send(:define_method, :destroyed?, &block)
-	#   end
+	def node_creation_attributes
+		{ :ar_id => id }
+	end
 
   private
 
 		def ensure_user_node
 			# make sure that the cuisine, neighborhood, feature, dish_type nodes
 			# that this user is associated with are there
-			if user_node_id.blank?
-				result = UserNode.create(node_creation_attributes) 
-				self.user_node_id = result.id
-				save!
-			end
+			# result = UserNode.create(node_creation_attributes) 
+			# self.user_node_id = result.id
+			self.user_node = create_user_node(node_creation_attributes)
+			# Hack Alert !
+			# We don't want to trigger the OAuth validation on the nested save.
+			# So we save the old controller, nil it out so that the OAuth code wont run,
+			# then put it back after our save has completed.
+			controller = session_class.controller 
+			session_class.controller = nil
+			save!
+			session_class.controller = controller
 		end
-		
-		def node_creation_attributes
-			{:ar_id => id, :twitter_uid => twitter_uid}
-		end
-		
+
     def authenticate_with_oauth
       super # oauth_token is set
       populate_oauth_user if twitter_uid.blank?
