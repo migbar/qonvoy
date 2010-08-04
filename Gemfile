@@ -48,5 +48,6 @@ end
 group :cucumber, :test do
   gem "factory_girl", :require => false
   gem "rspec-rails"
+	gem "rspec"
 	gem "webmock", "1.2.2"
 end

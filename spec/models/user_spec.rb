@@ -220,7 +220,7 @@ describe User do
 		  subject.stub(:twitter_api => twitter_api)
 		  subject.stub(:graph_api => graph_api)
 			twitter_api.stub(:friends => friends)
-			User.stub(:find_by_twitter_uid => ratingbird_users)
+			User.stub(:find_all_by_twitter_uid => ratingbird_users)
 			graph_api.stub(:add_or_update_followees)
 		end
 	  
@@ -230,7 +230,7 @@ describe User do
 	  end
 	
 		it "looks for the Twitter friends which have RatingBird accounts" do
-		  User.should_receive(:find_by_twitter_uid).with(friends.map(&:id)).and_return(ratingbird_users)
+		  User.should_receive(:find_all_by_twitter_uid).with(friends.map(&:id)).and_return(ratingbird_users)
 			subject.update_social_graph!
 		end
 		

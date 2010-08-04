@@ -58,12 +58,11 @@ Given /^a Twitter user "([^\"]*)" registered with Qonvoy$/ do |name|
 end
 
 Given /^the following Twitter users are registered with RatingBird$/ do |table|
-  table.rows.each do |row|
+  table.raw.each do |row|
   	twitter_screen_name = row[0]
 			Given %Q{a Twitter user "#{twitter_screen_name}" registered with Qonvoy}
   end
 end
-
 
 Given /^a Twitter user that denies access to Qonvoy$/ do
   UserSession.class_eval do
@@ -127,6 +126,6 @@ When /^I click the first link in the reply$/ do
   visit link
 end
 
-Given /^"([^"]*)" is following the following Twitter users:$/ do |twitter_name, users_table|
-  stub_twitter_followees(twitter_name, users_table.rows.flatten)
+Given /^"([^\"]*)" is following the following Twitter users:$/ do |twitter_name, users_table|
+  stub_twitter_followees(twitter_name, users_table.raw.flatten)
 end

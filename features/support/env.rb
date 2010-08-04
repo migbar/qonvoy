@@ -75,3 +75,5 @@ end
 World(ActionView::Helpers::RecordIdentificationHelper)
 World(ActionView::Helpers::UrlHelper)
 World(Authlogic::TestCase)
+
+require 'spec/stubs/cucumber'

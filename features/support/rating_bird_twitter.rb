@@ -25,7 +25,23 @@ module RatingBirdTwitter
   end
 
 	def stub_twitter_followees(screen_name, twitter_users)
-		# Stub out the Twitter response using webmock
+		twitter_user = User.find_by_screen_name(screen_name)
+		stubbed_twitter_users[screen_name] = twitter_user
+		
+		list_of_friends_return_by_twitter = twitter_users.map { |sn|
+			uid = User.find_by_screen_name(sn).try(:twitter_uid) || mock_model(User).id
+			Hashie::Mash.new(:id => uid, :screen_name => sn)
+		}
+		
+		twitter_user.stub_chain(:twitter_api, :friends).and_return(list_of_friends_return_by_twitter)
+	end
+	
+	def find_stubbed_twitter_user(screen_name)
+		stubbed_twitter_users[screen_name]
+	end
+	
+	def stubbed_twitter_users
+		@stubbed_twitter_users ||= {}
 	end
 end
 

@@ -15,9 +15,9 @@ Scenario: updating graph from Twitter
      | Charlie |
      | Dave    |
       
-    When the social graph is updated for "twitter_guy"
-    Then "twitter_guy" should following these RatingBird users:
-    | adam   |
-    | barack |
+  When the social graph is updated for "twitter_guy"
+  Then "twitter_guy" should have nodes with follows on these RatingBird users:
+     | adam   |
+     | barack |
 
   

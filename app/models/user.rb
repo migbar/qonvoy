@@ -21,7 +21,7 @@
 class User < ActiveRecord::Base
   include ActionController::UrlWriter
 
-	belongs_to :user_node
+	belongs_to :user_node, :class_name => "Graph::UserNode"
   
   acts_as_authentic
 
@@ -92,7 +92,9 @@ class User < ActiveRecord::Base
   end
 	
 	def update_social_graph!
-		rating_bird_users = User.find_by_twitter_uid(twitter_api.friends.map(&:id))
+		rating_bird_users = User.find_all_by_twitter_uid(twitter_api.friends.map(&:id))
+		user_node.update_follows(rating_bird_users)
+		
 		graph_api.add_or_update_followees(self, rating_bird_users)
 	end
 	
