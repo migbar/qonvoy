@@ -94,8 +94,7 @@ class User < ActiveRecord::Base
 	def update_social_graph!
 		rating_bird_users = User.find_all_by_twitter_uid(twitter_api.friends.map(&:id))
 		user_node.update_follows(rating_bird_users)
-		
-		graph_api.add_or_update_followees(self, rating_bird_users)
+		# graph_api.add_or_update_followees(self, rating_bird_users)
 	end
 	
 	def graph_api

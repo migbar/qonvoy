@@ -1,5 +1,5 @@
 class Graph::UserNode < ActiveResource::Base
-	self.site = "http://localhost:8988/n/"
+	self.site = Settings.node_graph_root
 	self.element_name = "user"	
 	self.format = :json
 	set_primary_key "node_id"

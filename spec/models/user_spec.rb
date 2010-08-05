@@ -31,7 +31,7 @@ describe User do
   should_validate_presence_of :screen_name
 
 	before(:each) do
-	  UserNode.stub(:create => mock_model(UserNode))
+	  Graph::UserNode.stub(:create => mock_model(Graph::UserNode))
 	end
   
   describe "associations" do
@@ -214,14 +214,12 @@ describe User do
 		let(:twitter_api){mock("twitter_api")}
 		let(:friends) { YAML.load(File.read(File.dirname(__FILE__) + "/../fixtures/friends/hyewyetest1.yml")) }
 		let(:ratingbird_users) { (1..3).map { mock_model(User) } }
-		let(:graph_api) {mock("GraphClient")}
+		let(:user_node) { mock_model(Graph::UserNode, :update_follows => nil) }
 		
 		before(:each) do
-		  subject.stub(:twitter_api => twitter_api)
-		  subject.stub(:graph_api => graph_api)
+		  subject.stub(:twitter_api => twitter_api, :user_node => user_node)
 			twitter_api.stub(:friends => friends)
 			User.stub(:find_all_by_twitter_uid => ratingbird_users)
-			graph_api.stub(:add_or_update_followees)
 		end
 	  
 		it "fetches the twitter friends" do
@@ -235,7 +233,7 @@ describe User do
 		end
 		
 		it "updates the RatingBird graph with the Twitter friends that are also in RatingBird" do
-			graph_api.should_receive(:add_or_update_followees).with(subject, ratingbird_users).and_return(true)
+			user_node.should_receive(:update_follows).with(ratingbird_users)
 			subject.update_social_graph! 
 		end
 	end 
@@ -243,14 +241,14 @@ describe User do
 	describe "#ensure_user_node" do
 		subject{ Factory.build(:twitter_user) }
 		let(:node_attributes){ { :ar_id => "42" } }
-		let(:user_node){ mock_model( UserNode ) }
+		let(:user_node){ mock_model( Graph::UserNode ) }
 		
 		before(:each) do
 		  subject.stub(:node_creation_attributes => node_attributes)
-			UserNode.stub(:create => user_node)
+			Graph::UserNode.stub(:create => user_node)
 		end
 		
-	  it "calls create on UserNode with the relevant attributes " do
+	  it "calls create on Graph::UserNode with the relevant attributes " do
 	    subject.should_receive(:create_user_node).with(node_attributes).and_return(user_node)
 			subject.save!
 			subject.reload.user_node_id.should == user_node.id
@@ -260,7 +258,7 @@ describe User do
 	describe "#node_creation_attributes" do
 		subject { Factory.create( :twitter_user ) }
 		
-	  it "returns a hash with the attributes to build a new UserNode" do
+	  it "returns a hash with the attributes to build a new Graph::UserNode" do
 	    subject.node_creation_attributes.should == { :ar_id => subject.id }
 	  end
 	end

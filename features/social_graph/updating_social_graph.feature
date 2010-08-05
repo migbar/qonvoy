@@ -12,8 +12,8 @@ Scenario: updating graph from Twitter
    And "twitter_guy" is following the following Twitter users:
      | adam    |
      | barack  |
-     | Charlie |
-     | Dave    |
+     | charlie |
+     | dave    |
       
   When the social graph is updated for "twitter_guy"
   Then "twitter_guy" should have nodes with follows on these RatingBird users:
