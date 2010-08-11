@@ -6,4 +6,8 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :statuses, :only => [:edit, :update], :member => { :preview => :put }
   map.resource :user_session
+
+	map.namespace :admin do |admin|
+		admin.resources :graph_nodes
+	end
 end

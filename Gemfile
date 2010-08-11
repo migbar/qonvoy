@@ -23,10 +23,12 @@ gem "json-jruby", ">= 1.4.1"
 gem "rest-client", "1.6.0"
 gem "jruby-openssl" 
 gem "nokogiri", "1.4.3.1"
+gem "neo4j", "0.4.4"
 
 group :development do
   # bundler requires these gems in development
   # gem "rails-footnotes"
+	gem "mongrel", :require => false
 	gem "annotate", :require => false
 	gem "launchy", :require => false
 end

@@ -20,8 +20,6 @@
 
 class User < ActiveRecord::Base
   include ActionController::UrlWriter
-
-	belongs_to :user_node, :class_name => "Graph::UserNode"
   
   acts_as_authentic
 
@@ -112,11 +110,15 @@ class User < ActiveRecord::Base
   private
 
 		def ensure_user_node
+			Neo4j::Transaction.run do
+				self.user_node_id = Graph::UserNode.new(node_creation_attributes)
+			end
+			
 			# make sure that the cuisine, neighborhood, feature, dish_type nodes
 			# that this user is associated with are there
-			# result = UserNode.create(node_creation_attributes) 
-			# self.user_node_id = result.id
-			self.user_node = create_user_node(node_creation_attributes)
+			
+			# self.user_node = create_user_node(node_creation_attributes)
+			
 			# Hack Alert !
 			# We don't want to trigger the OAuth validation on the nested save.
 			# So we save the old controller, nil it out so that the OAuth code wont run,

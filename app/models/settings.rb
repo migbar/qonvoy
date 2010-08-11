@@ -4,7 +4,7 @@ class Settings < Settingslogic
 
 	class << self
 		def node_graph_root
-			File.join(graph_db_root, 'n') + '/'
+			graph_db_root.gsub(":rails_root", Rails.root).gsub(":rails_env", Rails.env)
 		end
 	end
 end

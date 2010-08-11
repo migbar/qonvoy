@@ -1,16 +1,11 @@
-class Graph::UserNode < ActiveResource::Base
-	self.site = Settings.node_graph_root
-	self.element_name = "user"	
-	self.format = :json
-	set_primary_key "node_id"
-
-	# Hack to get around rails bug - see rails ticket:
-	# https://rails.lighthouseapp.com/projects/8994/tickets/3527-undefined-method-destroyed-for-activerecordassociationsbelongstoassociation
-	def destroyed?
-		false
-	end
+class Graph::UserNode
+	include Neo4j::NodeMixin
 	
 	def update_follows(friends)
+		return true
+		
+		# PENDING
+		
 		# 1. fetch all existing follows
 		# 2. create new follows for new friends
 		# 3. update old follows for old friends
@@ -29,6 +24,9 @@ class Graph::UserNode < ActiveResource::Base
 	end
 	
 	def follows
+		return []
+		
+		# PENDING
 		@follows ||= Follow.find(:all, :from => self)
 	end
 end
