@@ -1,9 +1,10 @@
 source :gemcutter
 # bundler requires these gems in all environments
-# gem "nokogiri", "1.4.2"
+
 # gem "geokit"
 gem "rails", "~> 2.3.8"
-gem "mysql"
+gem "activerecord-jdbcmysql-adapter"
+gem "jdbc-mysql"
 gem "haml", "~> 3.0.0"
 gem "bundler"
 gem "authlogic", "2.1.3"
@@ -17,8 +18,11 @@ gem "twitter", "0.8.4"
 gem "delayed_job", "~> 2.0.0"
 gem "searchlogic", "2.4.14"
 gem "geokit", "1.5.0"
-gem "json"
+# gem "json"
+gem "json-jruby", ">= 1.4.1"
 gem "rest-client", "1.6.0"
+gem "jruby-openssl" 
+gem "nokogiri", "1.4.3.1"
 
 group :development do
   # bundler requires these gems in development
@@ -40,7 +44,7 @@ group :cucumber do
   gem "database_cleaner"
   gem "pickle"
   gem "capybara", :require => false
-	gem "thin"
+	# gem "thin"
 	gem "selenium-webdriver", "0.0.23"
 	
 end
