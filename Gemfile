@@ -23,7 +23,7 @@ gem "json-jruby", ">= 1.4.1"
 gem "rest-client", "1.6.0"
 gem "jruby-openssl" 
 gem "nokogiri", "1.4.3.1"
-gem "neo4j", "0.4.4"
+gem "neo4j", "0.4.5"
 
 group :development do
   # bundler requires these gems in development
@@ -55,5 +55,5 @@ group :cucumber, :test do
   gem "factory_girl", :require => false
   gem "rspec-rails"
 	gem "rspec"
-	gem "webmock", "1.2.2"
+	gem "webmock", "1.3.4"
 end

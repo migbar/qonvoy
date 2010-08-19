@@ -1,5 +1,5 @@
 --- 
-hash: 50d4d115aa08b180fbd3287ffcd356c9d2131411
+hash: 5fc591483b64b17b14037ab27942510850fbbb89
 sources: 
   - Git: 
       require: authlogic_oauth
@@ -95,7 +95,7 @@ specs:
   - geokit: 
       version: 1.5.0
   - haml: 
-      version: 3.0.16
+      version: 3.0.17
   - hashie: 
       version: 0.1.8
   - hoptoad_notifier: 
@@ -113,21 +113,23 @@ specs:
   - jruby-openssl: 
       version: 0.7.1
   - json: 
-      version: 1.4.5
+      version: 1.4.6
   - json-jruby: 
-      version: 1.4.5
+      version: 1.4.6
   - launchy: 
       version: 0.3.7
   - mongrel: 
       version: 1.1.5
   - neo4j: 
-      version: 0.4.4
+      version: 0.4.5
   - ruby-hmac: 
       version: 0.4.0
   - oauth: 
       version: 0.3.6
+  - yard: 
+      version: 0.5.8
   - pickle: 
-      version: 0.3.4
+      version: 0.3.5
   - rails: 
       version: 2.3.8
   - remarkable: 
@@ -147,7 +149,7 @@ specs:
   - twitter: 
       version: 0.8.4
   - webmock: 
-      version: 1.2.2
+      version: 1.3.4
 dependencies: 
   rails: 
     version: ~> 2.3.8
@@ -232,7 +234,7 @@ dependencies:
     group: 
       - :default
   neo4j: 
-    version: = 0.4.4
+    version: = 0.4.5
     group: 
       - :default
   mongrel: 
@@ -307,7 +309,7 @@ dependencies:
       - :cucumber
       - :test
   webmock: 
-    version: = 1.2.2
+    version: = 1.3.4
     group: 
       - :cucumber
       - :test

@@ -8,8 +8,16 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
-  
+
+	# around_filter :neo4j_transaction
+
   private
+		def neo4j_transaction
+			Neo4j::Transaction.run do
+				yield
+			end
+		end
+
     def current_user_session
       @current_user_session ||= UserSession.find
     end

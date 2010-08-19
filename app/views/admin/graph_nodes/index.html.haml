@@ -1,4 +1,10 @@
 - @nodes.each do |node|
   %div
-    ID:
-    = h node.id
+    NODE:
+    = h node
+    / JSON:
+    / = h node.methods.sort.inspect
+    / ID:
+    / = h node.id
+    / NAME:
+    / = h node.to_json[:name]

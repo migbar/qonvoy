@@ -3,7 +3,7 @@ class Admin::GraphNodesController < ApplicationController
 	
 	def index
 		@nodes = []
-		Neo4j.all_nodes {|n| @nodes << n}
+		Neo4j.all_nodes {|n| puts "node is #{n} - coll is #{@nodes}"; @nodes << n.to_hash}
 	end
 
 private
@@ -12,4 +12,7 @@ private
     yield
     Neo4j::Transaction.finish
   end
+
+
+
 end

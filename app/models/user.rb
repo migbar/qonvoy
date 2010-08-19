@@ -104,14 +104,22 @@ class User < ActiveRecord::Base
 	end
 
 	def node_creation_attributes
-		{ :ar_id => id }
+		{ :user_id => id }
+	end
+	
+	def user_node
+		Neo4j.load_node(user_node_id)
+	end
+	
+	def follows
+		@follows ||= User.find(user_node.follows.map(&:user_id))
 	end
 
   private
 
 		def ensure_user_node
 			Neo4j::Transaction.run do
-				self.user_node_id = Graph::UserNode.new(node_creation_attributes)
+				self.user_node_id = Graph::UserNode.new(node_creation_attributes).neo_id
 			end
 			
 			# make sure that the cuisine, neighborhood, feature, dish_type nodes

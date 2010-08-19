@@ -240,26 +240,58 @@ describe User do
 	
 	describe "#ensure_user_node" do
 		subject{ Factory.build(:twitter_user) }
-		let(:node_attributes){ { :ar_id => "42" } }
-		let(:user_node){ mock_model( Graph::UserNode ) }
+		let(:node_attributes){ { :user_id => "42" } }
+		let(:user_node){ mock( Graph::UserNode, :neo_id => 42 ) }
 		
 		before(:each) do
 		  subject.stub(:node_creation_attributes => node_attributes)
-			Graph::UserNode.stub(:create => user_node)
 		end
 		
 	  it "calls create on Graph::UserNode with the relevant attributes " do
-	    subject.should_receive(:create_user_node).with(node_attributes).and_return(user_node)
+			Graph::UserNode.should_receive(:new).with(node_attributes).and_return(user_node)
 			subject.save!
-			subject.reload.user_node_id.should == user_node.id
+			subject.reload.user_node_id.should == user_node.neo_id
 	  end
+	end
+	
+	describe "#user_node" do
+	  subject{ Factory.build(:twitter_user, :user_node_id => 42) }
+		let(:user_node){ mock( Graph::UserNode ) }
+	
+		it "returns the user node associated with this user" do
+			Neo4j.should_receive(:load_node).with(42).and_return(user_node)
+		  subject.user_node.should == user_node
+		end
 	end
 	
 	describe "#node_creation_attributes" do
 		subject { Factory.create( :twitter_user ) }
 		
 	  it "returns a hash with the attributes to build a new Graph::UserNode" do
-	    subject.node_creation_attributes.should == { :ar_id => subject.id }
+	    subject.node_creation_attributes.should == { :user_id => subject.id }
 	  end
+	end
+	
+	describe "#follows" do
+		subject { Factory.build( :twitter_user ) }
+		let(:user_node){ mock( Graph::UserNode, :follows => follows ) }
+		let(:follows){ [ mock( Graph::UserNode, :user_id => 42 ) ] }
+		let(:users){ [ mock_model( User ) ] }
+		
+		before(:each) do
+		  subject.should_receive(:user_node).and_return(user_node)
+			User.stub(:find).and_return(users)
+		end
+		
+	  it "fetches the user nodes for the follows relationship" do
+			user_node.should_receive(:follows).and_return(follows)
+			subject.follows
+	  end
+	
+		it "finds the users with the user ids from the nodes" do
+		  User.should_receive(:find).with( [42] ).once.and_return(users)
+			subject.follows.should == users
+			subject.follows.should == users
+		end
 	end
 end
