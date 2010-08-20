@@ -30,4 +30,11 @@ class Graph::UserNode
 	def add_follows(user)
 		follows << Neo4j.load_node(user.user_node_id)
 	end
+	
+	def to_hash
+		{
+			:user_id => user_id,
+			:neo_id => neo_id
+		}
+	end
 end

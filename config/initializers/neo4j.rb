@@ -1,1 +1,22 @@
 Neo4j::Config[:storage_path] = Settings.node_graph_root
+
+
+org.neo4j.graphdb.Node.java_class.ruby_class.class_eval do 
+
+  def id
+    getId
+  end
+
+  def to_hash
+    extra_values = {:node_id => self.getId, :kind => 'Node'}
+    properties.merge extra_values
+  end
+
+	def properties
+    properties = {}
+    propertyKeys.each do |property|
+      properties[property] = self[property]
+    end
+    properties
+  end
+end
