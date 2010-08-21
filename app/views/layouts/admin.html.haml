@@ -1,0 +1,27 @@
+!!!
+%html{html_attrs}
+  %head
+    = title_tag
+    %meta{"http-equiv"=>"Content-type", :content=>"text/html; charset=utf-8"}
+    = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'buttons.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'print.css', :media => 'print'
+    /[if lt IE 8]
+      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
+    /[if lt IE 7]
+      = stylesheet_link_tag 'ie6.css', :media => 'screen, projection'
+    = yield(:head)
+  %body
+    .paper
+
+      .sheet
+        #header
+          = render "admin/shared/header"
+        #main-content
+          - if show_title?
+            %h2= h yield(:title)
+          = render "shared/flash", :flash => flash
+          = yield
+        
+      .footer
+        = render "admin/shared/footer"

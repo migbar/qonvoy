@@ -1,5 +1,5 @@
 --- 
-hash: 5fc591483b64b17b14037ab27942510850fbbb89
+hash: 3f0440b35c8b94203ca4da7c76f933c476f62d9a
 sources: 
   - Git: 
       require: authlogic_oauth
@@ -47,7 +47,7 @@ specs:
   - bundler: 
       version: 0.9.26
   - culerity: 
-      version: 0.2.10
+      version: 0.2.12
   - mime-types: 
       version: "1.16"
   - weakling: 
@@ -129,7 +129,7 @@ specs:
   - yard: 
       version: 0.5.8
   - pickle: 
-      version: 0.3.5
+      version: 0.4.1
   - rails: 
       version: 2.3.8
   - remarkable: 
@@ -313,3 +313,5 @@ dependencies:
     group: 
       - :cucumber
       - :test
+    require: []
+

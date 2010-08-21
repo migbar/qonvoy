@@ -22,5 +22,6 @@ config.action_controller.allow_forgery_protection    = false
 config.action_mailer.delivery_method = :test
 
 config.after_initialize do
-  WebMock.disable_net_connect!(:allow_localhost => true)
+	# require "webmock"
+  # WebMock.disable_net_connect!(:allow_localhost => true)
 end

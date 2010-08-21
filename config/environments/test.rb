@@ -28,5 +28,6 @@ config.action_mailer.delivery_method = :test
 # config.active_record.schema_format = :sql
 
 config.after_initialize do
+	require "webmock"
   WebMock.disable_net_connect!(:allow_localhost => true)
 end

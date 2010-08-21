@@ -14,7 +14,7 @@ Feature: Adding interests
      Then I should be on my profile page
       And I should see "Specify your interests"
   
-  @javascript @disabled
+  @javascript @wip
   Scenario: Filling in my interests on the profile page
     Given I am a logged in as the Twitter user "twitter_guy"
       And I am on my profile page
@@ -31,4 +31,3 @@ Feature: Adding interests
         | feature      | Late, Fireplace |
         | neighborhood | UES, LWS             |
         | dish_type    | pasta, dessert       |
-

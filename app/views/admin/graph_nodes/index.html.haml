@@ -1,10 +1,40 @@
-- @nodes.each do |node|
-  %div
-    NODE:
-    = h node
-    / JSON:
-    / = h node.methods.sort.inspect
-    / ID:
-    / = h node.id
-    / NAME:
-    / = h node.to_json[:name]
+/ - @nodes.each do |node|
+/   %div
+/     NODE:
+/     = h node
+
+
+/ JSON:
+/ = h node.methods.sort.inspect
+/ ID:
+/ = h node.id
+/ NAME:
+/ = h node.to_json[:name]
+#content
+  #header-cont
+    %ul.version
+      %li
+        Neo4j DB VERSION: 
+        %span.version-number= @stats[:version]      
+      %li
+        Lucene path :  
+        %span.lucene-path=@stats[:lucene_path]
+      %li
+        Store Lucene on file :  
+        %span.lucene-store-on-file=@stats[:lucene_store_on_file]
+
+    #path
+      Path to the Neo4j DB : 
+      %span.neo4j-path= @stats[:path]
+    #counts
+      Node count in the Neo4j DB : 
+      %span.node-count= @stats[:nodes]
+  #nodes
+  - @nodes.each_slice(5) do |row|
+    .node-row
+      - row.each_with_index do |node, index|
+        %span{ :class => "#{if index == 4; 'node-box last-box'; else 'node-box';end}" }
+          - node.stringify_keys!.keys.sort.each do  |key|
+            .node-entry
+              %span.node-key= h key.to_s
+              %span.node-value= h node[key].to_s

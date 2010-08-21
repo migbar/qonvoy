@@ -30,6 +30,12 @@ end
 Then /^my interest lists should be:$/ do |table|
 	table.hashes.each do |hash|
 		interest, value = hash['interest'], hash['list']
-		current_user.send("#{interest}_list").should == value.split(",").map(&:strip)
+		expected = value.split(",").map(&:strip).sort
+		
+		current_user.send("#{interest}_list").sort.should == expected
+		
+		rel = verb_for(:user, interest)
+		
+		current_user.user_node.send(rel).map(&:name).sort.should == expected
 	end
 end
