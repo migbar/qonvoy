@@ -1,0 +1,37 @@
+html {
+  background-color: $grey-background;
+}
+
+.paper {	
+	.title{margin: 0 auto;overflow: hidden;width: 950px;padding-bottom: 15px;font-size: 52px;font-weight: bold;text-align: center;}
+	.sheet {
+	  @include container; 
+		color: #666666;
+		background-color: #FFFFFF;
+		background: url(../images/page.jpg);
+	  background: url(../images/page-bottom_960.png) no-repeat bottom center, url(../images/page-top.jpg) repeat-x, url(../images/page.jpg);
+	  min-height: 400px;
+	  background: url(../images/page-bottom_960.png) no-repeat bottom center, url(../images/page-top.jpg) repeat-x, url(../images/page.jpg);
+
+		-webkit-box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1), 
+												1px -1px 0 rgba(0, 0, 0, 0.05), 
+												0 1px 0 rgba(0, 0, 0, 0.1), 
+												-1px 0 1px rgba(0, 0, 0, 0.1), 
+												-1px -1px 0 rgba(0, 0, 0, 0.05), 
+												0 2px 1px rgba(0, 0, 0, 0.15);
+
+	  -moz-box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1), 
+										1px -1px 0 rgba(0, 0, 0, 0.05), 
+										0 1px 0 rgba(0, 0, 0, 0.1), 
+										-1px 0 1px rgba(0, 0, 0, 0.1), 
+										-1px -1px 0 rgba(0, 0, 0, 0.05), 
+										0 2px 1px rgba(0, 0, 0, 0.15);
+	}
+	.footer {margin-top: 0px;color: #52585d;font-size: 14px;text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);margin: 0 auto;overflow: hidden;width: 950px;
+		a {color: #215a96;}
+	  ul {float: left; 
+			li {display: block;float: left;margin-right: 10px;}}
+		p {float: right;}
+	  .copyright {margin-top: 0px;margin-right: 10px;padding-bottom: 50px;color: #585858;float: right;}
+		.credits {@include horizontal-list;margin-left: 10px;}}	
+}

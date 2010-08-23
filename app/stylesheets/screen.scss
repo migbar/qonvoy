@@ -1,0 +1,26 @@
+// This import applies a global reset to any page that imports this stylesheet.
+@import "blueprint/reset";
+
+// To configure blueprint, edit the partials/_base.sass file.
+@import "partials/base";
+
+// Import all the default blueprint modules so that we can access their mixins.
+@import "blueprint";
+
+// Import the non-default scaffolding module.
+@import "blueprint/scaffolding";
+
+@import "compass/utilities/lists/horizontal-list";
+
+//the specific stylesheet for graphalicious
+@import "partials/paper";
+@import "partials/application";
+
+//@import "partials/stolen"
+
+// Generate the blueprint framework according to your configuration:
+@include blueprint;
+
+@include blueprint-typography;
+
+

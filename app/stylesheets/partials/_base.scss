@@ -1,0 +1,39 @@
+// Here is where you can define your constants for your application and to configure the blueprint framework.
+// Feel free to delete these if you want keep the defaults:
+
+$blueprint-grid-columns: 24;
+$blueprint-grid-width: 30px;
+$blueprint-grid-margin: 10px;
+
+// If you change your grid column dimensions
+// you can make a new grid background image from the command line like this:
+// compass grid-img 30+10x16
+
+$header-background-color: #EEEEEE;
+$blue-box-color: #449EEF;
+$blue-box-color: #579efe;
+$orange-box-color: #FA8928;
+$grey-background: #B8BCBF;
+
+@mixin rounded-box{	
+	font-size: 14px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+@mixin blue-box{
+	@include rounded-box;	
+	background-color: $blue-box-color;
+  color: white;
+}
+
+@mixin white-box{	
+	@include rounded-box;	
+	background-color: white;
+  color: $blue-box-color;
+}
+
+@mixin no-padding {
+	padding: 0px;
+}
