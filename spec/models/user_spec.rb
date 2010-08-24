@@ -194,19 +194,46 @@ describe User do
     
     describe "##{group}=" do
       subject { Factory.build(:twitter_user) }
+			let(:user_node) { mock(Graph::UserNode, :"update_#{group}" => nil) }
 
 			before(:each) do
-			  subject.stub(:create_user_node)
+				Neo4j::Transaction.new
+			  subject.stub(:ensure_user_node => user_node, :user_node => user_node)
 				subject.save
 			end
 			
-	    it "creates #{group.pluralize} associated with the user from a comma separated list" do
-        subject.send(:"#{group}=", "foo, bar, baz")
+			after(:each) do
+			  Neo4j::Transaction.finish
+			end
+			
+			def perform_update(group)
+				subject.send(:"#{group}=", "foo, bar, baz")
         subject.save
-        subject.send(group.pluralize).map(&:name).should include(*%w[foo bar baz])
+			end
+			
+	    it "creates #{group.pluralize} associated with the user from a comma separated list" do
+        perform_update(group)
+        subject.send(group.pluralize, true).map(&:name).should include(*%w[foo bar baz])
       end
+
+			it "updates the user_node's relations for the #{group} list" do
+				user_node.should_receive(:"update_#{group}").with(%w[foo bar baz])
+				perform_update(group)
+			end
     end
     
+		describe "##{group}_will_change!, ##{group}_changed?" do
+		  subject { Factory.build(:twitter_user) }
+		
+			it "by defaut #{group} is not dirty" do
+			  subject.send(:"#{group}_changed?").should be_false
+			end
+			
+			it "marks the #{group} as dirty" do
+			  subject.send(:"#{group}_will_change!")
+				subject.send(:"#{group}_changed?").should be_true
+			end
+		end
   end
 
 	describe "#update_social_graph!" do

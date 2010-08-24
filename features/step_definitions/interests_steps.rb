@@ -33,9 +33,6 @@ Then /^my interest lists should be:$/ do |table|
 		expected = value.split(",").map(&:strip).sort
 		
 		current_user.send("#{interest}_list").sort.should == expected
-		
-		rel = verb_for(:user, interest)
-		
-		current_user.user_node.send(rel).map(&:name).sort.should == expected
+		current_user.user_node.favors.map(&:name).sort.should == expected
 	end
 end

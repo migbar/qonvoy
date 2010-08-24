@@ -1,4 +1,4 @@
-class GraphMapping
+class Graph::Mapping
 # {
 # 	  :follows     => { :person       => :person       }, # from Twitter
 # 	  :likes       => { :person       => :cuisine      }, # derived from the rating of the dish
@@ -15,28 +15,28 @@ class GraphMapping
 # 		:lives_in    => { :restaurant   => :neighborhood } # from Zagat, address (reverse of above - needed?)
 # 	}
 	
-	
 	MAPPING = {
-		:person => {
-			:likes => :cuisine,
-			:follows => :person,
-			:favors => :cuisine,
-			:dislikes => :cuisine,
-			:rates => :restaurant,
+		:user => {
+			:likes     => :cuisine,
+			:follows   => :person,
+			:favors    => :cuisine,
+			:dislikes  => :cuisine,
+			:rates     => :restaurant,
 			:frequents => :neighborhood,
 			:likes_geo => :neighborhood
 		},
 		:restaurant => {
-			:serves => :cuisine,
-			:offers => :feature,
+			:serves    => :cuisine,
+			:offers    => :feature,
 			:resembles => :restaurant,
-			:lives_in =>  :neighborhood
-		}
+			:lives_in  =>  :neighborhood
+		},
 		:cuisine => {
-			:tastes_like => :cuisine
-		}
+			:tastes_like => :cuisine,
+			:favored     => :user
+		},
 		:neighborhood => {
 			:contains => :restaurant
 		}
-	}
+	}.freeze
 end

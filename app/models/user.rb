@@ -37,13 +37,24 @@ class User < ActiveRecord::Base
     acts_as_taggable_on group.pluralize
     
     define_method(:"#{group}=") do |csv|
+			send(:"#{group}_will_change!")
       send(:"#{group}_list=", csv.split(',').map(&:strip))
     end
 
     define_method(:"#{group}") do
       send(:"#{group}_list").sort.join(', ')
     end
+
+		define_method(:"#{group}_will_change!") do
+			instance_variable_set(:"@#{group}_changed", true)
+		end
+		
+		define_method(:"#{group}_changed?") do
+			instance_variable_get(:"@#{group}_changed")
+		end
   end
+
+	after_save :update_user_node_relationships
   
   has_many :statuses
   
@@ -141,4 +152,10 @@ class User < ActiveRecord::Base
       super # oauth_token is set
       populate_oauth_user if twitter_uid.blank?
     end
+
+		def update_user_node_relationships
+			self.class.interest_groups.each do |group|
+				user_node.send(:"update_#{group}", send(group.pluralize).map(&:name)) if send(:"#{group}_changed?")
+			end
+		end
 end
