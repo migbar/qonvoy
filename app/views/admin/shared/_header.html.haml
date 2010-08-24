@@ -1,0 +1,11 @@
+/ - if current_user
+/   = button_to "Log out", user_session_path, :method => :delete, :class => 'button light'
+/ - else
+/   %ul.buttons
+/     %li
+/       - form_tag profile_path do
+/         = oauth_register_button :value => "Register", :class => 'button matte-blue'
+/     %li
+/       - form_tag user_session_path do 
+/         = oauth_login_button :value => "Log in", :class => 'button matte-blue'
+%h1.title QONVOY ADMIN PANEL

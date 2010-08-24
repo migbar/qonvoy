@@ -3,13 +3,17 @@
 	@include column($blueprint-grid-columns, true); 
 	@include pull(2);
 	text-align: right;
-	font-size: 28px;
+	font-size: 14px;
+	margin-bottom: 20px;
 }
+
 
 .version, #lucene {
 	@include column($blueprint-grid-columns, true); 
 	@include horizontal-list;
 	@include push(2);
+	padding: 20px;
+	float: right;
 }
 
 .version-number, .lucene-store-on-file, .lucene-path {
@@ -21,25 +25,25 @@
 .neo4j-path {
 	@include blue-box;
 	padding: 10px;
-	font-size: 24px;
-	font-weight: bold;		
+	font-size: 16px;
+	font-weight: bold;
 }
 
 .node-count {
 	@include blue-box;
-	padding-right: 40px;
-	padding-left: 40px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-  font-size: 50px;
+	padding-right: 30px;
+	padding-left: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+  font-size: 30px;
 	font-weight: bold;		
 }
 
 #nodes {
-  @include column($blueprint-grid-columns); 
+  @include column($blueprint-grid-columns, true); 
 }
 .node-row {
-	@include column($blueprint-grid-columns - 1); 
+	@include column($blueprint-grid-columns, true); 
 	@include push(1);
 }
 .node-box {
@@ -48,19 +52,19 @@
 
 	.node-entry {
 		@include column(4);
-		@include blue-box;
 	}
 	
 	.node-key {
 		@include column(2);
-		@include blue-box;
 		text-align: right;
 	}
 	
 	.node-value {
-		@include column(2, true);
+		@include column(2);
 		@include white-box;
-		margin: -3px;
+		margin-bottom: 3px;
+		margin-left: -2px;
+		padding-left: 1px;;
 	}
 	
 }

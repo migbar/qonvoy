@@ -31,6 +31,7 @@ group :development do
 	gem "mongrel", :require => false
 	gem "annotate", :require => false
 	gem "launchy", :require => false
+	gem "compass", ">= 0.10.2"
 end
 
 group :test do

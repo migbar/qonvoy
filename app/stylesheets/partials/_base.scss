@@ -16,7 +16,7 @@ $orange-box-color: #FA8928;
 $grey-background: #B8BCBF;
 
 @mixin rounded-box{	
-	font-size: 14px;
+	font-size: 12px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
@@ -26,12 +26,14 @@ $grey-background: #B8BCBF;
 	@include rounded-box;	
 	background-color: $blue-box-color;
   color: white;
+	padding: 3px;
 }
 
 @mixin white-box{	
 	@include rounded-box;	
 	background-color: white;
   color: $blue-box-color;
+	margin: 1px;
 }
 
 @mixin no-padding {

@@ -1,5 +1,5 @@
 --- 
-hash: 3f0440b35c8b94203ca4da7c76f933c476f62d9a
+hash: b50091242230386d3c543b5badc51b20d451f2f4
 sources: 
   - Git: 
       require: authlogic_oauth
@@ -64,6 +64,10 @@ specs:
       version: 0.0.23
   - capybara: 
       version: 0.3.9
+  - haml: 
+      version: 3.0.17
+  - compass: 
+      version: 0.10.4
   - configuration: 
       version: 1.1.0
   - crack: 
@@ -94,8 +98,6 @@ specs:
       version: 0.2.3
   - geokit: 
       version: 1.5.0
-  - haml: 
-      version: 3.0.17
   - hashie: 
       version: 0.1.8
   - hoptoad_notifier: 
@@ -129,7 +131,7 @@ specs:
   - yard: 
       version: 0.5.8
   - pickle: 
-      version: 0.4.1
+      version: 0.4.2
   - rails: 
       version: 2.3.8
   - remarkable: 
@@ -255,6 +257,10 @@ dependencies:
       - :development
     require: []
 
+  compass: 
+    version: ">= 0.10.2"
+    group: 
+      - :development
   remarkable_rails: 
     version: ">= 0"
     group: 
