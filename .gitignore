@@ -13,3 +13,4 @@ rerun.txt
 capybara-*.html
 .bundle
 .idea
+public/stylesheets/compiled
