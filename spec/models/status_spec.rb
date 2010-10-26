@@ -2,20 +2,20 @@
 #
 # Table name: statuses
 #
-#  id                 :integer(4)      not null, primary key
-#  user_id            :integer(4)      indexed, indexed
+#  id                 :integer(11)     not null, primary key
+#  user_id            :integer(11)     indexed, indexed
 #  sender_screen_name :string(255)
-#  sender_id          :integer(8)
+#  sender_id          :integer(20)
 #  body               :string(1000)
 #  kind               :string(40)
 #  status_created_at  :datetime
-#  message_id         :integer(8)      indexed
+#  message_id         :integer(20)     indexed
 #  raw                :text
 #  created_at         :datetime
 #  updated_at         :datetime
-#  dish_id            :integer(4)      indexed
-#  place_id           :integer(4)      indexed
-#  rating_id          :integer(4)
+#  dish_id            :integer(11)     indexed
+#  place_id           :integer(11)     indexed
+#  rating_id          :integer(11)
 #  processed_at       :datetime        indexed
 #
 

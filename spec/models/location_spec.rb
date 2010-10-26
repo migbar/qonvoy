@@ -2,7 +2,7 @@
 #
 # Table name: locations
 #
-#  id             :integer(4)      not null, primary key
+#  id             :integer(11)     not null, primary key
 #  provider       :string(255)
 #  zip            :string(255)
 #  latitude       :decimal(10, 8)
@@ -15,10 +15,10 @@
 #  street_address :string(255)
 #  full_address   :string(255)
 #  country_code   :string(255)
-#  accuracy       :integer(4)
+#  accuracy       :integer(11)
 #  precision      :string(255)
 #  bounds         :text
-#  place_id       :integer(4)      indexed
+#  place_id       :integer(11)     indexed
 #  created_at     :datetime
 #  updated_at     :datetime
 #

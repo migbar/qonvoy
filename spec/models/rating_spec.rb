@@ -2,9 +2,9 @@
 #
 # Table name: ratings
 #
-#  id         :integer(4)      not null, primary key
-#  dish_id    :integer(4)      indexed
-#  value      :integer(4)
+#  id         :integer(11)     not null, primary key
+#  dish_id    :integer(11)     indexed
+#  value      :integer(11)
 #  created_at :datetime
 #  updated_at :datetime
 #

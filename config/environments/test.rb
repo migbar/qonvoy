@@ -31,3 +31,5 @@ config.after_initialize do
 	require "webmock"
   WebMock.disable_net_connect!(:allow_localhost => true)
 end
+
+ActiveSupport::Deprecation.silenced = true

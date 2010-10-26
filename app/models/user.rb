@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                  :integer(4)      not null, primary key
+#  id                  :integer(11)     not null, primary key
 #  name                :string(255)
 #  twitter_uid         :string(255)
 #  avatar_url          :string(255)
@@ -15,7 +15,7 @@
 #  oauth_secret        :string(255)
 #  created_at          :datetime
 #  updated_at          :datetime
-#  user_node_id        :integer(4)
+#  node_id             :integer(11)
 #
 
 class User < ActiveRecord::Base
@@ -25,24 +25,20 @@ class User < ActiveRecord::Base
 
 	after_create :ensure_user_node
   
-  INTEREST_GROUPS = %w[cuisine feature neighborhood dish_type]
-  
   class << self
     def interest_groups
-      INTEREST_GROUPS
+      Graph::Mapping.for(:user).keys
     end
   end
   
   interest_groups.each do |group|
-    acts_as_taggable_on group.pluralize
-    
     define_method(:"#{group}=") do |csv|
 			send(:"#{group}_will_change!")
-      send(:"#{group}_list=", csv.split(',').map(&:strip))
+			instance_variable_set(:"@#{group}", csv)
     end
 
     define_method(:"#{group}") do
-      send(:"#{group}_list").sort.join(', ')
+      instance_variable_get(:"@#{group}")
     end
 
 		define_method(:"#{group}_will_change!") do
@@ -119,7 +115,7 @@ class User < ActiveRecord::Base
 	end
 	
 	def user_node
-		Neo4j.load_node(user_node_id)
+		Neo4j.load_node(node_id)
 	end
 	
 	def follows
@@ -130,7 +126,7 @@ class User < ActiveRecord::Base
 
 		def ensure_user_node
 			Neo4j::Transaction.run do
-				self.user_node_id = Graph::UserNode.new(node_creation_attributes).neo_id
+				self.node_id = Graph::UserNode.new(node_creation_attributes).neo_id
 			end
 			
 			# make sure that the cuisine, neighborhood, feature, dish_type nodes
@@ -155,7 +151,7 @@ class User < ActiveRecord::Base
 
 		def update_user_node_relationships
 			self.class.interest_groups.each do |group|
-				user_node.send(:"update_#{group}", send(group.pluralize).map(&:name)) if send(:"#{group}_changed?")
+				user_node.changed_interest(group, send(group)) if send(:"#{group}_changed?")
 			end
 		end
 end

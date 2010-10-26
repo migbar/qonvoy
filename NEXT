@@ -5,6 +5,34 @@ ActsAsTaggableOn::Tag.find(:all, :joins => :taggings, :conditions => { :taggings
 
 TODO:
 
-- implement error handling on GraphAccessor for the Neo4J responses
+- extract generic code to update rels in user node (should handle follows and cuisines in the same way - through mapping)
 
+- FETCH THE INTERESTS TO PUT INTO THE VIEW (TAGS HELPER) - 
+  - PUT THE NODES INTO THE GRAPH DB (feature background) 
+  
+user[cuisine] = "french, italian"
+user[cuisine][likes] = "french, italian"
+user[likes] = "french, italian"
 
+"user" => { "likes" => { "cuisine" => "french, italian" } }
+
+# accepts_nested_attributes_for :likes
+
+def likes=(options) # { "cuisine" => "french, italian" }
+end 
+
+def cuisine=(options) # { "likes" => "french, italian" }
+end 
+
+def likes
+  {
+    "cuisine" => []
+  }
+end
+
+def cuisine
+  {
+    "likes" => [],
+    "dislikes" => []
+  }
+end

@@ -2,7 +2,7 @@ source :gemcutter
 # bundler requires these gems in all environments
 
 # gem "geokit"
-gem "rails", "~> 2.3.8"
+gem "rails", "~> 2.3.9"
 gem "activerecord-jdbcmysql-adapter"
 gem "jdbc-mysql"
 gem "haml", "~> 3.0.0"
@@ -23,7 +23,7 @@ gem "json-jruby", ">= 1.4.1"
 gem "rest-client", "1.6.0"
 gem "jruby-openssl" 
 gem "nokogiri", "1.4.3.1"
-gem "neo4j", "0.4.5"
+gem "neo4j", "0.4.6"
 
 group :development do
   # bundler requires these gems in development

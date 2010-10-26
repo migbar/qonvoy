@@ -15,28 +15,43 @@ class Graph::Mapping
 # 		:lives_in    => { :restaurant   => :neighborhood } # from Zagat, address (reverse of above - needed?)
 # 	}
 	
+	# MAPPING = {
+	# 	:user => {
+	# 		# :likes     => :cuisine,  we could use this to 'bake' in derived affinity to a cuisine based on their ratings
+	# 		:follows   => :person,
+	# 		:favors    => :cuisine,
+	# 		:dislikes  => :cuisine,
+	# 		:rates     => :restaurant,
+	# 		:frequents => :neighborhood,
+	# 		:likes_geo => :neighborhood
+	# 	},
+	# 	:restaurant => {
+	# 		:serves    => :cuisine,
+	# 		:offers    => :feature,
+	# 		:resembles => :restaurant,
+	# 		:lives_in  =>  :neighborhood
+	# 	},
+	# 	:cuisine => {
+	# 		:tastes_like => :cuisine,
+	# 		:favored     => :user
+	# 	},
+	# 	:neighborhood => {
+	# 		:contains => :restaurant
+	# 	}
+	# }.freeze
+	
 	MAPPING = {
-		:user => {
-			:likes     => :cuisine,
-			:follows   => :person,
-			:favors    => :cuisine,
-			:dislikes  => :cuisine,
-			:rates     => :restaurant,
-			:frequents => :neighborhood,
-			:likes_geo => :neighborhood
-		},
-		:restaurant => {
-			:serves    => :cuisine,
-			:offers    => :feature,
-			:resembles => :restaurant,
-			:lives_in  =>  :neighborhood
-		},
-		:cuisine => {
-			:tastes_like => :cuisine,
-			:favored     => :user
-		},
-		:neighborhood => {
-			:contains => :restaurant
-		}
-	}.freeze
+			:user => {
+				:favors    => :cuisine,
+				:likes_geo => :neighborhood
+			}
+	}
+	
+	# :cuisined => [:favors, :dislikes]
+	
+	class << self
+	  def for(model)
+	    MAPPING[model]
+	  end
+  end
 end

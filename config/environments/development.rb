@@ -19,3 +19,5 @@ config.action_mailer.raise_delivery_errors = false
 config.after_initialize do
 	ActiveResource::Base.logger = ActiveRecord::Base.logger
 end
+
+ActiveSupport::Deprecation.silenced = true

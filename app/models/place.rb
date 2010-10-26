@@ -2,16 +2,16 @@
 #
 # Table name: places
 #
-#  id         :integer(4)      not null, primary key
+#  id         :integer(11)     not null, primary key
 #  name       :string(255)     indexed
 #  address    :text
 #  created_at :datetime
 #  updated_at :datetime
-#  z_food     :integer(4)
-#  z_decor    :integer(4)
-#  z_service  :integer(4)
-#  z_price    :integer(4)
-#  z_id       :integer(4)      indexed
+#  z_food     :integer(11)
+#  z_decor    :integer(11)
+#  z_service  :integer(11)
+#  z_price    :integer(11)
+#  z_id       :integer(11)     indexed
 #  phone      :string(255)
 #
 

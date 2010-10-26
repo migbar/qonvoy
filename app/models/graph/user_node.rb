@@ -14,7 +14,7 @@ module Graph
 			# 3. update old follows for old friends
 			# 4. delete follows for removed friends
 		
-			desired_friend_ids = friends.map(&:user_node_id)
+			desired_friend_ids = friends.map(&:node_id)
 		
 			Neo4j::Transaction.run do
 				existing_friend_ids = follows.map(&:neo_id)
@@ -30,7 +30,7 @@ module Graph
 		end
 	
 		def add_follows(user)
-			follows << Neo4j.load_node(user.user_node_id)
+			follows << Neo4j.load_node(user.node_id)
 		end
 	
 		def to_hash

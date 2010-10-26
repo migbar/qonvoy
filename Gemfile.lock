@@ -1,317 +1,190 @@
---- 
-hash: 3f0440b35c8b94203ca4da7c76f933c476f62d9a
-sources: 
-  - Git: 
-      require: authlogic_oauth
-      git: http://github.com/jrallison/authlogic_oauth.git
-      uri: http://github.com/jrallison/authlogic_oauth.git
-      ref: 541626973b317b75d3645fb5108d0006322adaf2
-  - Rubygems: 
-      uri: http://gemcutter.org
-specs: 
-  - rake: 
-      version: 0.8.7
-  - activesupport: 
-      version: 2.3.8
-  - rack: 
-      version: 1.1.0
-  - actionpack: 
-      version: 2.3.8
-  - actionmailer: 
-      version: 2.3.8
-  - activerecord: 
-      version: 2.3.8
-  - activerecord-jdbc-adapter: 
-      version: 0.9.7
-  - jdbc-mysql: 
-      version: 5.0.4
-  - activerecord-jdbcmysql-adapter: 
-      version: 0.9.7
-  - activeresource: 
-      version: 2.3.8
-  - acts-as-taggable-on: 
-      version: 2.0.6
-  - addressable: 
-      version: 2.2.0
-  - annotate: 
-      version: 2.4.0
-  - authlogic: 
-      version: 2.1.3
-  - authlogic-oauth: 
-      version: 1.0.8
-      source: 0
-  - bouncy-castle-java: 
-      version: 1.5.0145.2
-  - builder: 
-      version: 2.1.2
-  - bundler: 
-      version: 0.9.26
-  - culerity: 
-      version: 0.2.12
-  - mime-types: 
-      version: "1.16"
-  - weakling: 
-      version: 0.0.4
-  - nokogiri: 
-      version: 1.4.3.1
-  - rack-test: 
-      version: 0.5.4
-  - ffi: 
-      version: 0.6.3
-  - json_pure: 
-      version: 1.4.6
-  - selenium-webdriver: 
-      version: 0.0.23
-  - capybara: 
-      version: 0.3.9
-  - configuration: 
-      version: 1.1.0
-  - crack: 
-      version: 0.1.8
-  - diff-lcs: 
-      version: 1.1.2
-  - trollop: 
-      version: 1.16.2
-  - gherkin: 
-      version: 2.1.5
-  - term-ansicolor: 
-      version: 1.0.5
-  - cucumber: 
-      version: 0.8.5
-  - cucumber-rails: 
-      version: 0.3.2
-  - daemons: 
-      version: 1.1.0
-  - database_cleaner: 
-      version: 0.5.2
-  - delayed_job: 
-      version: 2.0.3
-  - factory_girl: 
-      version: 1.3.2
-  - formtastic: 
-      version: 0.9.7
-  - gem_plugin: 
-      version: 0.2.3
-  - geokit: 
-      version: 1.5.0
-  - haml: 
-      version: 3.0.17
-  - hashie: 
-      version: 0.1.8
-  - hoptoad_notifier: 
-      version: 2.2.6
-  - httparty: 
-      version: 0.4.5
-  - rspec: 
-      version: 1.3.0
-  - selenium-client: 
-      version: 1.2.18
-  - selenium-rc: 
-      version: 2.2.4
-  - jasmine: 
-      version: 0.11.1.0
-  - jruby-openssl: 
-      version: 0.7.1
-  - json: 
-      version: 1.4.6
-  - json-jruby: 
-      version: 1.4.6
-  - launchy: 
-      version: 0.3.7
-  - mongrel: 
-      version: 1.1.5
-  - neo4j: 
-      version: 0.4.5
-  - ruby-hmac: 
-      version: 0.4.0
-  - oauth: 
-      version: 0.3.6
-  - yard: 
-      version: 0.5.8
-  - pickle: 
-      version: 0.4.1
-  - rails: 
-      version: 2.3.8
-  - remarkable: 
-      version: 3.1.13
-  - remarkable_activerecord: 
-      version: 3.1.13
-  - rspec-rails: 
-      version: 1.3.2
-  - remarkable_rails: 
-      version: 3.1.13
-  - rest-client: 
-      version: 1.6.0
-  - searchlogic: 
-      version: 2.4.14
-  - settingslogic: 
-      version: 2.0.3
-  - twitter: 
-      version: 0.8.4
-  - webmock: 
-      version: 1.3.4
-dependencies: 
-  rails: 
-    version: ~> 2.3.8
-    group: 
-      - :default
-  activerecord-jdbcmysql-adapter: 
-    version: ">= 0"
-    group: 
-      - :default
-  jdbc-mysql: 
-    version: ">= 0"
-    group: 
-      - :default
-  haml: 
-    version: ~> 3.0.0
-    group: 
-      - :default
-  bundler: 
-    version: ">= 0"
-    group: 
-      - :default
-  authlogic: 
-    version: = 2.1.3
-    group: 
-      - :default
-  oauth: 
-    version: = 0.3.6
-    group: 
-      - :default
-  authlogic-oauth: 
-    version: ">= 0"
-    group: 
-      - :default
-    require: 
-      - authlogic_oauth
-  settingslogic: 
-    version: = 2.0.3
-    group: 
-      - :default
-  formtastic: 
-    version: = 0.9.7
-    group: 
-      - :default
-  acts-as-taggable-on: 
-    version: = 2.0.6
-    group: 
-      - :default
-  hoptoad_notifier: 
-    version: ~> 2.2.0
-    group: 
-      - :default
-  twitter: 
-    version: = 0.8.4
-    group: 
-      - :default
-  delayed_job: 
-    version: ~> 2.0.0
-    group: 
-      - :default
-  searchlogic: 
-    version: = 2.4.14
-    group: 
-      - :default
-  geokit: 
-    version: = 1.5.0
-    group: 
-      - :default
-  json-jruby: 
-    version: ">= 1.4.1"
-    group: 
-      - :default
-  rest-client: 
-    version: = 1.6.0
-    group: 
-      - :default
-  jruby-openssl: 
-    version: ">= 0"
-    group: 
-      - :default
-  nokogiri: 
-    version: = 1.4.3.1
-    group: 
-      - :default
-  neo4j: 
-    version: = 0.4.5
-    group: 
-      - :default
-  mongrel: 
-    version: ">= 0"
-    group: 
-      - :development
-    require: []
+GIT
+  remote: http://github.com/jrallison/authlogic_oauth.git
+  revision: 541626973b317b75d3645fb5108d0006322adaf2
+  specs:
+    authlogic-oauth (1.0.8)
+      activesupport
 
-  annotate: 
-    version: ">= 0"
-    group: 
-      - :development
-    require: []
+GEM
+  remote: http://rubygems.org/
+  specs:
+    actionmailer (2.3.9)
+      actionpack (= 2.3.9)
+    actionpack (2.3.9)
+      activesupport (= 2.3.9)
+      rack (~> 1.1.0)
+    activerecord (2.3.9)
+      activesupport (= 2.3.9)
+    activerecord-jdbc-adapter (0.9.7-java)
+    activerecord-jdbcmysql-adapter (0.9.7-java)
+      activerecord-jdbc-adapter (= 0.9.7)
+      jdbc-mysql (>= 5.0.4)
+    activeresource (2.3.9)
+      activesupport (= 2.3.9)
+    activesupport (2.3.9)
+    acts-as-taggable-on (2.0.6)
+    addressable (2.2.1)
+    annotate (2.4.0)
+    authlogic (2.1.3)
+      activesupport
+    bouncy-castle-java (1.5.0145.2)
+    builder (2.1.2)
+    capybara (0.3.9)
+      culerity (>= 0.2.4)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      selenium-webdriver (>= 0.0.3)
+    configuration (1.1.0)
+    crack (0.1.8)
+    cucumber (0.9.0)
+      builder (~> 2.1.2)
+      diff-lcs (~> 1.1.2)
+      gherkin (~> 2.2.2)
+      json (~> 1.4.6)
+      term-ansicolor (~> 1.0.5)
+    cucumber-rails (0.3.2)
+      cucumber (>= 0.8.0)
+    culerity (0.2.12)
+    daemons (1.1.0)
+    database_cleaner (0.5.2)
+    delayed_job (2.0.3)
+      daemons
+    diff-lcs (1.1.2)
+    factory_girl (1.3.2)
+    ffi (0.6.3-java)
+    formtastic (0.9.7)
+      actionpack (>= 2.3.0)
+      activesupport (>= 2.3.0)
+    gem_plugin (0.2.3)
+    geokit (1.5.0)
+    gherkin (2.2.4-java)
+      json (~> 1.4.6)
+      term-ansicolor (~> 1.0.5)
+      trollop (~> 1.16.2)
+    haml (3.0.18)
+    hashie (0.1.8)
+    hoptoad_notifier (2.2.6)
+      activesupport
+    httparty (0.4.5)
+      crack (>= 0.1.1)
+    jasmine (1.0.0)
+      json_pure (>= 1.4.3)
+      rack (>= 1.0.0)
+      rake (>= 0.8.7)
+      rspec (>= 1.1.5)
+      selenium-client (>= 1.2.17)
+      selenium-rc (>= 2.1.0)
+    jdbc-mysql (5.0.4)
+    jruby-openssl (0.7.1)
+      bouncy-castle-java
+    json (1.4.6-java)
+    json-jruby (1.4.6-java)
+      json (= 1.4.6)
+    json_pure (1.4.6)
+    launchy (0.3.7)
+      configuration (>= 0.0.5)
+      rake (>= 0.8.1)
+    mime-types (1.16)
+    mongrel (1.1.5-java)
+      gem_plugin (>= 0.2.3)
+    neo4j (0.4.6)
+    nokogiri (1.4.3.1-java)
+      weakling (>= 0.0.3)
+    oauth (0.3.6)
+      ruby-hmac (>= 0.3.1)
+    pickle (0.4.2)
+      cucumber (>= 0.8)
+      rake
+      rspec (>= 1.3)
+      yard
+    rack (1.1.0)
+    rack-test (0.5.5)
+      rack (>= 1.0)
+    rails (2.3.9)
+      actionmailer (= 2.3.9)
+      actionpack (= 2.3.9)
+      activerecord (= 2.3.9)
+      activeresource (= 2.3.9)
+      activesupport (= 2.3.9)
+      rake (>= 0.8.3)
+    rake (0.8.7)
+    remarkable (3.1.13)
+      rspec (>= 1.2.0)
+    remarkable_activerecord (3.1.13)
+      remarkable (~> 3.1.13)
+      rspec (>= 1.2.0)
+    remarkable_rails (3.1.13)
+      remarkable (~> 3.1.13)
+      remarkable_activerecord (~> 3.1.13)
+      rspec (>= 1.2.0)
+      rspec-rails (>= 1.2.0)
+    rest-client (1.6.0)
+      mime-types (>= 1.16)
+    rspec (1.3.0)
+    rspec-rails (1.3.2)
+      rack (>= 1.0.0)
+      rspec (>= 1.3.0)
+    ruby-hmac (0.4.0)
+    searchlogic (2.4.14)
+      activerecord (>= 2.0.0)
+    selenium-client (1.2.18)
+    selenium-rc (2.2.4)
+      selenium-client (>= 1.2.18)
+    selenium-webdriver (0.0.23)
+      ffi (>= 0.6.1)
+      json_pure
+    settingslogic (2.0.3)
+    term-ansicolor (1.0.5)
+    trollop (1.16.2)
+    twitter (0.8.4)
+      hashie (~> 0.1.3)
+      httparty (~> 0.4.3)
+      oauth (~> 0.3.6)
+    weakling (0.0.4-java)
+    webmock (1.3.4)
+      addressable (>= 2.1.1)
+      crack (>= 0.1.7)
+    yard (0.6.1)
 
-  launchy: 
-    version: ">= 0"
-    group: 
-      - :development
-    require: []
+PLATFORMS
+  java
 
-  remarkable_rails: 
-    version: ">= 0"
-    group: 
-      - :test
-  jasmine: 
-    version: ">= 0"
-    group: 
-      - :test
-  term-ansicolor: 
-    version: ">= 0"
-    group: 
-      - :cucumber
-  cucumber-rails: 
-    version: ">= 0"
-    group: 
-      - :cucumber
-    require: []
-
-  database_cleaner: 
-    version: ">= 0"
-    group: 
-      - :cucumber
-  pickle: 
-    version: ">= 0"
-    group: 
-      - :cucumber
-  capybara: 
-    version: ">= 0"
-    group: 
-      - :cucumber
-    require: []
-
-  selenium-webdriver: 
-    version: = 0.0.23
-    group: 
-      - :cucumber
-  factory_girl: 
-    version: ">= 0"
-    group: 
-      - :cucumber
-      - :test
-    require: []
-
-  rspec-rails: 
-    version: ">= 0"
-    group: 
-      - :cucumber
-      - :test
-  rspec: 
-    version: ">= 0"
-    group: 
-      - :cucumber
-      - :test
-  webmock: 
-    version: = 1.3.4
-    group: 
-      - :cucumber
-      - :test
-    require: []
-
+DEPENDENCIES
+  activerecord-jdbcmysql-adapter
+  acts-as-taggable-on (= 2.0.6)
+  annotate
+  authlogic (= 2.1.3)
+  authlogic-oauth!
+  bundler
+  capybara
+  cucumber-rails
+  database_cleaner
+  delayed_job (~> 2.0.0)
+  factory_girl
+  formtastic (= 0.9.7)
+  geokit (= 1.5.0)
+  haml (~> 3.0.0)
+  hoptoad_notifier (~> 2.2.0)
+  jasmine
+  jdbc-mysql
+  jruby-openssl
+  json-jruby (>= 1.4.1)
+  launchy
+  mongrel
+  neo4j (= 0.4.6)
+  nokogiri (= 1.4.3.1)
+  oauth (= 0.3.6)
+  pickle
+  rails (~> 2.3.9)
+  remarkable_rails
+  rest-client (= 1.6.0)
+  rspec
+  rspec-rails
+  searchlogic (= 2.4.14)
+  selenium-webdriver (= 0.0.23)
+  settingslogic (= 2.0.3)
+  term-ansicolor
+  twitter (= 0.8.4)
+  webmock (= 1.3.4)

@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                  :integer(4)      not null, primary key
+#  id                  :integer(11)     not null, primary key
 #  name                :string(255)
 #  twitter_uid         :string(255)
 #  avatar_url          :string(255)
@@ -15,7 +15,7 @@
 #  oauth_secret        :string(255)
 #  created_at          :datetime
 #  updated_at          :datetime
-#  user_node_id        :integer(4)
+#  node_id             :integer(11)
 #
 
 require 'spec_helper'
@@ -36,9 +36,6 @@ describe User do
   
   describe "associations" do
     should_have_many :statuses
-    User.interest_groups.each do |group|
-      should_have_many :"#{group.pluralize}", :through => :"#{group}_taggings"
-    end
   end
   
   it "#to_s returns the screen_name for the user" do
@@ -186,15 +183,15 @@ describe User do
   User.interest_groups.each do |group|
     
     describe "##{group}" do
-      it "returns a comma joined sorted list of #{group.pluralize}" do
-        @user = Factory.build(:twitter_user, :"#{group}_list" => ["foo", "bar", "baz"])
-        @user.send(group).should == "bar, baz, foo"
+      it "returns a comma joined sorted list of #{group}" do
+        @user = Factory.build(:twitter_user, group => "foo, baz")
+        @user.send(group).should == "foo, baz"
       end
     end
     
     describe "##{group}=" do
       subject { Factory.build(:twitter_user) }
-			let(:user_node) { mock(Graph::UserNode, :"update_#{group}" => nil) }
+			let(:user_node) { mock(Graph::UserNode, :changed_interest => nil) }
 
 			before(:each) do
 				Neo4j::Transaction.new
@@ -205,20 +202,11 @@ describe User do
 			after(:each) do
 			  Neo4j::Transaction.finish
 			end
-			
-			def perform_update(group)
-				subject.send(:"#{group}=", "foo, bar, baz")
-        subject.save
-			end
-			
-	    it "creates #{group.pluralize} associated with the user from a comma separated list" do
-        perform_update(group)
-        subject.send(group.pluralize, true).map(&:name).should include(*%w[foo bar baz])
-      end
 
 			it "updates the user_node's relations for the #{group} list" do
-				user_node.should_receive(:"update_#{group}").with(%w[foo bar baz])
-				perform_update(group)
+				user_node.should_receive(:changed_interest).with(group, "foo, bar, baz")
+				subject.send(:"#{group}=", "foo, bar, baz")
+        subject.save
 			end
     end
     
@@ -277,12 +265,12 @@ describe User do
 	  it "calls create on Graph::UserNode with the relevant attributes " do
 			Graph::UserNode.should_receive(:new).with(node_attributes).and_return(user_node)
 			subject.save!
-			subject.reload.user_node_id.should == user_node.neo_id
+			subject.reload.node_id.should == user_node.neo_id
 	  end
 	end
 	
 	describe "#user_node" do
-	  subject{ Factory.build(:twitter_user, :user_node_id => 42) }
+	  subject{ Factory.build(:twitter_user, :node_id => 42) }
 		let(:user_node){ mock( Graph::UserNode ) }
 	
 		it "returns the user node associated with this user" do

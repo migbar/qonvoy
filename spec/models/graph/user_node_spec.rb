@@ -50,4 +50,8 @@ describe Graph::UserNode do
 			end
 		end
   end
+
+	describe "#changed_interest" do
+	  
+	end
 end

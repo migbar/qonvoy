@@ -2,10 +2,10 @@
 #
 # Table name: dishes
 #
-#  id         :integer(4)      not null, primary key
-#  place_id   :integer(4)      indexed => [name], indexed
+#  id         :integer(11)     not null, primary key
+#  place_id   :integer(11)     indexed => [name], indexed
 #  name       :string(255)     indexed, indexed => [place_id]
-#  rating     :integer(4)
+#  rating     :integer(11)
 #  created_at :datetime
 #  updated_at :datetime
 #

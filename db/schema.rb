@@ -9,11 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100727103019) do
+ActiveRecord::Schema.define(:version => 20100924110756) do
 
   create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0
-    t.integer  "attempts",   :default => 0
+    t.integer  "priority",   :limit => 11, :default => 0
+    t.integer  "attempts",   :limit => 11, :default => 0
     t.text     "handler"
     t.text     "last_error"
     t.datetime "run_at"
@@ -25,9 +25,9 @@ ActiveRecord::Schema.define(:version => 20100727103019) do
   end
 
   create_table "dishes", :force => true do |t|
-    t.integer  "place_id"
+    t.integer  "place_id",   :limit => 11
     t.string   "name"
-    t.integer  "rating"
+    t.integer  "rating",     :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(:version => 20100727103019) do
   create_table "locations", :force => true do |t|
     t.string   "provider"
     t.string   "zip"
-    t.decimal  "latitude",       :precision => 10, :scale => 8
-    t.decimal  "longitude",      :precision => 12, :scale => 8
+    t.decimal  "latitude",                     :precision => 10, :scale => 8
+    t.decimal  "longitude",                    :precision => 12, :scale => 8
     t.string   "district"
     t.string   "state"
     t.string   "province"
@@ -49,10 +49,10 @@ ActiveRecord::Schema.define(:version => 20100727103019) do
     t.string   "street_address"
     t.string   "full_address"
     t.string   "country_code"
-    t.integer  "accuracy"
+    t.integer  "accuracy",       :limit => 11
     t.string   "precision"
     t.text     "bounds"
-    t.integer  "place_id"
+    t.integer  "place_id",       :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -64,11 +64,11 @@ ActiveRecord::Schema.define(:version => 20100727103019) do
     t.text     "address"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "z_food"
-    t.integer  "z_decor"
-    t.integer  "z_service"
-    t.integer  "z_price"
-    t.integer  "z_id"
+    t.integer  "z_food",     :limit => 11
+    t.integer  "z_decor",    :limit => 11
+    t.integer  "z_service",  :limit => 11
+    t.integer  "z_price",    :limit => 11
+    t.integer  "z_id",       :limit => 11
     t.string   "phone"
   end
 
@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(:version => 20100727103019) do
   add_index "places", ["z_id"], :name => "index_places_on_z_id"
 
   create_table "ratings", :force => true do |t|
-    t.integer  "dish_id"
-    t.integer  "value"
+    t.integer  "dish_id",    :limit => 11
+    t.integer  "value",      :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -85,19 +85,19 @@ ActiveRecord::Schema.define(:version => 20100727103019) do
   add_index "ratings", ["dish_id"], :name => "index_ratings_on_dish_id"
 
   create_table "statuses", :force => true do |t|
-    t.integer  "user_id"
+    t.integer  "user_id",            :limit => 11
     t.string   "sender_screen_name"
-    t.integer  "sender_id",          :limit => 8
+    t.integer  "sender_id",          :limit => 20
     t.string   "body",               :limit => 1000
     t.string   "kind",               :limit => 40
     t.datetime "status_created_at"
-    t.integer  "message_id",         :limit => 8
+    t.integer  "message_id",         :limit => 20
     t.text     "raw"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "dish_id"
-    t.integer  "place_id"
-    t.integer  "rating_id"
+    t.integer  "dish_id",            :limit => 11
+    t.integer  "place_id",           :limit => 11
+    t.integer  "rating_id",          :limit => 11
     t.datetime "processed_at"
   end
 
@@ -109,9 +109,9 @@ ActiveRecord::Schema.define(:version => 20100727103019) do
   add_index "statuses", ["user_id"], :name => "index_statuses_on_user_id"
 
   create_table "taggings", :force => true do |t|
-    t.integer  "tag_id"
-    t.integer  "taggable_id"
-    t.integer  "tagger_id"
+    t.integer  "tag_id",        :limit => 11
+    t.integer  "taggable_id",   :limit => 11
+    t.integer  "tagger_id",     :limit => 11
     t.string   "tagger_type"
     t.string   "taggable_type"
     t.string   "context"
@@ -131,14 +131,14 @@ ActiveRecord::Schema.define(:version => 20100727103019) do
     t.string   "avatar_url"
     t.string   "screen_name"
     t.string   "location"
-    t.string   "persistence_token",   :default => "", :null => false
-    t.string   "single_access_token", :default => "", :null => false
-    t.string   "perishable_token",    :default => "", :null => false
+    t.string   "persistence_token",                 :default => "", :null => false
+    t.string   "single_access_token",               :default => "", :null => false
+    t.string   "perishable_token",                  :default => "", :null => false
     t.string   "oauth_token"
     t.string   "oauth_secret"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_node_id"
+    t.integer  "node_id",             :limit => 11
   end
 
   add_index "users", ["oauth_token"], :name => "index_users_on_oauth_token"
