@@ -18,3 +18,4 @@ Rails::Initializer.run do |config|
   end
 end
 
+require 'neo4j/extensions/reindexer'

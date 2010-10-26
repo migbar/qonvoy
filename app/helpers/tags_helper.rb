@@ -1,6 +1,6 @@
 module TagsHelper
   def all_interests(group)
-    [] # from graph
+    Graph::Mapping.nodes_for_interest(group)
     
     # ActsAsTaggableOn::Tag.find(:all,
     #   :joins => :taggings,

@@ -53,5 +53,15 @@ class Graph::Mapping
 	  def for(model)
 	    MAPPING[model]
 	  end
+	  
+	  def node_class_for(sym)
+	    "Graph::#{sym.to_s.camelize}Node".constantize
+	  end
+	  
+	  def nodes_for_interest(group)
+	    Neo4j::Transaction.run do
+  	    node_class_for(self.for(:user)[group.to_sym]).all.nodes.map(&:name)
+	    end
+	  end
   end
 end

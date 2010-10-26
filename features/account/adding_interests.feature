@@ -12,13 +12,21 @@ Feature: Adding interests
   @javascript @wip @show-page
   Scenario: Filling in my interests on the profile page
     Given I am a logged in as the Twitter user "twitter_guy"
+      And the nodes for the following cuisines exist
+      | name    |
+      | italian |
+      | french  |
+      And the nodes for the following neighborhoods exist
+      | name |
+      | UES  |
+      | LWS  |
       And I am on my profile page
      When I select the following interests:
-        | interest     | fill_in   | click     |
-        | Cuisine      | italian   | french    |
-        | Neighborhood | UES       | LWS       |
+        | interest     | fill_in | click  |
+        | Cuisine      | italian | french |
+        | Neighborhood | UES     | LWS    |
       And I press "Save my interests"
      Then my interest lists should be:
-        | interest     | list                 |
-        | cuisine      | italian, french      |
-        | neighborhood | UES, LWS             |
+        | interest     | list            |
+        | cuisine      | italian, french |
+        | neighborhood | UES, LWS        |
